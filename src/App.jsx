@@ -10,8 +10,11 @@ function App() {
     <>
       <Header />
       <div className="circles--mobile" >
+      <br />
+      <br />
       <Circles />
       </div>
+      <br />
       <div className="intro--card">
         <div className="about">
           <h2>about</h2>
