@@ -183,7 +183,7 @@ export default function References() {
         <img
           src="../images/mary-kelly.svg"
           className="mary--kelly--image"
-          alt="Dee Marco"
+          alt="Mary Kelly"
         />
       </div>
       <div className="kelly--text">

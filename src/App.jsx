@@ -9,6 +9,9 @@ function App() {
   return (
     <>
       <Header />
+      <div className="circles--mobile" >
+      <Circles />
+      </div>
       <div className="intro--card">
         <div className="about">
           <h2>about</h2>
@@ -57,8 +60,8 @@ function App() {
           </p>
         </div>
       </div>
-      <div>
-        <Circles />
+      <div className="circles--dt">
+        <Circles  />
       </div>
       <div className="section--div">
         <Divider

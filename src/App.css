@@ -3,6 +3,8 @@
   src:
     url("../fonts/Crake-SemiBold.woff") format("woff"),
     url("../fonts/Crake-SemiBold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
@@ -10,6 +12,8 @@
   src:
     url("../fonts/Remixa-Semibold.woff") format("woff"),
     url("../fonts/Remixa-Semibold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* unvisited link */
@@ -38,6 +42,10 @@ h2 {
   line-height: 35px;
   letter-spacing: 1px;
   font-weight: normal;
+}
+
+.circles--mobile {
+  display: none;
 }
 
 .header--title {
@@ -271,8 +279,13 @@ h2 {
   width: 50%;
 }
 
+.mary--kelly--image {
+  width: 80%;
+}
+
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: normal;
   margin: 0;
   background-color: rgba(242, 243, 244, 1);
 }
@@ -280,9 +293,13 @@ body {
 /* -------Mobile View---------*/
 
 @media all and (max-width: 600px) {
-  /* .dee--image {
-    width: 50vw;
-  } */
+  .circles--mobile {
+    display: contents;
+  }
+
+  .circles--dt {
+    display: none;
+  }
 
   .header--title {
     margin-left: 1rem;
@@ -303,10 +320,15 @@ body {
   }
 
   .card {
-    width: 70vw;
+    width: 75vw;
+    margin-right: 2rem;
   }
   .intro--card {
     flex-direction: column;
+  }
+
+  .about {
+    margin-right: 2rem;
   }
 
   .ref--card {
@@ -315,8 +337,8 @@ body {
 
   .ref--mobile {
     display: block;
-    padding-left: 15vw;
-    padding-right: 15vw;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .ref {
@@ -339,34 +361,31 @@ body {
 
   .dear--data--image {
     display: block;
-    width: 85vw;
-    margin-top: -100px;
+    width: 100%;
+    margin-top: -120px;
   }
 
   .mary--kelly--image {
     display: block;
+    margin-right: 1rem;
     width: 85vw;
   }
 
   .dee--card {
-    width: 75vw;
+    width: 85vw;
     padding: 0;
     margin-right: 2rem;
   }
 
   .kelly--text {
-    width: 75vw;
+    width: 85vw;
     padding: 0;
     margin-left: 2rem;
   }
 
-  .kelly--image {
-    flex-direction: column;
-  }
-
   .title--card {
     justify-content: center;
-    width: 75vw;
+    width: 85vw;
     padding: 0;
     margin: 2rem;
   }
@@ -374,7 +393,7 @@ body {
   .about--circles {
     padding: 1rem;
     display: grid;
-    grid-template-columns: 10% 30% 10%;
+    /* grid-template-columns: % 30% 30%; */
   }
 
   .color--circle--4 {
@@ -411,6 +430,7 @@ body {
   }
 
   .image--circle--2 {
+    width: 80%;
     animation-name: none;
     animation-duration: 4s;
     animation-iteration-count: infinite;
@@ -483,7 +503,7 @@ body {
 
 /* -------iPad View---------*/
 
-@media all and (max-width: 800px) {
+@media all and (min-width: 601px) and (max-width: 900px) {
   .dee--marco--image {
     width: 80%;
   }
@@ -493,7 +513,7 @@ body {
   }
 
   .mary--kelly--image {
-    width: 80%;
+    width: 50%;
   }
 
   @keyframes circle-translate-1 {
