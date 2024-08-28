@@ -396,7 +396,7 @@ body {
   }
 
   .color--circle--4 {
-    animation-name: none;
+    animation-name: circle-translate-1;
     animation-duration: 6s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
@@ -404,7 +404,7 @@ body {
   }
 
   .color--circle--3 {
-    animation-name: none;
+    animation-name: circle-translate-2;
     animation-duration: 6s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
@@ -412,7 +412,7 @@ body {
   }
 
   .color--circle--5 {
-    animation-name: none;
+    animation-name: circle-translate-3;
     animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
@@ -421,7 +421,7 @@ body {
 
   .image--circle--1 {
     width: 100%;
-    animation-name: none;
+    animation-name: circle-translate-4;
     animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
@@ -430,7 +430,7 @@ body {
 
   .image--circle--2 {
     width: 80%;
-    animation-name: none;
+    animation-name: circle-translate-5;
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
@@ -438,7 +438,7 @@ body {
   }
 
   .image--circle--3 {
-    animation-name: none;
+    animation-name: circle-translate-6;
     animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
@@ -477,7 +477,7 @@ body {
       transform: translate(0vw, 0vw);
     }
     to {
-      transform: translate(0rem, -2rem);
+      transform: translate(0rem, 10rem);
     }
   }
 
@@ -495,7 +495,7 @@ body {
       transform: translate(0vw, 0vw);
     }
     to {
-      transform: translate(2rem, 2rem);
+      transform: translate(0rem, -5rem);
     }
   }
 }
