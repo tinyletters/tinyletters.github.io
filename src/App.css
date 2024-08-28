@@ -34,7 +34,10 @@ a:active {
 
 h2 {
   font-family: "Remixa", sans-serif;
-  font-weight: 400;
+  font-size: 35px;
+  font-weight: 100;
+  line-height: 35px;
+  letter-spacing: 1px;
 }
 
 .header--title {
@@ -44,7 +47,6 @@ h2 {
   margin-top: 0;
   margin-left: 2rem;
   align-items: center;
-
 }
 
 .header--logo {
@@ -67,6 +69,18 @@ h2 {
   width: 100%;
 }
 
+.ref--card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.ref--mobile {
+  display: none;
+}
+
 .about {
   padding-left: 2rem;
   padding-right: 1rem;
@@ -74,12 +88,131 @@ h2 {
   padding-bottom: 1rem;
 }
 
+.section--div {
+  margin: 2rem;
+}
+
+.div-mobile {
+  display: none;
+}
+
+.ref {
+  padding-left: 1rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: right;
+  width: 20%;
+}
+
 .about--circles {
   padding: 2rem;
   display: grid;
   grid-template-columns: 20% 50% 30%;
   gap: 16px;
+}
 
+.color--circle--4 {
+  animation-name: circle-translate-2;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+}
+
+.color--circle--3 {
+  animation-name: circle-translate-4;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+}
+
+.color--circle--5 {
+  animation-name: circle-translate-6;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+}
+
+.image--circle--1 {
+  width: 30%;
+  animation-name: circle-translate-1;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+}
+
+.image--circle--2 {
+  animation-name: circle-translate-5;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+}
+
+.image--circle--3 {
+  animation-name: circle-translate-3;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+}
+
+@keyframes circle-translate-1 {
+  from {
+    transform: translate(0rem, 0rem);
+  }
+  to {
+    transform: translate(50rem, 20rem);
+  }
+}
+
+@keyframes circle-translate-2 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(-20rem, -20rem);
+  }
+}
+
+@keyframes circle-translate-3 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(0rem, 30rem);
+  }
+}
+
+@keyframes circle-translate-6 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(0rem, -20rem);
+  }
+}
+
+@keyframes circle-translate-4 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(20rem, 0rem);
+  }
+}
+
+@keyframes circle-translate-5 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(2rem, 2rem);
+  }
 }
 
 .card {
@@ -92,6 +225,49 @@ h2 {
   margin-top: 2rem;
   margin-bottom: 2rem;
   margin-right: 2rem;
+  margin-left: 2rem;
+  width: 50%;
+}
+
+.dee--marco {
+  display: flex;
+  flex-direction: row;
+}
+
+.dee--image {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.dee--image--mobile {
+  display: none;
+}
+
+.kelly--image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kelly--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title--card {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
   width: 50%;
 }
 
@@ -99,4 +275,280 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
   background-color: rgba(242, 243, 244, 1);
+}
+
+/* -------Mobile View---------*/
+
+@media all and (max-width: 600px) {
+  /* .dee--image {
+    width: 50vw;
+  } */
+
+  .header--title {
+    margin-left: 1rem;
+    align-items: center;
+  }
+
+  .header--logo {
+    margin-right: 1rem;
+    height: 5vw;
+  }
+
+  .div-dt {
+    display: none;
+  }
+
+  .div-mobile {
+    display: contents;
+  }
+
+  .card {
+    width: 70vw;
+  }
+  .intro--card {
+    flex-direction: column;
+  }
+
+  .ref--card {
+    flex-direction: column;
+  }
+
+  .ref--mobile {
+    display: block;
+    padding-left: 15vw;
+    padding-right: 15vw;
+  }
+
+  .ref {
+    display: none;
+  }
+
+  .dee--marco {
+    flex-direction: column;
+  }
+
+  .dee--marco--image {
+    display: none;
+  }
+
+  .dee--image--mobile {
+    display: block;
+    width: 85vw;
+    margin-left: 2rem;
+  }
+
+  .dear--data--image {
+    display: block;
+    width: 85vw;
+    margin-top: -100px;
+  }
+
+  .mary--kelly--image {
+    display: block;
+    width: 85vw;
+  }
+
+  .dee--card {
+    width: 75vw;
+    padding: 0;
+    margin-right: 2rem;
+  }
+
+  .kelly--text {
+    width: 75vw;
+    padding: 0;
+    margin-left: 2rem;
+  }
+
+  .kelly--image {
+    flex-direction: column;
+  }
+
+  .title--card {
+    justify-content: center;
+    width: 75vw;
+    padding: 0;
+    margin: 2rem;
+  }
+
+  .about--circles {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 10% 30% 10%;
+  }
+
+  .color--circle--4 {
+    animation-name: none;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+  }
+
+  .color--circle--3 {
+    animation-name: none;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+  }
+
+  .color--circle--5 {
+    animation-name: none;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+  }
+
+  .image--circle--1 {
+    width: 100%;
+    animation-name: none;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+  }
+
+  .image--circle--2 {
+    animation-name: none;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+  }
+
+  .image--circle--3 {
+    animation-name: none;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+  }
+
+  @keyframes circle-translate-1 {
+    from {
+      transform: translate(0rem, 0rem);
+    }
+    to {
+      transform: translate(2rem, 2rem);
+    }
+  }
+
+  @keyframes circle-translate-2 {
+    from {
+      transform: translate(0vw, 0vw);
+    }
+    to {
+      transform: translate(-2rem, -2rem);
+    }
+  }
+
+  @keyframes circle-translate-3 {
+    from {
+      transform: translate(0vw, 0vw);
+    }
+    to {
+      transform: translate(0rem, 3rem);
+    }
+  }
+
+  @keyframes circle-translate-6 {
+    from {
+      transform: translate(0vw, 0vw);
+    }
+    to {
+      transform: translate(0rem, -2rem);
+    }
+  }
+
+  @keyframes circle-translate-4 {
+    from {
+      transform: translate(0vw, 0vw);
+    }
+    to {
+      transform: translate(2rem, 0rem);
+    }
+  }
+
+  @keyframes circle-translate-5 {
+    from {
+      transform: translate(0vw, 0vw);
+    }
+    to {
+      transform: translate(2rem, 2rem);
+    }
+  }
+}
+
+/* -------iPad View---------*/
+
+@media all and (max-width: 800px) {
+  .dee--marco--image {
+    width: 80%;
+  }
+
+  .dear--data--image {
+    width: 80%;
+  }
+
+  .mary--kelly--image {
+    width: 80%;
+  }
+
+  
+@keyframes circle-translate-1 {
+  from {
+    transform: translate(0rem, 0rem);
+  }
+  to {
+    transform: translate(10rem, 5rem);
+  }
+}
+
+@keyframes circle-translate-2 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(-5rem, -5rem);
+  }
+}
+
+@keyframes circle-translate-3 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(0rem, 5rem);
+  }
+}
+
+@keyframes circle-translate-6 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(0rem, -5rem);
+  }
+}
+
+@keyframes circle-translate-4 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(5rem, 0rem);
+  }
+}
+
+@keyframes circle-translate-5 {
+  from {
+    transform: translate(0vw, 0vw);
+  }
+  to {
+    transform: translate(2rem, 2rem);
+  }
+}
+  
 }

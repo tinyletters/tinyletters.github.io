@@ -7,17 +7,41 @@ export default function Header() {
     <>
 <br />
 <br />
+
+<div className="div-mobile">
       <Divider
         sx={{
           borderColor: "black",
-          borderWidth: "1px",
+          borderWidth: "0.99px",
+          width: "99.9%",
+        }}
+      />
+      </div>
+
+<div className="div-dt">
+      <Divider
+        sx={{
+          borderColor: "black",
+      borderWidth: "1px",
           width: "100%",
         }}
       />
+      </div>
       <div className="header--box">
-        <div className="header--title">tiny letters for mothers</div>
+        <div className="header--title">tiny letters for parents</div>
         <img src="../images/logo.svg" className="header--logo" alt="logo" />
       </div>
+      <div className="div-mobile">
+      <Divider
+        sx={{
+          borderColor: "black",
+          borderWidth: "0.99px",
+          my: 1,
+          width: "99.9%",
+        }}
+      />
+      </div>
+      <div className="div-dt">
       <Divider
             sx={{
               borderColor: "black",
@@ -26,6 +50,7 @@ export default function Header() {
               width: "100%",
             }}
           />
+          </div>
     </>
   );
 }

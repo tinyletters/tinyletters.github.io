@@ -40,6 +40,9 @@ export const Circles = () => {
 
   return (
     <>
+      <br />
+      <br />
+      <br />
       <div className="about--circles">
         <img
           src="../images/Ellipse-9.svg"
@@ -62,9 +65,9 @@ export const Circles = () => {
           className="image--circle--3"
           alt="logo"
         />
-                <img
+        <img
           src="../images/Ellipse-10.svg"
-          className="color--circle--4"
+          className="color--circle--5"
           alt="logo"
         />
         <img
@@ -73,7 +76,10 @@ export const Circles = () => {
           alt="logo"
         />
       </div>
-      <svg viewBox="0 0 100 50" ref={ref} />
+      <br />
+      <br />
+      <br />
+      {/* <svg viewBox="0 0 100 50" ref={ref} /> */}
     </>
   );
 };
