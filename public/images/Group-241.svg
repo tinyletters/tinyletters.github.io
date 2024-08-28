@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_209" data-name="Path 209" d="M32-31.507a32,32,0,0,0-32,32H0a32,32,0,0,0,32,32h0a32,32,0,0,0,32-32h0A32,32,0,0,0,32-31.507Z" transform="translate(0 31.507)" fill="none"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" y1="1" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#003b3f"/>
+      <stop offset="0.1" stop-color="#184352"/>
+      <stop offset="0.2" stop-color="#324b65"/>
+      <stop offset="0.3" stop-color="#4b5478"/>
+      <stop offset="0.4" stop-color="#655c8b"/>
+      <stop offset="0.5" stop-color="#7f649f"/>
+      <stop offset="0.6" stop-color="#986cb2"/>
+      <stop offset="0.7" stop-color="#b274c5"/>
+      <stop offset="0.8" stop-color="#cb7cd8"/>
+      <stop offset="0.9" stop-color="#e584eb"/>
+      <stop offset="1" stop-color="#ff8cff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_241" data-name="Group 241" transform="translate(0 31.507)">
+    <g id="Group_240" data-name="Group 240" transform="translate(0 -31.507)" clip-path="url(#clip-path)">
+      <g id="Group_239" data-name="Group 239" transform="translate(0 -0.001)">
+        <path id="Path_208" data-name="Path 208" d="M0-31.507H64v64H0Z" transform="translate(0 31.507)" fill="url(#linear-gradient)"/>
+      </g>
+    </g>
+  </g>
+</svg>

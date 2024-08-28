@@ -41,7 +41,10 @@ h2 {
   font-family: "Crake", sans-serif;
   font-size: 7vw;
   color: black;
+  margin-top: 0;
   margin-left: 2rem;
+  align-items: center;
+
 }
 
 .header--logo {
@@ -69,6 +72,14 @@ h2 {
   padding-right: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.about--circles {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 20% 50% 30%;
+  gap: 16px;
+
 }
 
 .card {

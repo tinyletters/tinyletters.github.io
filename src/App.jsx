@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Circles } from "./Circle";
 import Header from "./Header";
+import { Divider } from "@mui/material";
 
 function App() {
   return (
@@ -10,12 +11,31 @@ function App() {
       <div className="intro--card">
         <div className="about">
           <h2>about</h2>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
           <p>
             To contribute to our first data story{" "}
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform" target="_blank">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
+              target="_blank"
+            >
               fill out this form
             </a>
           </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
         </div>
         <div className="card">
           <p>
