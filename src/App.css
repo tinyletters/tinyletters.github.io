@@ -334,7 +334,8 @@ body {
   }
 
   .card {
-    width: 75vw;
+    width: 70vw;
+    padding-right: 2rem;
     margin-right: 2rem;
   }
   .intro--card {
