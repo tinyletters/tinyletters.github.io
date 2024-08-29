@@ -27,7 +27,7 @@ export default function References() {
             community. After Dee worked with Independent Network for
             Contemporary Culture & Art (INCCA) on their Art After Baby project,
             her and INCCA founder Lara Koseff found common ground in their
-            interest in trying find new ways to tell the many little stories of
+            interest in trying to find new ways to tell the many little stories of
             motherhood that often go unrecorded or unsaid. Below are a series of
             references that influenced this collaboration.
           </p>
@@ -160,7 +160,7 @@ export default function References() {
                 related to motherhood specifically, this project motivated Dee
                 and Lara to consider a form of collaboration through data
                 storytelling, one in which the minutiae of everyday life is
-                visualised. They decided to specifically focus on the the first
+                visualised. They decided to specifically focus on the first
                 40 days postpartum, to create a resource so that mothers can
                 potentially feel less alone and isolated during one of the most
                 tumultuous periods in a care-givers life. Read more{" "}
