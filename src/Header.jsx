@@ -13,7 +13,7 @@ export default function Header() {
         sx={{
           borderColor: "black",
           borderWidth: "0.99px",
-          width: "99.9%",
+          width: "99.5%",
         }}
       />
       </div>
@@ -37,7 +37,7 @@ export default function Header() {
           borderColor: "black",
           borderWidth: "0.99px",
           my: 1,
-          width: "99.9%",
+          width: "99.5%",
         }}
       />
       </div>

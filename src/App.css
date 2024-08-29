@@ -37,7 +37,7 @@ a:active {
 }
 
 h2 {
-  font-family: "Remixa", sans-serif;
+  font-family: "Crake", sans-serif;
   font-size: 35px;
   line-height: 35px;
   letter-spacing: 1px;
@@ -297,6 +297,20 @@ body {
     display: contents;
   }
 
+  .header--title {
+    font-family: "Crake", sans-serif;
+    font-size: 8vw;
+    color: black;
+    margin-top: 0;
+    margin-left: 2rem;
+    align-items: center;
+  }
+  
+  .header--logo {
+    margin-right: 2rem;
+    height: 6vw;
+  }
+
   .circles--dt {
     display: none;
   }
@@ -320,7 +334,7 @@ body {
   }
 
   .card {
-    width: 70vw;
+    width: 75vw;
     margin-right: 2rem;
   }
   .intro--card {
@@ -363,11 +377,11 @@ body {
     display: block;
     width: 85vw;
     margin-top: -120px;
+    margin-bottom: -20px;
   }
 
   .mary--kelly--image {
     display: block;
-    margin-left: 1rem;
     width: 85vw;
   }
 
