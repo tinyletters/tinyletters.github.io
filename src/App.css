@@ -249,6 +249,14 @@ h2 {
   margin-left: 2rem;
 }
 
+.dear--data--image {
+  width: 90%;
+}
+
+.dee--marco--image {
+  width: 90%;
+}
+
 .dee--image--mobile {
   display: none;
 }
@@ -523,11 +531,11 @@ body {
 
 @media all and (min-width: 601px) and (max-width: 900px) {
   .dee--marco--image {
-    width: 80%;
+    width: 90%;
   }
 
   .dear--data--image {
-    width: 80%;
+    width: 90%;
   }
 
   .mary--kelly--image {
