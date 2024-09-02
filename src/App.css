@@ -334,9 +334,13 @@ body {
   }
 
   .card {
-    width: 70vw;
-    padding-right: 2rem;
+    width: 77vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
     margin-right: 2rem;
+    border-radius: 10px;
   }
   .intro--card {
     flex-direction: column;
