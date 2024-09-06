@@ -269,6 +269,9 @@ export default function References() {
             }}
           />
         </div>
+        <br />
+        <br />
+        <br />
     </>
   );
 }
