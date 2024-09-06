@@ -46,7 +46,7 @@ function App() {
         </div>
         <div className="card">
           <p>
-            Tiny letters for parents is an artistic research project that aims
+            Tiny letters for mothers is an artistic research project that aims
             to create a global network of data stories about mothering and
             parenting, especially in the early stages. Our first data story is
             focussed on the first 40 days / 6 weeks postpartum, and on the birth

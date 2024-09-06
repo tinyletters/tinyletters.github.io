@@ -28,7 +28,7 @@ export default function Header() {
       />
       </div>
       <div className="header--box">
-        <div className="header--title">tiny letters for parents</div>
+        <div className="header--title">tiny letters for mothers</div>
         <img src="../images/logo.svg" className="header--logo" alt="logo" />
       </div>
       <div className="div-mobile">

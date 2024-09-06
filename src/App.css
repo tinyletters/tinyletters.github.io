@@ -237,6 +237,11 @@ h2 {
   width: 50%;
 }
 
+.reading {
+  padding: 2rem;
+  margin-left: 2rem;
+}
+
 .dee--marco {
   display: flex;
   flex-direction: row;
@@ -276,7 +281,7 @@ h2 {
 .title--card {
   display: flex;
   flex-direction: column;
-  padding-left: 2rem;
+  padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -286,6 +291,17 @@ h2 {
   margin-left: 2rem;
   width: 50%;
 }
+
+.reading--card {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+
 
 .mary--kelly--image {
   width: 80%;
