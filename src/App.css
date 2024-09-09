@@ -301,8 +301,6 @@ h2 {
   margin-left: 2rem;
 }
 
-
-
 .mary--kelly--image {
   width: 80%;
 }
@@ -323,13 +321,13 @@ body {
 
   .header--title {
     font-family: "Crake", sans-serif;
-    font-size: 8vw;
+    font-size: 7.5vw;
     color: black;
     margin-top: 0;
     margin-left: 2rem;
     align-items: center;
   }
-  
+
   .header--logo {
     margin-right: 2rem;
     height: 6vw;
@@ -431,6 +429,17 @@ body {
     width: 85vw;
     padding: 0;
     margin: 2rem;
+  }
+
+  .reading {
+    padding: 0rem;
+    margin-left: 2rem;
+  }
+
+  .reading--card {
+    padding: 0;
+    margin-right: 2rem;
+    margin-left: 2rem;
   }
 
   .about--circles {
