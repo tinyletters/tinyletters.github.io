@@ -4,8 +4,12 @@ import { Circles } from "./Circle";
 import Header from "./Header";
 import { Divider } from "@mui/material";
 import References from "./References";
+import BubbleChartComponent from "./BubbleChartComponent"
 
 function App() {
+
+  const sampleText = "Hello world! This is a test. Hello again, world! This text is just a simple test.";
+
   return (
     <>
       <Header />
@@ -15,6 +19,9 @@ function App() {
       <Circles />
       </div>
       <br />
+      <div>
+            <BubbleChartComponent className text={sampleText} />
+        </div>
       <div className="intro--card">
         <div className="about">
           <h2>about</h2>

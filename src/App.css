@@ -16,6 +16,11 @@
   font-style: normal;
 }
 
+.bubble-chart {
+  width: 100%;
+  height: auto;
+}
+
 /* unvisited link */
 a:link {
   color: black;
@@ -46,6 +51,11 @@ h2 {
 
 .circles--mobile {
   display: none;
+}
+
+.card-name {
+  font-family: "Crake", sans-serif;
+  font-size: 35px;
 }
 
 .header--title {
@@ -104,6 +114,29 @@ h2 {
   display: none;
 }
 
+.filter-section {
+  position: absolute;
+  width: 200px;
+  margin: 2rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search-category {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+select {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: rgba(242, 243, 244, 1);
+}
+
 .ref {
   padding-left: 1rem;
   padding-right: 2rem;
@@ -111,6 +144,15 @@ h2 {
   padding-bottom: 1rem;
   text-align: right;
   width: 20%;
+}
+
+.tooltip {
+  border: none;
+  width: 300px;
+  padding-top: -15px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .about--circles {
