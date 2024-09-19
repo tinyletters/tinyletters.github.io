@@ -9,10 +9,14 @@ const data = [
     birthKind: "Caeserian",
     noOfChildren: "1",
     birthStory:
-      "My labour was planned as baby was breach, so it had to be a c-section (I come from a long line of breach babies including me, my brother, and my mom who was delivered by c-section in the 1950s, so it was not a massive surprise). Before it was confirmed that baby was not going to turn, my gynae said it was up to me how I wanted to deliver (I believe this is common in South African private hospitals) and that there were pros and cons to both caesar and vaginal.",
+      "My labour was planned as baby was breach, so it had to be a c-section (I come from a long line of breach babies including me, my brother, and my mom who was delivered by c-section in the 1950s, so it was not a massive surprise). Before it was confirmed that baby was not going to turn, my gynae said it was up to me how I wanted to deliver (I believe this is common in South African private hospitals) and that there were pros and cons to both caesar and vaginal.'They're both shit', I remember her concluding. I was kind of relieved I wasn't given a choice. I was terrified, labelled as a 'mature' mother in my late 30s after having gone through IVF after not falling pregnant naturally for around six years (possibly due to endometriosis), I was made fully aware of all the possible complications and risks at my age. I was aware that I was lucky to have fallen pregnant, for the first time in my life, with only one viable embryo, and after only one cycle of IVF. The whole process felt like a strange and unbelievable lottery of life. I always describe it as both a horror show and a miracle.",
     sentences: [
       "My labour was planned as baby was breach, so it had to be a c-section (I come from a long line of breach babies including me, my brother, and my mom who was delivered by c-section in the 1950s, so it was not a massive surprise).",
       "Before it was confirmed that baby was not going to turn, my gynae said it was up to me how I wanted to deliver (I believe this is common in South African private hospitals) and that there were pros and cons to both caesar and vaginal.",
+      "'They're both shit', I remember her concluding. I was kind of relieved I wasn't given a choice.",
+      "I was terrified, labelled as a 'mature' mother in my late 30s after having gone through IVF after not falling pregnant naturally for around six years (possibly due to endometriosis), I was made fully aware of all the possible complications and risks at my age.",
+      "I was aware that I was lucky to have fallen pregnant, for the first time in my life, with only one viable embryo, and after only one cycle of IVF.",
+      "The whole process felt like a strange and unbelievable lottery of life. I always describe it as both a horror show and a miracle.",
     ],
   },
   {

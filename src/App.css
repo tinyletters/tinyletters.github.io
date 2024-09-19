@@ -18,7 +18,7 @@
 
 .bubble-chart {
   width: 100%;
-  height: auto;
+  height: 600px;
 }
 
 /* unvisited link */
@@ -115,6 +115,8 @@ h2 {
 }
 
 .filter-section {
+  background-color: white;
+  border-radius: 10px;
   position: absolute;
   width: 200px;
   margin: 2rem;
@@ -127,6 +129,8 @@ h2 {
 .search-category {
   display: flex;
   flex-direction: row;
+  justify-content: space-between ;
+
   gap: 5px;
 }
 
@@ -134,7 +138,7 @@ select {
   border-top: none;
   border-left: none;
   border-right: none;
-  background-color: rgba(242, 243, 244, 1);
+  background-color: white;
 }
 
 .ref {
