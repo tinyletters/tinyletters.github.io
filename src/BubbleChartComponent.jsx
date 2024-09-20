@@ -89,6 +89,7 @@ const stopWords = new Set([
   "should",
   "shouldn",
   "so",
+  "she",
   "some",
   "such",
   "t",
@@ -115,6 +116,7 @@ const stopWords = new Set([
   "very",
   "was",
   "wasn",
+  "wasn't",
   "we",
   "were",
   "weren",
@@ -130,7 +132,11 @@ const stopWords = new Set([
   "would",
   "wouldn",
   "-",
-  "(i"
+  "(i",
+  "could",
+  "can",
+  "going",
+  "made",
 ]);
 
 const normalizeWord = (word) => {
@@ -156,54 +162,59 @@ const countWords = (text) => {
   return frequency;
 };
 
-const getBubbleData = (frequency) => {
-  const bubbleData = [];
-
-  data.forEach((entry) => {
-    const words = entry.birthStory
-      .toLowerCase()
-      .replace(/[.,!?;]*/g, "")
-      .split(/\s+/);
-
-    words.forEach((word) => {
-      if (frequency[word] >= 2) {
-        // Only include words with a frequency greater than 2
-        const existingBubble = bubbleData.find(
-          (bubble) => bubble.name === word
-        );
-        if (existingBubble) {
-          existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 5; // Adjust size based on frequency
-        } else {
-          bubbleData.push({
-            name: word,
-            value: frequency[word],
-            size: frequency[word] * 5,
-            story: entry.birthStory, // Include the birth story
-            author: entry.name, // Include the author's name
-          });
+const getBubbleData = (frequency, filteredData) => {
+    const bubbleData = [];
+  
+    filteredData.forEach((entry) => {
+      // Convert birthStory to lowercase and clean punctuation
+      let words = entry.birthStory.toLowerCase();
+      const punctuations = ['.', ',', '!', '?', ';'];
+      punctuations.forEach((punctuation) => {
+        words = words.split(punctuation).join("");
+      });
+  
+      // Split the cleaned words by spaces
+      words = words.split(" ");
+  
+      words.forEach((word) => {
+        if (frequency[word] >= 2) {
+          // Only include words with a frequency greater than 2
+          const existingBubble = bubbleData.find((bubble) => bubble.name === word);
+          if (existingBubble) {
+            existingBubble.value += frequency[word];
+            existingBubble.size += frequency[word] * 5; // Adjust size based on frequency
+          } else {
+            bubbleData.push({
+              name: word,
+              value: frequency[word],
+              size: frequency[word] * 5,
+              story: entry.birthStory, // Include the birth story
+              author: entry.name, // Include the author's name
+            });
+          }
         }
-      }
+      });
     });
-  });
-
-  return bubbleData;
-};
+  
+    return bubbleData;
+  };
 
 const getRelevantSentence = (sentences, word) => {
-  // Filter sentences that contain the word
-  const matchingSentences = sentences.filter((sentence) =>
-    sentence.toLowerCase().includes(word.toLowerCase())
-  );
-
-  // Select a random matching sentence or return a fallback
-  if (matchingSentences.length > 0) {
-    const randomIndex = Math.floor(Math.random() * matchingSentences.length);
-    return matchingSentences[randomIndex];
-  }
-
-  return "No relevant sentence found.";
-};
+    // Filter sentences that contain the word
+    const matchingSentences = sentences.filter((sentence) =>
+      sentence.toLowerCase().includes(word.toLowerCase())
+    );
+  
+    // Select a random matching sentence or return an empty string (if no matches found)
+    if (matchingSentences.length > 0) {
+      const randomIndex = Math.floor(Math.random() * matchingSentences.length);
+      return matchingSentences[randomIndex];
+    }
+  
+    // Return an empty string if no relevant sentences found
+    return "";
+  };
+  
 
 const colorMap = {
   labour: "#ff5733",
@@ -253,24 +264,25 @@ const BubbleChartComponent = () => {
 
 
 
-  useEffect(() => {
+useEffect(() => {
+    // Use filteredData to construct combined stories
     const combinedStories = filteredData
       .flatMap((entry) => entry.sentences)
       .join(" ");
-
-    const wordFrequency = countWords(combinedStories); // Assuming countWords is defined elsewhere
-    const bubbleData = getBubbleData(wordFrequency); // Assuming getBubbleData is defined elsewhere
-
+  
+    const wordFrequency = countWords(combinedStories);
+    const bubbleData = getBubbleData(wordFrequency, filteredData); // Pass filteredData
+  
     const width = parseInt(d3.select(".bubble-chart").style("width"));
     const height = parseInt(d3.select(".bubble-chart").style("height"));
-
+  
     d3.select(svgRef.current).selectAll("*").remove();
-
+  
     const svg = d3
       .select(svgRef.current)
       .attr("width", width)
       .attr("height", height);
-
+  
     const tooltip = d3
       .select(tooltipRef.current)
       .style("opacity", 0)
@@ -280,16 +292,16 @@ const BubbleChartComponent = () => {
       .style("border", "1px solid #ccc")
       .style("border-radius", "10px")
       .style("pointer-events", "none");
-
+  
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(-50))
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("charge", d3.forceManyBody().strength(-25))
+      .force("center", d3.forceCenter(width / 2, height / 2.5))
       .force(
         "collide",
         d3.forceCollide((d) => d.size + 20)
       );
-
+  
     const bubbles = svg
       .selectAll("circle")
       .data(bubbleData)
@@ -298,43 +310,35 @@ const BubbleChartComponent = () => {
       .attr("r", (d) => d.size)
       .attr("fill", (d) => getColor(d.name)) // Assuming getColor is defined elsewhere
       .on("mouseover", (event, d) => {
-        // Ensure that entry is coming from the filteredData
         const entry = filteredData.find((entry) => entry.name === d.author);
-        
-        // Find the relevant sentence for the correct word and author
         const relevantSentence = entry
-            ? getRelevantSentence(entry.sentences, d.name) 
-            : "No relevant sentence found.";
-    
-        // Bold the relevant word in the sentence
+          ? getRelevantSentence(entry.sentences, d.name)
+          : "No relevant sentence found.";
+  
         const boldedSentence = relevantSentence
-            .split(" ")
-            .map((word) =>
-                word.toLowerCase() === d.name.toLowerCase() ||
-                normalizeWord(word).toLowerCase() === d.name.toLowerCase()
-                    ? `<strong>${word}</strong>`
-                    : word
-            )
-            .join(" ");
-    
+          .split(" ")
+          .map((word) =>
+            word.toLowerCase() === d.name.toLowerCase() ||
+            normalizeWord(word).toLowerCase() === d.name.toLowerCase()
+              ? `<strong>${word}</strong>`
+              : word
+          )
+          .join(" ");
+  
         tooltip.transition().duration(200).style("opacity", 1);
         tooltip
-            .html(
-                `
-                <div class="tooltip">    
-                    <div class="card-name">${d.name}</div><br>
-                    <hr><br>
-                    <strong>Frequency:</strong> ${d.value}<br>
-                    <strong>Quote:</strong> "${boldedSentence}"<br>
-                    <strong>Author:</strong> ${d.author}
-                </div>
-                `
-            )
-            .style("left", `${event.pageX + 5}px`)
-            .style("top", `${event.pageY - 28}px`);
-    })
-    
-
+          .html(`
+            <div class="tooltip">    
+              <div class="card-name">${d.name}</div><br>
+              <hr><br>
+              <strong>Frequency:</strong> ${d.value}<br>
+              <strong>Quote:</strong> "${boldedSentence}"<br>
+              <strong>Author:</strong> ${d.author}
+            </div>
+          `)
+          .style("left", `${event.pageX + 5}px`)
+          .style("top", `${event.pageY - 28}px`);
+      })
       .on("mousemove", (event) => {
         tooltip
           .style("left", `${event.pageX + 5}px`)
@@ -343,11 +347,11 @@ const BubbleChartComponent = () => {
       .on("mouseout", () => {
         tooltip.transition().duration(200).style("opacity", 0);
       });
-
+  
     simulation.on("tick", () => {
       bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
     });
-
+  
     return () => simulation.stop();
   }, [filteredData]);
 
