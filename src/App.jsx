@@ -20,7 +20,7 @@ function App() {
       </div>
       <br />
       <div>
-            <BubbleChartComponent className text={sampleText} />
+
         </div>
       <div className="intro--card">
         <div className="about">
@@ -84,8 +84,19 @@ function App() {
         />
       </div>
       <br />
+      <BubbleChartComponent className text={sampleText} />
+      <br />
 
-
+      <div className="section--div">
+        <Divider
+          sx={{
+            borderColor: "black",
+            borderWidth: "0.9px",
+            my: 2,
+            width: "100%",
+          }}
+        />
+      </div>
       <References />
     </>
   );

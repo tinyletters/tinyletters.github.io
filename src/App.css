@@ -110,6 +110,10 @@ h2 {
   margin: 2rem;
 }
 
+.key-word {
+  font-size: 12px;
+}
+
 .div-mobile {
   display: none;
 }
@@ -124,6 +128,15 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.data-viz {
+  display: flex;
+  flex-direction: row;
+  margin: 2rem;
+}
+.color-key-item {
+  width: 150px;
 }
 
 .search-category {
@@ -167,7 +180,10 @@ select:focus {
   outline: none;
 }
 
-
+.dviz-title {
+  font-family: "Crake", sans-serif;
+  font-size: 35px;
+}
 
 .about--circles {
   padding: 2rem;

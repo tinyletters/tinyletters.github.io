@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import "./App.css";
+import ColorKey from "./ColorKey";
 
 import data from "./Data";
 
@@ -153,6 +154,11 @@ const stopWords = new Set([
   "although",
   "many",
   "ever",
+  "baby",
+  "remember",
+  "one",
+  "thing",
+  "mum",
 ]);
 
 const normalizeWord = (word) => {
@@ -197,7 +203,7 @@ const getBubbleData = (frequency, filteredData) => {
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 1;
+          existingBubble.size += frequency[word] * 2;
         } else {
           bubbleData.push({
             name: word,
@@ -261,17 +267,17 @@ const colorMap = {
   child: "#F000FF",
   one: "#3E1E70",
   body: "#A569BD",
-  feel: "#5DADE2",
+  feel: "#bcb8b1",
   husband: "#D35400",
   thing: "#76D7C4",
-  felt: "#F1948A",
+  felt: "#bcb8b1",
   even: "#3498DB",
   see: "#48C9B0",
   pain: "#E74C3C",
   coming: "#F5B041",
   say: "#7FB3D5",
   due: "#AF7AC5",
-  still: "#34495E",
+  still: "#c0dfa1",
   tried: "#F39C12",
   moment: "#85C1E9",
   birth: "#D98880",
@@ -297,7 +303,7 @@ const colorMap = {
   matter: "#1ABC9C",
   gynae: "#8E44AD",
   lucky: "#F7DC6F",
-  mum: "#C0392B",
+
   wanting: "#E67E22",
   mother: "#EC7063",
   sense: "#7DCEA0",
@@ -316,7 +322,7 @@ const colorMap = {
   complication: "#8E44AD",
   checked: "#27AE60",
   situation: "#F5B041",
-  time: "#1ABC9C"
+  time: "#1ABC9C",
 };
 
 const getColor = (word) => colorMap[word] || "#8884d8";
@@ -324,7 +330,6 @@ const getColor = (word) => colorMap[word] || "#8884d8";
 const BubbleChartComponent = () => {
   const svgRef = useRef();
   const tooltipRef = useRef();
-
   const [filters, setFilters] = useState({
     race: "",
     country: "",
@@ -332,6 +337,7 @@ const BubbleChartComponent = () => {
   });
 
   const [filteredData, setFilteredData] = useState(data);
+  const [wordFrequency, setWordFrequency] = useState({}); // Add state for word frequency
 
   useEffect(() => {
     const { race, country, birthType } = filters;
@@ -354,8 +360,9 @@ const BubbleChartComponent = () => {
       .flatMap((entry) => entry.sentences)
       .join(" ");
 
-    const wordFrequency = countWords(combinedStories);
-    const bubbleData = getBubbleData(wordFrequency, filteredData);
+    const frequency = countWords(combinedStories);
+    setWordFrequency(frequency); // Set word frequency state
+    const bubbleData = getBubbleData(frequency, filteredData);
 
     const width = parseInt(d3.select(".bubble-chart").style("width"));
     const height = parseInt(d3.select(".bubble-chart").style("height"));
@@ -379,8 +386,8 @@ const BubbleChartComponent = () => {
 
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(-5))
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("charge", d3.forceManyBody().strength(-10))
+      .force("center", d3.forceCenter(width / 1.6, height / 2))
       .force(
         "collide",
         d3.forceCollide((d) => d.size + 20)
@@ -405,14 +412,14 @@ const BubbleChartComponent = () => {
         tooltip
           .html(
             `
-              <div class="tooltip">
-                <div class="card-name">${d.name}</div><br>
-                <hr><br>
-                <strong>Frequency:</strong> ${d.value}<br>
-                <strong>Quote:</strong> "${boldedSentence}"<br>
-                <strong>Author:</strong> ${d.author}
-              </div>
-            `
+                <div class="tooltip">
+                  <div class="card-name">${d.name}</div><br>
+                  <hr><br>
+                  <strong>Frequency:</strong> ${d.value}<br>
+                  <strong>Quote:</strong> "${boldedSentence}"<br>
+                  <strong>Author:</strong> ${d.author}
+                </div>
+              `
           )
           .style("left", `${event.pageX + 5}px`)
           .style("top", `${event.pageY - 28}px`);
@@ -442,49 +449,59 @@ const BubbleChartComponent = () => {
 
   return (
     <>
-      <div className="filter-section">
-        <label className="search-category">
-          <div>Race:</div>
-          <select
-            name="race"
-            value={filters.race}
-            onChange={handleFilterChange}
-          >
-            <option value="">All</option>
-            <option value="white">White</option>
-            <option value="coloured">Coloured</option>
-          </select>
-        </label>
+      <div className="data-viz">
+        <div className="filter-section">
+        <div className="dviz-title">birth stories</div>
+        <p>For this data story, mothers are asked to share their birth story in as much detail as they can remember. These are a selection of some of the most frequent words based on the data we have collected so far. You can also filter by race, country (this is the country where the birth took place) and birth type.</p>
+        <br />
+          <label className="search-category">
+            <div>Race:</div>
+            <select
+              name="race"
+              value={filters.race}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="white">White</option>
+              <option value="coloured">Coloured</option>
+            </select>
+          </label>
 
-        <label className="search-category">
-          Country:
-          <select
-            name="country"
-            value={filters.country}
-            onChange={handleFilterChange}
-          >
-            <option value="">All</option>
-            <option value="South Africa">South Africa</option>
-            <option value="Egypt">Egypt</option>
-          </select>
-        </label>
+          <label className="search-category">
+            Country:
+            <select
+              name="country"
+              value={filters.country}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="South Africa">South Africa</option>
+              <option value="Egypt">Egypt</option>
+            </select>
+          </label>
 
-        <label className="search-category">
-          Birth Type:
-          <select
-            name="birthType"
-            value={filters.birthType}
-            onChange={handleFilterChange}
-          >
-            <option value="">All</option>
-            <option value="Caeserian">Caeserian</option>
-            <option value="Vaginal">Vaginal</option>
-          </select>
-        </label>
+          <label className="search-category">
+            Birth Type:
+            <select
+              name="birthType"
+              value={filters.birthType}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="Caeserian">Caeserian</option>
+              <option value="Vaginal">Vaginal</option>
+            </select>
+          </label>
+        </div>
+
+        <svg ref={svgRef} className="bubble-chart"></svg>
+
+        <div ref={tooltipRef} />
+        <div>
+          {" "}
+          <ColorKey wordFrequency={wordFrequency} colorMap={colorMap} />
+        </div>
       </div>
-
-      <svg ref={svgRef} className="bubble-chart"></svg>
-      <div ref={tooltipRef} />
     </>
   );
 };
