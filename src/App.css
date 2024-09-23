@@ -182,7 +182,7 @@ select:focus {
 
 .dviz-title {
   font-family: "Crake", sans-serif;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .about--circles {
@@ -386,7 +386,7 @@ body {
 
 /* -------Mobile View---------*/
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 768px) {
   .circles--mobile {
     display: contents;
   }
@@ -396,7 +396,7 @@ body {
     font-size: 7.5vw;
     color: black;
     margin-top: 0;
-    margin-left: 2rem;
+    margin-left: 1rem;
     align-items: center;
   }
 
@@ -407,11 +407,6 @@ body {
 
   .circles--dt {
     display: none;
-  }
-
-  .header--title {
-    margin-left: 1rem;
-    align-items: center;
   }
 
   .header--logo {
@@ -426,6 +421,70 @@ body {
   .div-mobile {
     display: contents;
   }
+
+.filter-section {
+  background-color: white;
+  border-radius: 10px;
+  position: sticky;
+  width: 77vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 0rem;
+  margin-top: -2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+h2 {
+  font-family: "Crake", sans-serif;
+  font-size: 30px;
+  line-height: 30px;
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+
+.data-viz {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+.color-key-item {
+  width: 130px;
+}
+
+.tooltip {
+  border: none;
+  width: 80px;
+  padding-top: -15px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 9px;
+}
+
+.color-key {
+  margin-top: -30rem;
+  display: grid;
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.search-category {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between ;
+
+  gap: 5px;
+}
+
+.card-name {
+  font-family: "Crake", sans-serif;
+  font-size: 20px;
+}
 
   .card {
     width: 77vw;
@@ -626,7 +685,7 @@ body {
 
 /* -------iPad View---------*/
 
-@media all and (min-width: 601px) and (max-width: 900px) {
+@media all and (min-width: 769px) and (max-width: 900px) {
   .dee--marco--image {
     width: 90%;
   }

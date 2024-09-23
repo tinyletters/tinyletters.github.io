@@ -330,6 +330,7 @@ const getColor = (word) => colorMap[word] || "#8884d8";
 const BubbleChartComponent = () => {
   const svgRef = useRef();
   const tooltipRef = useRef();
+  const containerRef = useRef();
   const [filters, setFilters] = useState({
     race: "",
     country: "",
@@ -338,6 +339,7 @@ const BubbleChartComponent = () => {
 
   const [filteredData, setFilteredData] = useState(data);
   const [wordFrequency, setWordFrequency] = useState({}); // Add state for word frequency
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const { race, country, birthType } = filters;
@@ -356,87 +358,114 @@ const BubbleChartComponent = () => {
   }, [filters]);
 
   useEffect(() => {
-    const combinedStories = filteredData
-      .flatMap((entry) => entry.sentences)
-      .join(" ");
+    // Update dimensions based on the container's size
+    const handleResize = () => {
+      if (containerRef.current) {
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        setDimensions({ width, height });
+      }
+    };
 
-    const frequency = countWords(combinedStories);
-    setWordFrequency(frequency); // Set word frequency state
-    const bubbleData = getBubbleData(frequency, filteredData);
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-    const width = parseInt(d3.select(".bubble-chart").style("width"));
-    const height = parseInt(d3.select(".bubble-chart").style("height"));
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-    d3.select(svgRef.current).selectAll("*").remove();
+useEffect(() => {
+  const combinedStories = filteredData
+    .flatMap((entry) => entry.sentences)
+    .join(" ");
 
-    const svg = d3
-      .select(svgRef.current)
-      .attr("width", width)
-      .attr("height", height);
+  const frequency = countWords(combinedStories);
+  setWordFrequency(frequency); // Set word frequency state
+  const bubbleData = getBubbleData(frequency, filteredData);
 
-    const tooltip = d3
-      .select(tooltipRef.current)
-      .style("opacity", 0)
-      .style("position", "absolute")
-      .style("background", "white")
-      .style("padding", "15px")
-      .style("border", "1px solid #ccc")
-      .style("border-radius", "10px")
-      .style("pointer-events", "none");
+  const { width, height } = dimensions;
 
-    const simulation = d3
-      .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(-10))
-      .force("center", d3.forceCenter(width / 1.6, height / 2))
-      .force(
-        "collide",
-        d3.forceCollide((d) => d.size + 20)
-      );
+  // Clear previous SVG contents
+  d3.select(svgRef.current).selectAll("*").remove();
 
-    const bubbles = svg
-      .selectAll("circle")
-      .data(bubbleData)
-      .enter()
-      .append("circle")
-      .attr("r", (d) => d.size)
-      .attr("fill", (d) => getColor(d.name))
-      .on("mouseover", (event, d) => {
-        const entry = filteredData.find((entry) => entry.name === d.author);
-        const relevantSentence = entry
-          ? getRelevantSentence(entry.sentences, d.name)
-          : "No relevant sentence found.";
+  const svg = d3
+    .select(svgRef.current)
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .attr("preserveAspectRatio", "xMidYMid meet");
 
-        const boldedSentence = getBoldedSentence(relevantSentence, d.name);
+  const tooltip = d3
+    .select(tooltipRef.current)
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("padding", "15px")
+    .style("border", "1px solid #ccc")
+    .style("border-radius", "10px")
+    .style("pointer-events", "none");
 
-        tooltip.transition().duration(200).style("opacity", 1);
-        tooltip
-          .html(
+  // Adjust forces based on screen size
+  const isMobile = width < 768; // Adjust for mobile screen width, set breakpoint
+
+  const simulation = d3
+    .forceSimulation(bubbleData)
+    .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -10)) // Weaker charge for mobile
+    .force(
+      "center",
+      d3.forceCenter(
+        width / (isMobile ? 2 : 1.6), // Center more in the middle for mobile
+        height / (isMobile ? 4 : 2),  // Keep vertical centering the same
+      )
+    )
+    .force(
+      "collide",
+      d3.forceCollide((d) => d.size + (isMobile ? 0.8 : 12)) // Smaller collision for mobile
+    );
+
+  const bubbles = svg
+    .selectAll("circle")
+    .data(bubbleData)
+    .enter()
+    .append("circle")
+    .attr("r", (d) => d.size)
+    .attr("fill", (d) => getColor(d.name))
+    .on("mouseover", (event, d) => {
+      const entry = filteredData.find((entry) => entry.name === d.author);
+      const relevantSentence = entry
+        ? getRelevantSentence(entry.sentences, d.name)
+        : "No relevant sentence found.";
+
+      const boldedSentence = getBoldedSentence(relevantSentence, d.name);
+
+      tooltip.transition().duration(200).style("opacity", 1);
+      tooltip
+        .html(
+          `
+              <div class="tooltip">
+                <div class="card-name">${d.name}</div><br>
+                <hr><br>
+                <strong>Frequency:</strong> ${d.value}<br>
+                <strong>Quote:</strong> "${boldedSentence}"<br>
+                <strong>Author:</strong> ${d.author}
+              </div>
             `
-                <div class="tooltip">
-                  <div class="card-name">${d.name}</div><br>
-                  <hr><br>
-                  <strong>Frequency:</strong> ${d.value}<br>
-                  <strong>Quote:</strong> "${boldedSentence}"<br>
-                  <strong>Author:</strong> ${d.author}
-                </div>
-              `
-          )
-          .style("left", `${event.pageX + 5}px`)
-          .style("top", `${event.pageY - 28}px`);
-      })
-      .on("mousemove", (event) => {
-        tooltip
-          .style("left", `${event.pageX + 5}px`)
-          .style("top", `${event.pageY - 28}px`);
-      })
-      .on("mouseout", () => {
-        tooltip.transition().duration(500).style("opacity", 0);
-      });
-
-    simulation.on("tick", () => {
-      bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+        )
+        .style("left", `${event.pageX -50}px`)
+        .style("top", `${event.pageY - 90}px`);
+    })
+    .on("mousemove", (event) => {
+      tooltip
+        .style("left", `${event.pageX -50}px`)
+        .style("top", `${event.pageY - 90}px`);
+    })
+    .on("mouseout", () => {
+      tooltip.transition().duration(500).style("opacity", 0);
     });
-  }, [filteredData]);
+
+  simulation.on("tick", () => {
+    bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+  });
+}, [filteredData, dimensions]);
+
 
   // Update filter values
   const handleFilterChange = (e) => {
@@ -449,11 +478,17 @@ const BubbleChartComponent = () => {
 
   return (
     <>
-      <div className="data-viz">
+      <div ref={containerRef} className="data-viz">
         <div className="filter-section">
-        <div className="dviz-title">birth stories</div>
-        <p>For this data story, mothers are asked to share their birth story in as much detail as they can remember. These are a selection of some of the most frequent words based on the data we have collected so far. You can also filter by race, country (this is the country where the birth took place) and birth type.</p>
-        <br />
+          <div className="dviz-title">birth stories</div>
+          <p>
+            For this data story, mothers are asked to share their birth story in
+            as much detail as they can remember. These are a selection of some
+            of the most frequent words based on the data we have collected so
+            far. You can also filter by race, country (this is the country where
+            the birth took place) and birth type.
+          </p>
+          <br />
           <label className="search-category">
             <div>Race:</div>
             <select
