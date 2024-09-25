@@ -203,14 +203,22 @@ const getBubbleData = (frequency, filteredData) => {
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 2;
+          existingBubble.size += frequency[word] * 2.5;
         } else {
           bubbleData.push({
             name: word,
             value: frequency[word],
-            size: frequency[word] * 2,
+            size: frequency[word] * 2.5,
             story: entry.birthStory,
             author: entry.name,
+            country: entry.country,
+            countryLivesIn: entry.countryLivesIn,
+            portrait: entry.portrait,
+            noOfChildren: entry.noOfChildren,
+            noOfChild: entry.noOfChild,
+            birthDate: entry.birthDate,
+            birthAge: entry.birthAge,
+            city: entry.city,
           });
         }
       }
@@ -256,7 +264,7 @@ const colorMap = {
   labour: "#ff5733",
   labouring: "#ff5733",
   water: "#4955FA",
-  came: "#48DFC1",
+  came: "#493b39",
   first: "#F092D0",
   remember: "#ffcc33",
   "c-section": "#B6A09F",
@@ -274,7 +282,7 @@ const colorMap = {
   even: "#3498DB",
   see: "#48C9B0",
   pain: "#E74C3C",
-  coming: "#F5B041",
+  coming: "#493b39",
   say: "#7FB3D5",
   due: "#AF7AC5",
   still: "#c0dfa1",
@@ -285,7 +293,7 @@ const colorMap = {
   down: "#6C3483",
   hospital: "#7B68EE",
   aware: "#FF6347",
-  hated: "#8B0000",
+  hated: "#0c0f0a",
   back: "#4682B4",
   required: "#FFD700",
   actually: "#32CD32",
@@ -303,7 +311,6 @@ const colorMap = {
   matter: "#1ABC9C",
   gynae: "#8E44AD",
   lucky: "#F7DC6F",
-
   wanting: "#E67E22",
   mother: "#EC7063",
   sense: "#7DCEA0",
@@ -312,7 +319,7 @@ const colorMap = {
   thinking: "#AAB7B8",
   birthing: "#E74C3C",
   literally: "#F5B041",
-  op: "#A569BD",
+  op: "#ddded0",
   nothing: "#34495E",
   two: "#DC7633",
   mum: "#9B59B6",
@@ -323,6 +330,8 @@ const colorMap = {
   checked: "#27AE60",
   situation: "#F5B041",
   time: "#1ABC9C",
+  happening: "#766153",
+  pregnancy: "#947c51",
 };
 
 const getColor = (word) => colorMap[word] || "#8884d8";
@@ -337,6 +346,7 @@ const BubbleChartComponent = () => {
     birthType: "",
   });
 
+  const [hoveredWord, setHoveredWord] = useState(null); // Track hovered word
   const [filteredData, setFilteredData] = useState(data);
   const [wordFrequency, setWordFrequency] = useState({}); // Add state for word frequency
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -399,7 +409,7 @@ useEffect(() => {
     .style("position", "absolute")
     .style("background", "white")
     .style("padding", "15px")
-    .style("border", "1px solid #ccc")
+    .style("border", "none")
     .style("border-radius", "10px")
     .style("pointer-events", "none");
 
@@ -408,7 +418,7 @@ useEffect(() => {
 
   const simulation = d3
     .forceSimulation(bubbleData)
-    .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -10)) // Weaker charge for mobile
+    .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -12)) // Weaker charge for mobile
     .force(
       "center",
       d3.forceCenter(
@@ -428,6 +438,7 @@ useEffect(() => {
     .append("circle")
     .attr("r", (d) => d.size)
     .attr("fill", (d) => getColor(d.name))
+    .classed("hovered", (d) => d.name === hoveredWord) // Use `classed` to toggle class
     .on("mouseover", (event, d) => {
       const entry = filteredData.find((entry) => entry.name === d.author);
       const relevantSentence = entry
@@ -436,6 +447,9 @@ useEffect(() => {
 
       const boldedSentence = getBoldedSentence(relevantSentence, d.name);
 
+
+    //   <strong>Word frequency:</strong> ${d.value}<br>
+
       tooltip.transition().duration(200).style("opacity", 1);
       tooltip
         .html(
@@ -443,9 +457,25 @@ useEffect(() => {
               <div class="tooltip">
                 <div class="card-name">${d.name}</div><br>
                 <hr><br>
-                <strong>Frequency:</strong> ${d.value}<br>
-                <strong>Quote:</strong> "${boldedSentence}"<br>
-                <strong>Author:</strong> ${d.author}
+      
+               "${boldedSentence}"<br>
+               <br>
+                <div class="tooltip-name-flex">
+                <div><img src="${d.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
+                <div><strong>${d.author}</strong>, ${d.countryLivesIn}</div>
+                </div>
+                <br>
+                <hr><br>
+                <div class="details-flex">
+                <div><strong>Country of child's birth:</strong> ${d.country}</div>
+                <div><strong>City of child's birth:</strong> ${d.city}</div>
+                <div><strong>Number of child:</strong> ${d.noOfChild}</div>
+                <div><strong>Year of birth:</strong> ${d.birthDate}</div>
+                <div><strong>Mother's age at childbirth:</strong> ${d.birthAge}</div>
+                </div>
+                <br>
+                <hr><br>
+                <div>Read full birth story <strong>here</strong></div>
               </div>
             `
         )
@@ -534,7 +564,7 @@ useEffect(() => {
         <div ref={tooltipRef} />
         <div>
           {" "}
-          <ColorKey wordFrequency={wordFrequency} colorMap={colorMap} />
+          <ColorKey wordFrequency={wordFrequency} colorMap={colorMap} setHoveredWord={setHoveredWord} />
         </div>
       </div>
     </>

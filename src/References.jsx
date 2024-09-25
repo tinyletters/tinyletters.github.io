@@ -213,7 +213,7 @@ export default function References() {
                 Both Dee and Lara always followed the work of Mary Kelly, but
                 both revisited it in a new light as mothers, noting that now, in
                 many societies, almost half a century since it was first
-                exhibited, there subsists a sense of shame about the daily
+                exhibited, there remains a sense of shame about the daily
                 realities of motherhood.
               </p>
             </div>
@@ -234,6 +234,139 @@ export default function References() {
         <div>
           <p>
             <a
+              href="https://www.penguinrandomhouse.com/books/730717/touched-out-by-amanda-montei/"
+              target="_blank"
+            >
+              Touched Out: Motherhood, Misogyny, Consent, and Control {""}
+            </a>
+            by Amanda Montei
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
+              href="https://lareviewofbooks.org/article/birth-stories-are-an-ideological-minefield-a-conversation-with-amanda-montei/?utm_source=substack&utm_medium=email"
+              target="_blank"
+            >
+              Birth Stories Are an Ideological Minefield: A Conversation with Amanda Montei {""}
+            </a>
+            by Kate Durbin
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
+              href="https://read.dukeupress.edu/books/book/1596/Cruel-Optimism"
+              target="_blank"
+            >
+              Cruel Optimism {""}
+            </a>
+            by Lauren Berlant
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
+              href="https://extraextramagazine.com/talk/lauren-berlant-on-intimacy-as-world-making/"
+              target="_blank"
+            >
+              Lauren Berlant on Intimacy as World-Making {""}
+            </a>
+            by Hans Demeyer 
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
+              href="https://www.moussemagazine.it/magazine/michellegrabner-mocacleveland/"
+              target="_blank"
+            >
+              I Work from Home {""}
+            </a>
+            by Michelle Grabner at MOCA Cleveland
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
+              href="https://www.harpersbazaar.com/culture/art-books-music/a43012829/christina-sharpe-in-the-wake/"
+              target="_blank"
+            >
+              In The Wake {""}
+            </a>
+            by Christina Sharpe
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
+              href="https://www.processjmus.org/blackmotherhood"
+              target="_blank"
+            >
+             Black Motherhood In the Wake {""}
+            </a>
+            by Camille Crichlow
+          </p>
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "0.9px",
+              my: 2,
+              width: "100%",
+            }}
+          />
+        </div>
+        <div>
+          <p>
+            <a
               href="https://www.hettiejudah.co.uk/how-not-to-exclude-artist-mothers-and-other-parents"
               target="_blank"
             >
@@ -250,28 +383,10 @@ export default function References() {
             }}
           />
         </div>
-
-          <p>
-            <a
-              href="https://lareviewofbooks.org/article/birth-stories-are-an-ideological-minefield-a-conversation-with-amanda-montei/?utm_source=substack&utm_medium=email"
-              target="_blank"
-            >
-              Touched Out: Motherhood, Misogyny, Consent, and Control {""}
-            </a>
-            by Amanda Montei
-          </p>
-          <Divider
-            sx={{
-              borderColor: "black",
-              borderWidth: "0.9px",
-              my: 2,
-              width: "100%",
-            }}
-          />
-        </div>
-        <br />
-        <br />
-        <br />
+      </div>
+      <br />
+      <br />
+      <br />
     </>
   );
 }
