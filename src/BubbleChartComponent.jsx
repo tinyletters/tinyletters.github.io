@@ -411,7 +411,8 @@ useEffect(() => {
     .style("padding", "15px")
     .style("border", "none")
     .style("border-radius", "10px")
-    .style("pointer-events", "none");
+    .style("pointer-events", "none")
+    .style("box-shadow", "rgba(0, 0, 0, 0.3) 0 2px 10px")
 
   // Adjust forces based on screen size
   const isMobile = width < 768; // Adjust for mobile screen width, set breakpoint
