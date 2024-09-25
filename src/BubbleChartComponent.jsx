@@ -219,6 +219,7 @@ const getBubbleData = (frequency, filteredData) => {
             birthDate: entry.birthDate,
             birthAge: entry.birthAge,
             city: entry.city,
+            link: entry.link,
           });
         }
       }
@@ -337,239 +338,215 @@ const colorMap = {
 const getColor = (word) => colorMap[word] || "#8884d8";
 
 const BubbleChartComponent = () => {
-  const svgRef = useRef();
-  const tooltipRef = useRef();
-  const containerRef = useRef();
-  const [filters, setFilters] = useState({
-    race: "",
-    country: "",
-    birthType: "",
-  });
+    const svgRef = useRef();
+    const tooltipRef = useRef();
+    const containerRef = useRef();
+    const [filters, setFilters] = useState({ race: "", country: "", birthType: "" });
+    const [hoveredWord, setHoveredWord] = useState(null); 
+    const [filteredData, setFilteredData] = useState(data);
+    const [wordFrequency, setWordFrequency] = useState({});
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const [tooltipVisible, setTooltipVisible] = useState(false); // Manage tooltip visibility
+  
+    useEffect(() => {
+      const { race, country, birthType } = filters;
+  
+      const filtered = data.filter((entry) => {
+        return (
+          (race === "" || entry.race.toLowerCase() === race.toLowerCase()) &&
+          (country === "" || entry.country.toLowerCase() === country.toLowerCase()) &&
+          (birthType === "" || entry.birthKind.toLowerCase() === birthType.toLowerCase())
+        );
+      });
+  
+      setFilteredData(filtered);
+    }, [filters]);
+  
+    useEffect(() => {
+      const handleResize = () => {
+        if (containerRef.current) {
+          const { width, height } = containerRef.current.getBoundingClientRect();
+          setDimensions({ width, height });
+        }
+      };
+  
+      handleResize();
+      window.addEventListener("resize", handleResize);
+  
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+  
+    useEffect(() => {
+      const combinedStories = filteredData.flatMap(entry => entry.sentences).join(" ");
+      const frequency = countWords(combinedStories);
+      setWordFrequency(frequency);
+      const bubbleData = getBubbleData(frequency, filteredData);
+  
+      const { width, height } = dimensions;
+  
+      d3.select(svgRef.current).selectAll("*").remove();
+  
+      const svg = d3
+        .select(svgRef.current)
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+  
+      const tooltip = d3
+        .select(tooltipRef.current)
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .style("background", "white")
+        .style("padding", "15px")
+        .style("border", "none")
+        .style("border-radius", "10px")
+        .style("pointer-events", "none")
+        .style("box-shadow", "rgba(0, 0, 0, 0.3) 0 2px 10px");
+  
+      const isMobile = width < 768;
+  
+      const simulation = d3
+        .forceSimulation(bubbleData)
+        .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -12))
+        .force("center", d3.forceCenter(width / (isMobile ? 2 : 1.6), height / (isMobile ? 4 : 2)))
+        .force("collide", d3.forceCollide(d => d.size + (isMobile ? 0.8 : 12)));
+  
+      const bubbles = svg
+        .selectAll("circle")
+        .data(bubbleData)
+        .enter()
+        .append("circle")
+        .attr("r", d => d.size)
+        .attr("fill", d => getColor(d.name))
+        .classed("hovered", d => d.name === hoveredWord)
+        .on("mouseover", (event, d) => {
+          const entry = filteredData.find(entry => entry.name === d.author);
+          const relevantSentence = entry ? getRelevantSentence(entry.sentences, d.name) : "No relevant sentence found.";
+          const boldedSentence = getBoldedSentence(relevantSentence, d.name);
+  
+          tooltip.transition().duration(200).style("opacity", 1);
+          tooltip
+            .html(`
+                <div class="tooltip">
+                  <div class="card-name">${d.name}</div><br>
+                  <hr><br>
+                  "${boldedSentence}"<br>
+                  <br>
+                  <div class="tooltip-name-flex">
+                  <div><img src="${d.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
+                  <div><strong>${d.author}</strong>, ${d.countryLivesIn}</div>
+                  </div>
+                  <br>
+                  <hr><br>
+                  <div class="details-flex">
+                  <div><strong>Country of child's birth:</strong> ${d.country}</div>
+                  <div><strong>City of child's birth:</strong> ${d.city}</div>
+                  <div><strong>Number of child:</strong> ${d.noOfChild}</div>
+                  <div><strong>Year of birth:</strong> ${d.birthDate}</div>
+                  <div><strong>Mother's age at childbirth:</strong> ${d.birthAge}</div>
+                  </div>
+                  <br>
+                  <hr><br>
+                  <div>Read full birth story <strong><a href="${d.link}" target="_blank" rel="noopener noreferrer">here</a></strong></div>
+                </div>
+              `)
+            .style("left", `${event.pageX - 50}px`)
+            .style("top", `${event.pageY - 90}px`);
+  
+          // Set tooltip visibility to true on mouseover
+          setTooltipVisible(true);
+        })
+        .on("mousemove", (event) => {
+          tooltip
+            .style("left", `${event.pageX - 50}px`)
+            .style("top", `${event.pageY - 90}px`);
+        })
+        .on("mouseout", () => {
+          if (!tooltipVisible) {
+            tooltip.transition().duration(500).style("opacity", 0);
+          }
+        });
+  
+      simulation.on("tick", () => {
+        bubbles.attr("cx", d => d.x).attr("cy", d => d.y);
+      });
+    }, [filteredData, dimensions, tooltipVisible]);
 
-  const [hoveredWord, setHoveredWord] = useState(null); // Track hovered word
-  const [filteredData, setFilteredData] = useState(data);
-  const [wordFrequency, setWordFrequency] = useState({}); // Add state for word frequency
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
+    // Handle clicks outside tooltip to hide it
   useEffect(() => {
-    const { race, country, birthType } = filters;
-
-    const filtered = data.filter((entry) => {
-      return (
-        (race === "" || entry.race.toLowerCase() === race.toLowerCase()) &&
-        (country === "" ||
-          entry.country.toLowerCase() === country.toLowerCase()) &&
-        (birthType === "" ||
-          entry.birthKind.toLowerCase() === birthType.toLowerCase())
-      );
-    });
-
-    setFilteredData(filtered);
-  }, [filters]);
-
-  useEffect(() => {
-    // Update dimensions based on the container's size
-    const handleResize = () => {
-      if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        setDimensions({ width, height });
+    const handleClickOutside = (event) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target) && tooltipVisible) {
+        setTooltipVisible(false);
+        d3.select(tooltipRef.current).transition().duration(500).style("opacity", 0);
       }
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
-
-useEffect(() => {
-  const combinedStories = filteredData
-    .flatMap((entry) => entry.sentences)
-    .join(" ");
-
-  const frequency = countWords(combinedStories);
-  setWordFrequency(frequency); // Set word frequency state
-  const bubbleData = getBubbleData(frequency, filteredData);
-
-  const { width, height } = dimensions;
-
-  // Clear previous SVG contents
-  d3.select(svgRef.current).selectAll("*").remove();
-
-  const svg = d3
-    .select(svgRef.current)
-    .attr("viewBox", `0 0 ${width} ${height}`)
-    .attr("preserveAspectRatio", "xMidYMid meet");
-
-  const tooltip = d3
-    .select(tooltipRef.current)
-    .style("opacity", 0)
-    .style("position", "absolute")
-    .style("background", "white")
-    .style("padding", "15px")
-    .style("border", "none")
-    .style("border-radius", "10px")
-    .style("pointer-events", "none")
-    .style("box-shadow", "rgba(0, 0, 0, 0.3) 0 2px 10px")
-
-  // Adjust forces based on screen size
-  const isMobile = width < 768; // Adjust for mobile screen width, set breakpoint
-
-  const simulation = d3
-    .forceSimulation(bubbleData)
-    .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -12)) // Weaker charge for mobile
-    .force(
-      "center",
-      d3.forceCenter(
-        width / (isMobile ? 2 : 1.6), // Center more in the middle for mobile
-        height / (isMobile ? 4 : 2),  // Keep vertical centering the same
-      )
-    )
-    .force(
-      "collide",
-      d3.forceCollide((d) => d.size + (isMobile ? 0.8 : 12)) // Smaller collision for mobile
+  }, [tooltipVisible]);
+  
+    const handleFilterChange = (e) => {
+      const { name, value } = e.target;
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    };
+  
+    return (
+      <>
+        <div ref={containerRef} className="data-viz">
+          <div className="filter-section">
+            <div className="dviz-title">birth stories</div>
+            <p>
+              For this data story, mothers are asked to share their birth story in
+              as much detail as they can remember. These are a selection of some
+              of the most frequent words based on the data we have collected so
+              far. You can also filter by race, country (this is the country where
+              the birth took place) and birth type.
+            </p>
+            <br />
+            <label className="search-category">
+              <div>Race:</div>
+              <select name="race" value={filters.race} onChange={handleFilterChange}>
+                <option value="">All</option>
+                <option value="white">White</option>
+                <option value="coloured">Coloured</option>
+              </select>
+            </label>
+  
+            <label className="search-category">
+              Country:
+              <select name="country" value={filters.country} onChange={handleFilterChange}>
+                <option value="">All</option>
+                <option value="South Africa">South Africa</option>
+                <option value="Egypt">Egypt</option>
+              </select>
+            </label>
+  
+            <label className="search-category">
+              Birth Type:
+              <select name="birthType" value={filters.birthType} onChange={handleFilterChange}>
+                <option value="">All</option>
+                <option value="Caeserian">Caeserian</option>
+                <option value="Vaginal">Vaginal</option>
+              </select>
+            </label>
+          </div>
+  
+          <svg ref={svgRef} className="bubble-chart"></svg>
+  
+          <div ref={tooltipRef} />
+          <div>
+            <ColorKey wordFrequency={wordFrequency} colorMap={colorMap} setHoveredWord={setHoveredWord} />
+          </div>
+        </div>
+      </>
     );
-
-  const bubbles = svg
-    .selectAll("circle")
-    .data(bubbleData)
-    .enter()
-    .append("circle")
-    .attr("r", (d) => d.size)
-    .attr("fill", (d) => getColor(d.name))
-    .classed("hovered", (d) => d.name === hoveredWord) // Use `classed` to toggle class
-    .on("mouseover", (event, d) => {
-      const entry = filteredData.find((entry) => entry.name === d.author);
-      const relevantSentence = entry
-        ? getRelevantSentence(entry.sentences, d.name)
-        : "No relevant sentence found.";
-
-      const boldedSentence = getBoldedSentence(relevantSentence, d.name);
-
-
-    //   <strong>Word frequency:</strong> ${d.value}<br>
-
-      tooltip.transition().duration(200).style("opacity", 1);
-      tooltip
-        .html(
-          `
-              <div class="tooltip">
-                <div class="card-name">${d.name}</div><br>
-                <hr><br>
-      
-               "${boldedSentence}"<br>
-               <br>
-                <div class="tooltip-name-flex">
-                <div><img src="${d.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
-                <div><strong>${d.author}</strong>, ${d.countryLivesIn}</div>
-                </div>
-                <br>
-                <hr><br>
-                <div class="details-flex">
-                <div><strong>Country of child's birth:</strong> ${d.country}</div>
-                <div><strong>City of child's birth:</strong> ${d.city}</div>
-                <div><strong>Number of child:</strong> ${d.noOfChild}</div>
-                <div><strong>Year of birth:</strong> ${d.birthDate}</div>
-                <div><strong>Mother's age at childbirth:</strong> ${d.birthAge}</div>
-                </div>
-                <br>
-                <hr><br>
-                <div>Read full birth story <strong>here</strong></div>
-              </div>
-            `
-        )
-        .style("left", `${event.pageX -50}px`)
-        .style("top", `${event.pageY - 90}px`);
-    })
-    .on("mousemove", (event) => {
-      tooltip
-        .style("left", `${event.pageX -50}px`)
-        .style("top", `${event.pageY - 90}px`);
-    })
-    .on("mouseout", () => {
-      tooltip.transition().duration(500).style("opacity", 0);
-    });
-
-  simulation.on("tick", () => {
-    bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-  });
-}, [filteredData, dimensions]);
-
-
-  // Update filter values
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
   };
-
-  return (
-    <>
-      <div ref={containerRef} className="data-viz">
-        <div className="filter-section">
-          <div className="dviz-title">birth stories</div>
-          <p>
-            For this data story, mothers are asked to share their birth story in
-            as much detail as they can remember. These are a selection of some
-            of the most frequent words based on the data we have collected so
-            far. You can also filter by race, country (this is the country where
-            the birth took place) and birth type.
-          </p>
-          <br />
-          <label className="search-category">
-            <div>Race:</div>
-            <select
-              name="race"
-              value={filters.race}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="white">White</option>
-              <option value="coloured">Coloured</option>
-            </select>
-          </label>
-
-          <label className="search-category">
-            Country:
-            <select
-              name="country"
-              value={filters.country}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="South Africa">South Africa</option>
-              <option value="Egypt">Egypt</option>
-            </select>
-          </label>
-
-          <label className="search-category">
-            Birth Type:
-            <select
-              name="birthType"
-              value={filters.birthType}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="Caeserian">Caeserian</option>
-              <option value="Vaginal">Vaginal</option>
-            </select>
-          </label>
-        </div>
-
-        <svg ref={svgRef} className="bubble-chart"></svg>
-
-        <div ref={tooltipRef} />
-        <div>
-          {" "}
-          <ColorKey wordFrequency={wordFrequency} colorMap={colorMap} setHoveredWord={setHoveredWord} />
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default BubbleChartComponent;
+  
+  export default BubbleChartComponent;
