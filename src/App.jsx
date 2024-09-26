@@ -7,6 +7,9 @@ import References from "./References";
 import BubbleChartComponent from "./BubbleChartComponent";
 import FullStoryPage from './FullStoryPage';
 import { HashRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import ScrollToTop from './ScrollToTop'; 
+
+
 
 function MainContent() {
   const location = useLocation();
@@ -116,6 +119,7 @@ function MainContent() {
 function App() {
   return (
     <Router>
+      <ScrollToTop /> 
       <Header />
       <MainContent />
     </Router>

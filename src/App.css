@@ -249,6 +249,7 @@ select:focus {
 h3 {
   font-family: "Crake", sans-serif;
   font-size: 30px;
+  font-weight: normal !important;
 }
 
 .birth-story {
@@ -500,14 +501,18 @@ h3 {
   
   h3 {
     font-family: "Crake", sans-serif;
-    font-size: 30px;
+    font-size: 26px;
+    font-weight: normal !important;
   }
   
   .birth-story {
     background-color: white;
     border-radius: 20px;
-    width: 77vw;
-    padding: 2rem;
+    width: 76vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
 .filter-section {

@@ -224,18 +224,18 @@ const getBubbleData = (frequency, filteredData) => {
     words = words.split(" ");
 
     words.forEach((word) => {
-      if (frequency[word] >= 2) {
+      if (frequency[word] > 2) {
         const existingBubble = bubbleData.find(
           (bubble) => bubble.name === word
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 1.8;
+          existingBubble.size += frequency[word] * 1;
         } else {
           bubbleData.push({
             name: word,
             value: frequency[word],
-            size: frequency[word] * 1.8,
+            size: frequency[word] * 1,
             story: entry.birthStory,
             author: entry.name,
             country: entry.country,
