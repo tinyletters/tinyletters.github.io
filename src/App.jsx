@@ -6,7 +6,7 @@ import { Divider } from "@mui/material";
 import References from "./References";
 import BubbleChartComponent from "./BubbleChartComponent";
 import FullStoryPage from './FullStoryPage';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 function MainContent() {
   const location = useLocation();
