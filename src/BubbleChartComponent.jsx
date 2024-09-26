@@ -539,7 +539,7 @@ const BubbleChartComponent = () => {
                   <br>
 
                   <hr><br>
-                  Read full birth story <strong><a href="/story/${d.id}">here</a></strong></div>
+                  Read full birth story <strong><a href="#/story/${d.id}">here</a></strong></div>
               `
           )
           .style("left", `${event.pageX + 5}px`)
