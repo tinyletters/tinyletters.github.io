@@ -495,7 +495,7 @@ const BubbleChartComponent = () => {
 
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -12))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -7))
       .force(
         "center",
         d3.forceCenter(
@@ -505,7 +505,7 @@ const BubbleChartComponent = () => {
       )
       .force(
         "collide",
-        d3.forceCollide((d) => d.size + (isMobile ? 0.8 : 12))
+        d3.forceCollide((d) => d.size + (isMobile ? 0.8 : 7))
       );
 
     const bubbles = svg
