@@ -266,28 +266,28 @@ const BubbleChartComponent = () => {
     });
   }, [filteredData, dimensions, tooltipVisible]);
 
-  // Handle clicks outside tooltip to hide it
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        tooltipRef.current &&
-        !tooltipRef.current.contains(event.target) &&
-        tooltipVisible
-      ) {
-        setTooltipVisible(false);
-        d3.select(tooltipRef.current)
-          .transition()
-          .duration(500)
-          .style("opacity", 0);
-      }
-    };
+  // // Handle clicks outside tooltip to hide it
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       tooltipRef.current &&
+  //       !tooltipRef.current.contains(event.target) &&
+  //       tooltipVisible
+  //     ) {
+  //       setTooltipVisible(false);
+  //       d3.select(tooltipRef.current)
+  //         .transition()
+  //         .duration(500)
+  //         .style("opacity", 0);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [tooltipVisible]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [tooltipVisible]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
