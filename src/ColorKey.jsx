@@ -1,4 +1,5 @@
 import React from 'react';
+import colorMap from './ColorMap'; 
 
 const ColorKey = ({ wordFrequency, colorMap, setHoveredWord }) => {
     const sortedWords = Object.keys(wordFrequency)

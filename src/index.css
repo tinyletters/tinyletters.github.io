@@ -22,15 +22,12 @@ button {
   font-weight: 400;
   font-family: inherit;
   background-color: white;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: border-color 0.25s;
 }
 button:hover {
   border-color: hotpink;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 

@@ -3,190 +3,9 @@ import * as d3 from "d3";
 import "./App.css";
 import ColorKey from "./ColorKey";
 import data from "./Data";
+import colorMap from './ColorMap';
+import stopWords from "./StopWords"; 
 
-// List of stop words to exclude
-const stopWords = new Set([
-  "a",
-  "about",
-  "above",
-  "after",
-  "again",
-  "against",
-  "all",
-  "am",
-  "an",
-  "and",
-  "any",
-  "are",
-  "as",
-  "at",
-  "be",
-  "because",
-  "been",
-  "before",
-  "being",
-  "below",
-  "between",
-  "both",
-  "but",
-  "by",
-  "for",
-  "from",
-  "further",
-  "had",
-  "hadn",
-  "has",
-  "hasn",
-  "have",
-  "haven",
-  "he",
-  "her",
-  "here",
-  "hers",
-  "herself",
-  "him",
-  "himself",
-  "his",
-  "how",
-  "i",
-  "if",
-  "in",
-  "into",
-  "is",
-  "isn",
-  "it",
-  "its",
-  "itself",
-  "just",
-  "me",
-  "mightn",
-  "more",
-  "most",
-  "mustn",
-  "my",
-  "myself",
-  "no",
-  "nor",
-  "not",
-  "now",
-  "of",
-  "off",
-  "on",
-  "once",
-  "only",
-  "or",
-  "other",
-  "our",
-  "ours",
-  "ourselves",
-  "out",
-  "over",
-  "own",
-  "re",
-  "s",
-  "same",
-  "shan",
-  "should",
-  "shouldn",
-  "so",
-  "she",
-  "some",
-  "such",
-  "t",
-  "than",
-  "that",
-  "the",
-  "their",
-  "theirs",
-  "them",
-  "themselves",
-  "then",
-  "there",
-  "these",
-  "they",
-  "this",
-  "those",
-  "through",
-  "to",
-  "too",
-  "under",
-  "until",
-  "up",
-  "ve",
-  "very",
-  "was",
-  "wasn",
-  "wasn't",
-  "we",
-  "were",
-  "weren",
-  "what",
-  "which",
-  "while",
-  "who",
-  "whom",
-  "why",
-  "will",
-  "with",
-  "won",
-  "would",
-  "wouldn",
-  "-",
-  "(i",
-  "could",
-  "can",
-  "going",
-  "made",
-  "few",
-  "bit",
-  "like",
-  "didn't",
-  "each",
-  "around",
-  "you",
-  "karen",
-  "i'd",
-  "went",
-  "said",
-  "did",
-  "though",
-  "although",
-  "many",
-  "ever",
-  "baby",
-  "remember",
-  "one",
-  "thing",
-  "mum",
-  "don't",
-  "don’t",
-  "don",
-  "your",
-  "lot",
-  "come",
-  "get",
-  "ask",
-  "take",
-  "was",
-  "was]",
-  "i]",
-  "[i",
-  "got",
-  "labour",
-  "felt",
-  "onto",
-  "the]",
-  "also",
-  "when",
-  "[the",
-  "mother",
-  "first",
-  "remembered",
-  "i'm",
-  "much",
-  "well",
-  "whose",
-]);
 
 const normalizeWord = (word) => {
   // Handle basic pluralization
@@ -230,12 +49,12 @@ const getBubbleData = (frequency, filteredData) => {
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 1.6;
+          existingBubble.size += frequency[word] * 1.8;
         } else {
           bubbleData.push({
             name: word,
             value: frequency[word],
-            size: frequency[word] * 1.6,
+            size: frequency[word] * 1.8,
             story: entry.birthStory,
             author: entry.name,
             country: entry.country,
@@ -289,130 +108,6 @@ const getBoldedSentence = (sentence, word) => {
     .join(" ");
 };
 
-const colorMap = {
-  labour: "#ff5733",
-  labouring: "#ff5733",
-  water: "#4955FA",
-  came: "#493b39",
-  first: "#F092D0",
-  remember: "#ffcc33",
-  "c-section": "#B6A09F",
-  broken: "#B39E25",
-  broke: "#B39E25",
-  midwife: "#F09275",
-  baby: "#F0F68F",
-  child: "#F000FF",
-  one: "#3E1E70",
-  body: "#532c1e",
-  feel: "#bcb8b1",
-  husband: "#D35400",
-  thing: "#76D7C4",
-  felt: "#bcb8b1",
-  even: "#3498DB",
-  see: "#48C9B0",
-  pain: "#E74C3C",
-  coming: "#493b39",
-  say: "#7FB3D5",
-  due: "#AF7AC5",
-  still: "#c0dfa1",
-  tried: "#F39C12",
-  moment: "#85C1E9",
-  birth: "#D98880",
-  everything: "#E59866",
-  down: "#6C3483",
-  hospital: "#7B68EE",
-  aware: "#FF6347",
-  hated: "#0c0f0a",
-  back: "#4682B4",
-  required: "#FFD700",
-  actually: "#32CD32",
-  every: "#BA55D3",
-  day: "#40E0D0",
-  lay: "#FF4500",
-  horrible: "#DC143C",
-  brave: "#FF1493",
-  natural: "#228B22",
-  kind: "#FF69B4",
-  pretty: "#FFB6C1",
-  blood: "#8B0000",
-  caesarian: "#B6A09F",
-  children: "#F000FF",
-  matter: "#1ABC9C",
-  gynae: "#8E44AD",
-  lucky: "#F7DC6F",
-  wanting: "#E67E22",
-  mother: "#EC7063",
-  sense: "#7DCEA0",
-  month: "#5499C7",
-  almost: "#48C9B0",
-  thinking: "#AAB7B8",
-  think: "#AAB7B8",
-  birthing: "#E74C3C",
-  literally: "#F5B041",
-  op: "#ddded0",
-  nothing: "#34495E",
-  nobody: "#34495E",
-  two: "#DC7633",
-  mum: "#9B59B6",
-  read: "#2980B9",
-  emergency: "#E74C3C",
-  book: "#F39C12",
-  complication: "#8E44AD",
-  checked: "#27AE60",
-  situation: "#F5B041",
-  time: "#1ABC9C",
-  happening: "#766153",
-  pregnancy: "#947c51",
-  open: "#74C2E1",
-  nice: "#FFCC66",
-  miracle: "#20fa83",
-  music: "#7B68EE",
-  dream: "#9370DB",
-  little: "#FFB6C1",
-  people: "#4682B4",
-  sound: "#1E90FF",
-  home: "#8B4513",
-  way: "#32CD32",
-  planned: "#008080",
-  crash: "#DC143C",
-  aftermath: "#696969",
-  style: "#FF69B4",
-  green: "#3CB371",
-  anaesthetist: "#87CEEB",
-  six: "#f4a261",
-  physical: "#faedcd",
-  looked: "#240046",
-  looking: "#240046",
-  left: "#414833",
-  filled: "#f95738",
-  liquid: "#2c7da0",
-  state: "#240046",
-  part: "#c17c74",
-  abandoned: "#495057",
-  knew: "#ff8600",
-  realm: "#d1ffc6",
-  breastfeeding: "#faf3dd",
-  calm: "#e1e5f2",
-  partner: "#373d20",
-  help: "#ba181b",
-  breathed: "#3e5c76",
-  falling: "#adb5bd",
-  health: "#e5383b",
-  different: "#6f2dbd",
-  supportive: "#d8e2dc",
-  night: "#1f1d2a",
-  feed: "#ede7e3",
-  formula: "#f2efea",
-  lactation: "#fff8d6",
-  consultant: "#062710",
-  happy: "#ffe548",
-  dropped: "#1dd3b0",
-  pump: "#d4c7c8",
-  paed: "#618985",
-  struggling: "#2a0800",
-  readmitted: "#8fcb9b"
-
-};
 
 const getColor = (word) => colorMap[word] || "#8884d8";
 
@@ -495,17 +190,17 @@ const BubbleChartComponent = () => {
 
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(isMobile ? -4 : -7))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -3 : -6))
       .force(
         "center",
         d3.forceCenter(
           width / (isMobile ? 2 : 1.8),
-          height / (isMobile ? 4 : 2)
+          height / (isMobile ? 3 : 2)
         )
       )
       .force(
         "collide",
-        d3.forceCollide((d) => d.size + (isMobile ? 0.8 : 7))
+        d3.forceCollide((d) => d.size + (isMobile ? 1 : 10))
       );
 
     const bubbles = svg
@@ -523,12 +218,19 @@ const BubbleChartComponent = () => {
           : "No relevant sentence found.";
         const boldedSentence = getBoldedSentence(relevantSentence, d.name);
 
+        const wordColor = getColor(d.name); // Get color for the word
+
         tooltip.transition().duration(200).style("opacity", 1);
         tooltip
           .html(
             `
                 <div class="tooltip">
-                  <div class="card-name">${d.name}</div><br>
+                  <div class="card-flex">
+                  <div class="card-name">
+                  ${d.name}
+                  </div>
+                  <div class="word-dot" style="border-radius: 50%; background-color: ${wordColor};"></div>
+             </div><br>
                   <hr><br>
                   "${boldedSentence}"<br>
                   <br>
@@ -599,13 +301,24 @@ const BubbleChartComponent = () => {
     <>
       <div ref={containerRef} className="data-viz">
         <div className="filter-section">
-          <div className="dviz-title">birth stories</div>
+          <div className="dviz-title">remembering the first 40 days</div>
+          <br />
           <p>
-            For this data story, mothers are asked to share their birth story in
-            as much detail as they can remember. These are a selection of some
-            of the most frequent words based on the data we have collected so
-            far. You can also filter by race, country (this is the country where
-            the birth took place) and birth type.
+            For this data story, mothers and parents are asked to share their
+            birth/coming home story and first weeks with their child in as much
+            detail as they can remember. These are a selection of some of the
+            most frequent words based on the data we have collected so far. You
+            can also filter by race of the mother, country (this is the country
+            where the birth took place) and birth type. Explore each story
+            through the tooltips. This is a growing data story. You can
+            contribute to it{" "}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here.
+            </a>
           </p>
           <br />
           <label className="search-category">
