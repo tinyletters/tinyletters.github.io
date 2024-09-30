@@ -19,7 +19,7 @@ export default function References() {
             >
               here
             </a>
-            , will emphasise the process of recalling birth or coming home
+            , emphasises the process of recalling birth or coming home
             stories, exploring the way in which data and narrative can express
             the nuances of this unique period in a mother or parent’s life,
             which is often difficult to express. It is a collaborative project,
