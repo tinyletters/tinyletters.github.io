@@ -22,7 +22,6 @@ const countWords = (text) => {
   words.forEach((word) => {
     const normalizedWord = normalizeWord(word);
     if (!stopWords.has(normalizedWord)) {
-      // Exclude stop words
       frequency[normalizedWord] = (frequency[normalizedWord] || 0) + 1;
     }
   });
@@ -194,7 +193,7 @@ const BubbleChartComponent = () => {
       .force(
         "center",
         d3.forceCenter(
-          width / (isMobile ? 2 : 1.8),
+          width / (isMobile ? 2 : 1.4),
           height / (isMobile ? 3 : 2)
         )
       )
