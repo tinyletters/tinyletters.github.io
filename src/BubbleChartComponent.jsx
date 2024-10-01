@@ -27,7 +27,7 @@ const countWords = (text) => {
   return frequency;
 };
 
-const getBubbleData = (frequency, filteredData) => {
+export const getBubbleData = (frequency, filteredData) => {
   const bubbleData = [];
 
   filteredData.forEach((entry) => {
@@ -46,12 +46,12 @@ const getBubbleData = (frequency, filteredData) => {
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 1.8;
+          existingBubble.size += frequency[word] * 1.7;
         } else {
           bubbleData.push({
             name: word,
             value: frequency[word],
-            size: frequency[word] * 1.8,
+            size: frequency[word] * 1.7,
             story: entry.birthStory,
             author: entry.name,
             country: entry.country,
@@ -114,9 +114,9 @@ const BubbleChartComponent = () => {
     country: "",
     birthType: "",
   });
-  const [hoveredWord, setHoveredWord] = useState(null);
   const [filteredData, setFilteredData] = useState(data);
   const [wordFrequency, setWordFrequency] = useState({});
+  const [bubbleData, setBubbleData] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
@@ -154,6 +154,7 @@ const BubbleChartComponent = () => {
     const frequency = countWords(combinedStories);
     setWordFrequency(frequency);
     const bubbleData = getBubbleData(frequency, filteredData);
+    setBubbleData(bubbleData);
 
     const { width, height } = dimensions;
 
@@ -182,7 +183,7 @@ const BubbleChartComponent = () => {
 
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -4))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -3))
       .force(
         "center",
         d3.forceCenter(
@@ -192,7 +193,7 @@ const BubbleChartComponent = () => {
       )
       .force(
         "collide",
-        d3.forceCollide((d) => d.size + (isMobile ? 1 : 7))
+        d3.forceCollide((d) => d.size + (isMobile ? 1 : 6))
       );
 
     const bubbles = svg
@@ -202,7 +203,6 @@ const BubbleChartComponent = () => {
       .append("circle")
       .attr("r", (d) => d.size)
       .attr("fill", (d) => getColor(d.name))
-      .classed("hovered", (d) => d.name === hoveredWord)
       .on("mouseover", (event, d) => {
         clearTimeout(timeoutId);
         const entry = filteredData.find((entry) => entry.name === d.author);
@@ -307,7 +307,12 @@ const BubbleChartComponent = () => {
               here.
             </a>
           </p>
-          <p className="best-viewed"><strong>Please note: this data visualisation is best viewed and explored on a desktop</strong></p>
+          <p className="best-viewed">
+            <strong>
+              Please note: this data visualisation is best viewed and explored
+              on a desktop
+            </strong>
+          </p>
 
           <br />
           <label className="search-category">
@@ -354,13 +359,8 @@ const BubbleChartComponent = () => {
 
         <div ref={tooltipRef} />
         <div>
-          <ColorKey
-            wordFrequency={wordFrequency}
-            colorMap={colorMap}
-            setHoveredWord={setHoveredWord}
-          />
+          <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
         </div>
-        
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import data from "./Data";
 import colorMap from './ColorMap'; 
 import stopWords from "./StopWords";
 import { Divider } from "@mui/material";
+import { getBubbleData } from "./BubbleChartComponent";
 
 const normalizeWord = (word) => {
   if (word.endsWith("s") && word.length > 1) {
@@ -31,6 +32,7 @@ function FullStoryPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [wordFrequency, setWordFrequency] = useState({});
+  const [bubbleData, setBubbleData] = useState([]);
 
   const story = data.find((item) => item.id === id);
   const birthParagraphs = story.birthOnly
@@ -47,7 +49,11 @@ function FullStoryPage() {
   useEffect(() => {
     const frequency = countWords(story.birthStory);
     setWordFrequency(frequency);
+  
+    const bubbleData = getBubbleData(frequency, [story]); // Only pass the current story as filteredData
+    setBubbleData(bubbleData); 
   }, [story]);
+  
 
   return (
     <>
@@ -60,11 +66,11 @@ function FullStoryPage() {
           />
           <br />
           <br />
-          <Divider sx={{ borderColor: "black", borderWidth: "0.99px", my: 1, width: "100%" }} />
+          <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <h3 className="story-name">
             {story.name}, {story.countryLivesIn}
           </h3>
-          <Divider sx={{ borderColor: "black", borderWidth: "0.99px", my: 1, width: "100%" }} />
+          <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <br />
           <div>
             <strong>Year of childbirth:</strong> {story.birthDate}
@@ -88,7 +94,7 @@ function FullStoryPage() {
             <strong>Birth type:</strong> {story.birthKind}
           </div>
           <br />
-          <Divider sx={{ borderColor: "black", borderWidth: "0.99px", my: 1, width: "100%" }} />
+          <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <br />
 
           {/* Back Button */}
@@ -96,7 +102,7 @@ function FullStoryPage() {
         </div>
         <div className="birth-story">
           <h4>birth story</h4>
-          <Divider sx={{ borderColor: "black", borderWidth: "0.99px", my: 1, width: "100%" }} />
+          <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <br />
           {birthParagraphs.map((para, idx) => (
             <p key={idx}>{para}</p>
@@ -104,14 +110,14 @@ function FullStoryPage() {
           <br />
 
           <h4>the first 40 days (and other memories)</h4>
-          <Divider sx={{ borderColor: "black", borderWidth: "0.99px", my: 1, width: "100%" }} />
+          <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <br />
           {firstFortyParagraphs.map((para, idx) => (
             <p key={idx}>{para}</p>
           ))}
         </div>
         <div>
-          <ColorKey wordFrequency={wordFrequency} colorMap={colorMap} />
+          <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
         </div>
       </div>
       <br />

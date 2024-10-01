@@ -14,7 +14,7 @@ export default function Header() {
       <Divider
         sx={{
           borderColor: "black",
-          borderWidth: "0.99px",
+          borderWidth: "1px",
           width: "99.5%",
         }}
       />
@@ -39,7 +39,7 @@ export default function Header() {
       <Divider
         sx={{
           borderColor: "black",
-          borderWidth: "0.99px",
+          borderWidth: "1px",
           mt: 1,
           width: "99%",
         }}

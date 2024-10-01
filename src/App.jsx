@@ -39,7 +39,7 @@ function MainContent() {
               <Divider
                 sx={{
                   borderColor: "black",
-                  borderWidth: "0.99px",
+                  borderWidth: "1px",
                   my: 2,
                   width: "100%",
                 }}
@@ -57,7 +57,7 @@ function MainContent() {
               <Divider
                 sx={{
                   borderColor: "black",
-                  borderWidth: "0.99px",
+                  borderWidth: "1px",
                   my: 2,
                   width: "100%",
                 }}
@@ -89,7 +89,7 @@ function MainContent() {
             <Divider
               sx={{
                 borderColor: "black",
-                borderWidth: "0.99px",
+                borderWidth: "1px",
                 my: 2,
                 width: "100%",
               }}
@@ -103,7 +103,7 @@ function MainContent() {
             <Divider
               sx={{
                 borderColor: "black",
-                borderWidth: "0.99px",
+                borderWidth: "1px",
                 my: 2,
                 width: "100%",
               }}
