@@ -3,14 +3,12 @@ import * as d3 from "d3";
 import "./App.css";
 import ColorKey from "./ColorKey";
 import data from "./Data";
-import colorMap from './ColorMap';
-import stopWords from "./StopWords"; 
-
+import colorMap from "./ColorMap";
+import stopWords from "./StopWords";
 
 const normalizeWord = (word) => {
-  // Handle basic pluralization
   if (word.endsWith("s") && word.length > 1) {
-    return word.slice(0, -1); // Remove 's' for basic plural
+    return word.slice(0, -1);
   }
   return word;
 };
@@ -75,7 +73,6 @@ const getBubbleData = (frequency, filteredData) => {
   return bubbleData;
 };
 
-// Get relevant sentence for tooltip
 const getRelevantSentence = (sentences, word) => {
   const matchingSentences = sentences.filter((sentence) =>
     sentence.toLowerCase().includes(word.toLowerCase())
@@ -89,7 +86,6 @@ const getRelevantSentence = (sentences, word) => {
   return "";
 };
 
-// Normalize sentence and add bolding for matching words
 const getBoldedSentence = (sentence, word) => {
   const cleanWord = normalizeWord(word.toLowerCase());
 
@@ -107,7 +103,6 @@ const getBoldedSentence = (sentence, word) => {
     .join(" ");
 };
 
-
 const getColor = (word) => colorMap[word] || "#8884d8";
 
 const BubbleChartComponent = () => {
@@ -123,7 +118,7 @@ const BubbleChartComponent = () => {
   const [filteredData, setFilteredData] = useState(data);
   const [wordFrequency, setWordFrequency] = useState({});
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [tooltipVisible, setTooltipVisible] = useState(false); // Manage tooltip visibility
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   useEffect(() => {
     const { race, country, birthType } = filters;
@@ -150,11 +145,6 @@ const BubbleChartComponent = () => {
     };
 
     handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
   useEffect(() => {
@@ -182,24 +172,27 @@ const BubbleChartComponent = () => {
       .style("padding", "15px")
       .style("border", "none")
       .style("border-radius", "10px")
-      .style("pointer-events", "none")
+      .style("pointer-events", "auto")
       .style("box-shadow", "rgba(0, 0, 0, 0.3) 0 2px 10px");
+
+    let timeoutId;
+    let isMouseInsideTooltip = false;
 
     const isMobile = width < 768;
 
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(isMobile ? -3 : -6))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -4))
       .force(
         "center",
         d3.forceCenter(
-          width / (isMobile ? 2 : 1.6),
+          width / (isMobile ? 2.2 : 1.6),
           height / (isMobile ? 3 : 2)
         )
       )
       .force(
         "collide",
-        d3.forceCollide((d) => d.size + (isMobile ? 1 : 10))
+        d3.forceCollide((d) => d.size + (isMobile ? 1 : 7))
       );
 
     const bubbles = svg
@@ -211,13 +204,14 @@ const BubbleChartComponent = () => {
       .attr("fill", (d) => getColor(d.name))
       .classed("hovered", (d) => d.name === hoveredWord)
       .on("mouseover", (event, d) => {
+        clearTimeout(timeoutId);
         const entry = filteredData.find((entry) => entry.name === d.author);
         const relevantSentence = entry
           ? getRelevantSentence(entry.sentences, d.name)
           : "No relevant sentence found.";
         const boldedSentence = getBoldedSentence(relevantSentence, d.name);
 
-        const wordColor = getColor(d.name); // Get color for the word
+        const wordColor = getColor(d.name);
 
         tooltip.transition().duration(200).style("opacity", 1);
         tooltip
@@ -246,7 +240,6 @@ const BubbleChartComponent = () => {
           .style("left", `${event.pageX + 5}px`)
           .style("top", `${event.pageY - 28}px`);
 
-        // Set tooltip visibility to true on mouseover
         setTooltipVisible(true);
       })
       .on("mousemove", (event) => {
@@ -255,38 +248,33 @@ const BubbleChartComponent = () => {
           .style("top", `${event.pageY - 28}px`);
       })
       .on("mouseout", () => {
-        if (!tooltipVisible) {
-          tooltip.transition().duration(500).style("opacity", 0);
+        if (!isMouseInsideTooltip) {
+          timeoutId = setTimeout(() => {
+            tooltip.transition().duration(500).style("opacity", 0);
+            setTooltipVisible(false);
+          }, 2000);
         }
       });
+
+    const tooltipElement = d3.select(tooltipRef.current);
+
+    tooltipElement.on("mouseover", () => {
+      clearTimeout(timeoutId);
+      isMouseInsideTooltip = true;
+    });
+
+    tooltipElement.on("mouseout", () => {
+      isMouseInsideTooltip = false;
+      timeoutId = setTimeout(() => {
+        tooltip.transition().duration(500).style("opacity", 0);
+        setTooltipVisible(false);
+      }, 500);
+    });
 
     simulation.on("tick", () => {
       bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
     });
   }, [filteredData, dimensions, tooltipVisible]);
-
-  // // Handle clicks outside tooltip to hide it
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (
-  //       tooltipRef.current &&
-  //       !tooltipRef.current.contains(event.target) &&
-  //       tooltipVisible
-  //     ) {
-  //       setTooltipVisible(false);
-  //       d3.select(tooltipRef.current)
-  //         .transition()
-  //         .duration(500)
-  //         .style("opacity", 0);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [tooltipVisible]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -319,6 +307,8 @@ const BubbleChartComponent = () => {
               here.
             </a>
           </p>
+          <p className="best-viewed"><strong>Please note: this data visualisation is best viewed and explored on a desktop</strong></p>
+
           <br />
           <label className="search-category">
             <div>Race:</div>
@@ -370,6 +360,7 @@ const BubbleChartComponent = () => {
             setHoveredWord={setHoveredWord}
           />
         </div>
+        
       </div>
     </>
   );

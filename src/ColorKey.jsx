@@ -2,9 +2,10 @@ import React from 'react';
 import colorMap from './ColorMap'; 
 
 const ColorKey = ({ wordFrequency, colorMap, setHoveredWord }) => {
+    // Filter out words with a frequency less than 2 and then sort by word frequency in descending order
     const sortedWords = Object.keys(wordFrequency)
-      .filter((word) => colorMap[word])
-      .sort((a, b) => wordFrequency[b] - wordFrequency[a]);
+      .filter((word) => colorMap[word] && wordFrequency[word] >= 2)
+      .sort((a, b) => wordFrequency[b] - wordFrequency[a]); // Sort by frequency descending
   
     return (
       <div className="color-key">
@@ -12,14 +13,8 @@ const ColorKey = ({ wordFrequency, colorMap, setHoveredWord }) => {
           <div
             key={word}
             className="color-key-item"
-            onMouseEnter={() => {
-              console.log("Hovered:", word);
-              setHoveredWord(word); // Set hovered word on enter
-            }}
-            onMouseLeave={() => {
-              console.log("Unhovered:", word);
-              setHoveredWord(null); // Clear hovered word on leave
-            }}
+            onMouseEnter={() => setHoveredWord(word)} // Set hovered word on enter
+            onMouseLeave={() => setHoveredWord(null)} // Clear hovered word on leave
           >
             <div
               className="color-box"
@@ -39,6 +34,4 @@ const ColorKey = ({ wordFrequency, colorMap, setHoveredWord }) => {
     );
   };
   
-  
-  export default ColorKey;
-  
+export default ColorKey;
