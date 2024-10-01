@@ -120,6 +120,9 @@ const BubbleChartComponent = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
+  const mobileTooltipTimeout = 20000; 
+  const desktopTooltipTimeout = 5000; 
+
   useEffect(() => {
     const { race, country, birthType } = filters;
 
@@ -176,10 +179,12 @@ const BubbleChartComponent = () => {
       .style("pointer-events", "auto")
       .style("box-shadow", "rgba(0, 0, 0, 0.3) 0 2px 10px");
 
+      const isMobile = width < 768;
+      
     let timeoutId;
     let isMouseInsideTooltip = false;
 
-    const isMobile = width < 768;
+
 
     const simulation = d3
       .forceSimulation(bubbleData)
@@ -252,7 +257,7 @@ const BubbleChartComponent = () => {
           timeoutId = setTimeout(() => {
             tooltip.transition().duration(500).style("opacity", 0);
             setTooltipVisible(false);
-          }, 5000);
+          }, isMobile ? mobileTooltipTimeout : desktopTooltipTimeout); // Use the appropriate timeout duration
         }
       });
 
@@ -268,7 +273,7 @@ const BubbleChartComponent = () => {
       timeoutId = setTimeout(() => {
         tooltip.transition().duration(500).style("opacity", 0);
         setTooltipVisible(false);
-      }, 5000);
+      }, isMobile ? mobileTooltipTimeout : desktopTooltipTimeout); // Use the appropriate timeout duration
     });
 
     simulation.on("tick", () => {
