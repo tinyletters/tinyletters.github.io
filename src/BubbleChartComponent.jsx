@@ -252,7 +252,7 @@ const BubbleChartComponent = () => {
           timeoutId = setTimeout(() => {
             tooltip.transition().duration(500).style("opacity", 0);
             setTooltipVisible(false);
-          }, 2000);
+          }, 5000);
         }
       });
 
@@ -268,7 +268,7 @@ const BubbleChartComponent = () => {
       timeoutId = setTimeout(() => {
         tooltip.transition().duration(500).style("opacity", 0);
         setTooltipVisible(false);
-      }, 500);
+      }, 5000);
     });
 
     simulation.on("tick", () => {
