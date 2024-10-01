@@ -193,7 +193,7 @@ const BubbleChartComponent = () => {
       .force(
         "center",
         d3.forceCenter(
-          width / (isMobile ? 2 : 1.4),
+          width / (isMobile ? 2 : 1.6),
           height / (isMobile ? 3 : 2)
         )
       )
