@@ -33,6 +33,9 @@ function MainContent() {
             <Circles />
           </div>
           <br />
+                    <div className="circles--dt">
+            <Circles />
+          </div>
           <div className="intro--card">
             <div className="about">
               <h2>about</h2>
@@ -82,9 +85,7 @@ function MainContent() {
               </p>
             </div>
           </div>
-          <div className="circles--dt">
-            <Circles />
-          </div>
+
           <div className="section--div">
             <Divider
               sx={{
