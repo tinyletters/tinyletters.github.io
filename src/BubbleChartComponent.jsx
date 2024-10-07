@@ -40,18 +40,18 @@ export const getBubbleData = (frequency, filteredData) => {
     words = words.split(" ");
 
     words.forEach((word) => {
-      if (frequency[word] >= 2) {
+      if (frequency[word] > 2) {
         const existingBubble = bubbleData.find(
           (bubble) => bubble.name === word
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 1.7;
+          existingBubble.size += frequency[word] * 0.5;
         } else {
           bubbleData.push({
             name: word,
             value: frequency[word],
-            size: frequency[word] * 1.7,
+            size: frequency[word] * 1,
             story: entry.birthStory,
             author: entry.name,
             country: entry.country,
@@ -64,6 +64,7 @@ export const getBubbleData = (frequency, filteredData) => {
             city: entry.city,
             link: entry.link,
             id: entry.id,
+            motherName: entry.motherName,
           });
         }
       }
@@ -74,16 +75,28 @@ export const getBubbleData = (frequency, filteredData) => {
 };
 
 const getRelevantSentence = (sentences, word) => {
-  const matchingSentences = sentences.filter((sentence) =>
-    sentence.toLowerCase().includes(word.toLowerCase())
-  );
+  const cleanWord = normalizeWord(word.toLowerCase());
 
+  // Filter sentences to include only those that contain the cleanWord as a distinct word
+  const matchingSentences = sentences.filter((sentence) => {
+    const lowerSentence = sentence.toLowerCase();
+
+    // Use a regular expression to match whole words only, not substrings
+    const wordBoundaryRegex = new RegExp(`\\b${cleanWord}\\b`);
+
+    // Check if the sentence contains the exact word
+    const containsExactWord = wordBoundaryRegex.test(lowerSentence);
+
+    return containsExactWord;
+  });
+
+  // Return a random matching sentence, or a default message if no matches
   if (matchingSentences.length > 0) {
     const randomIndex = Math.floor(Math.random() * matchingSentences.length);
     return matchingSentences[randomIndex];
   }
 
-  return "";
+  return "No relevant sentence found.";
 };
 
 const getBoldedSentence = (sentence, word) => {
@@ -120,24 +133,30 @@ const BubbleChartComponent = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  const mobileTooltipTimeout = 20000; 
-  const desktopTooltipTimeout = 5000; 
+  const mobileTooltipTimeout = 20000;
+  const desktopTooltipTimeout = 5000;
 
   useEffect(() => {
     const { race, country, birthType } = filters;
-
+  
     const filtered = data.filter((entry) => {
       return (
         (race === "" || entry.race.toLowerCase() === race.toLowerCase()) &&
-        (country === "" ||
-          entry.country.toLowerCase() === country.toLowerCase()) &&
-        (birthType === "" ||
-          entry.birthKind.toLowerCase() === birthType.toLowerCase())
+        (country === "" || entry.country.toLowerCase() === country.toLowerCase()) &&
+        (birthType === "" || entry.birthKind.toLowerCase() === birthType.toLowerCase())
       );
     });
-
+  
     setFilteredData(filtered);
+
+     // Update bubble data when filtered data changes
+  const combinedStories = filtered.flatMap((entry) => entry.sentences).join(" ");
+  const frequency = countWords(combinedStories);
+  const bubbleData = getBubbleData(frequency, filtered);
+  setBubbleData(bubbleData);
+
   }, [filters]);
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -179,16 +198,14 @@ const BubbleChartComponent = () => {
       .style("pointer-events", "auto")
       .style("box-shadow", "rgba(0, 0, 0, 0.3) 0 2px 10px");
 
-      const isMobile = width < 768;
-      
+    const isMobile = width < 768;
+
     let timeoutId;
     let isMouseInsideTooltip = false;
 
-
-
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -3))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -2))
       .force(
         "center",
         d3.forceCenter(
@@ -198,7 +215,7 @@ const BubbleChartComponent = () => {
       )
       .force(
         "collide",
-        d3.forceCollide((d) => d.size + (isMobile ? 1 : 6))
+        d3.forceCollide((d) => d.size + (isMobile ? 1 : 3))
       );
 
     const bubbles = svg
@@ -234,7 +251,7 @@ const BubbleChartComponent = () => {
                   <br>
                   <div class="tooltip-name-flex">
                   <div><img src="${d.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
-                  <div><strong>${d.author}</strong>, ${d.countryLivesIn}</div>
+                  <div><strong>${d.motherName}</strong>, ${d.countryLivesIn}</div>
                   </div>
                   <br>
 
@@ -254,10 +271,13 @@ const BubbleChartComponent = () => {
       })
       .on("mouseout", () => {
         if (!isMouseInsideTooltip) {
-          timeoutId = setTimeout(() => {
-            tooltip.transition().duration(500).style("opacity", 0);
-            setTooltipVisible(false);
-          }, isMobile ? mobileTooltipTimeout : desktopTooltipTimeout); // Use the appropriate timeout duration
+          timeoutId = setTimeout(
+            () => {
+              tooltip.transition().duration(500).style("opacity", 0);
+              setTooltipVisible(false);
+            },
+            isMobile ? mobileTooltipTimeout : desktopTooltipTimeout
+          ); // Use the appropriate timeout duration
         }
       });
 
@@ -270,15 +290,26 @@ const BubbleChartComponent = () => {
 
     tooltipElement.on("mouseout", () => {
       isMouseInsideTooltip = false;
-      timeoutId = setTimeout(() => {
-        tooltip.transition().duration(500).style("opacity", 0);
-        setTooltipVisible(false);
-      }, isMobile ? mobileTooltipTimeout : desktopTooltipTimeout); // Use the appropriate timeout duration
+      timeoutId = setTimeout(
+        () => {
+          tooltip.transition().duration(500).style("opacity", 0);
+          setTooltipVisible(false);
+        },
+        isMobile ? mobileTooltipTimeout : desktopTooltipTimeout
+      ); // Use the appropriate timeout duration
     });
 
     simulation.on("tick", () => {
       bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
     });
+
+    if (bubbleData.length === 0) {
+      console.log("No words with frequency > 2");
+      setBubbleData([]);
+    } else {
+      setBubbleData(bubbleData);
+    }
+
   }, [filteredData, dimensions, tooltipVisible]);
 
   const handleFilterChange = (e) => {
@@ -330,6 +361,7 @@ const BubbleChartComponent = () => {
               <option value="">All</option>
               <option value="white">White</option>
               <option value="coloured">Coloured</option>
+              <option value="Black African">Black African</option>
             </select>
           </label>
 
@@ -343,6 +375,7 @@ const BubbleChartComponent = () => {
               <option value="">All</option>
               <option value="South Africa">South Africa</option>
               <option value="Egypt">Egypt</option>
+              <option value="The Netherlands">The Netherlands</option>
             </select>
           </label>
 
@@ -359,13 +392,20 @@ const BubbleChartComponent = () => {
             </select>
           </label>
         </div>
-
-        <svg ref={svgRef} className="bubble-chart"></svg>
-
-        <div ref={tooltipRef} />
-        <div>
-          <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
-        </div>
+        {/* Render a message if no data is found */}
+        {filteredData.length === 0 || bubbleData.length === 0 ? (
+  <div className="limited-data">
+    <p>Data for this search is currently too limited. Try broader filters.</p>
+  </div>
+) : (
+  <>
+    <svg ref={svgRef} className="bubble-chart"></svg>
+    <div ref={tooltipRef} />
+    <div className="color-key-main">
+    <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
+    </div>
+  </>
+)}
       </div>
     </>
   );

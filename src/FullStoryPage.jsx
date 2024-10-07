@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ColorKey from "./ColorKey";
+import ColorKeyStory from "./ColorKeyStory";
 import data from "./Data";
 import colorMap from './ColorMap'; 
 import stopWords from "./StopWords";
@@ -68,7 +68,7 @@ function FullStoryPage() {
           <br />
           <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <h3 className="story-name">
-            {story.name}, {story.countryLivesIn}
+            {story.motherName}, {story.countryLivesIn}
           </h3>
           <Divider sx={{ borderColor: "black", borderWidth: "1px", my: 1, width: "100%" }} />
           <br />
@@ -80,6 +80,9 @@ function FullStoryPage() {
           </div>
           <div>
             <strong>Mother's race:</strong> {story.race}
+          </div>
+          <div>
+            <strong>Mother's origin:</strong> {story.motherOrigin}
           </div>
           <div>
             <strong>City of child's birth:</strong> {story.city}
@@ -117,7 +120,7 @@ function FullStoryPage() {
           ))}
         </div>
         <div>
-          <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
+          <ColorKeyStory bubbleData={bubbleData} colorMap={colorMap} />
         </div>
       </div>
       <br />
