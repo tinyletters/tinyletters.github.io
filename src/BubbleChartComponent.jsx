@@ -34,11 +34,11 @@ export const getBubbleData = (frequency, filteredData) => {
     const words = entry.birthStory.toLowerCase().replace(/[.,!?:;]/g, "").split(" "); // Simplified punctuation removal
 
     words.forEach((word) => {
-      if (frequency[word] > 3) {
+      if (frequency[word] >= 3) {
         const existingBubble = bubbleData.find((bubble) => bubble.name === word);
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 0.4;
+          existingBubble.size += frequency[word] * 0.3;
         } else {
           bubbleData.push({
             name: word,
@@ -154,8 +154,8 @@ const BubbleChartComponent = () => {
     };
 
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    // window.addEventListener("resize", handleResize);
+    // return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -190,11 +190,11 @@ const BubbleChartComponent = () => {
       .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -2))
       .force(
         "center",
-        d3.forceCenter(width / (isMobile ? 2.2 : 1.6), height / (isMobile ? 3 : 2))
+        d3.forceCenter(width / (isMobile ? 2.2 : 1.7), height / (isMobile ? 3 : 2))
       )
       .force(
         "collide",
-        d3.forceCollide((d) => d.size + (isMobile ? 1 : 3))
+        d3.forceCollide((d) => d.size + (isMobile ? 1 : 5))
       );
 
     const bubbles = svg
@@ -328,6 +328,7 @@ const BubbleChartComponent = () => {
             >
               <option value="">All</option>
               <option value="white">White</option>
+              <option value="white, other">White, other</option>
               <option value="coloured">Coloured</option>
               <option value="Black African">Black African</option>
             </select>
@@ -344,6 +345,7 @@ const BubbleChartComponent = () => {
               <option value="South Africa">South Africa</option>
               <option value="Egypt">Egypt</option>
               <option value="The Netherlands">The Netherlands</option>
+              <option value="United Kingdom">United Kingdom</option>
             </select>
           </label>
 
