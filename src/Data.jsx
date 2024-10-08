@@ -1,6 +1,42 @@
 const data = [
 
   {
+    id: "anon001",
+    name: "Anonymous 001",
+    motherName: "Anonymous",
+    race: "white",
+    birthDate: "2020",
+    birthAge: "41",
+    city: "Johannesburg",
+    birthCity: "Johannesburg",
+    country: "South Africa",
+    countryLivesIn: "South Africa",
+    motherOrigin: "Johannesburg, South Africa",
+    birthKind: "Vaginal",
+    noOfChildren: "One",
+    noOfChild: "First",
+    portrait: "../images/anon-001-portrait.png",
+    link: "https://deemarco.substack.com/",
+    birthStory:
+      "My daughter’s birth was a surprise, but a beautiful one. I was supposed to have a caesarean but she arrived early so I gave birth naturally, relying completely on the inherent wisdom of the female body. I breathed through it, drew on inner strength and it was truly a magical experience. I felt I had to take charge of the situation as the doctor was in a state, it was the midst of Covid, and my husband was fearful of natural birth. Because I hadn’t expected a natural childbirth I didn’t expect any sensations nor any consequences of the birth. In retrospect I am glad for this, however, I realise that knowledge is power with child birth and ensure the safety and health of mother and child. I felt like the bottom of my body was falling out! But I also felt calm and in control. I breathed a lot - as if meditating - to keep the baby calm and help her enter the world peacefully.The first 40 days were tricky - my husband was supportive but not as I had imagined. I also still had to work. It was all a bit surreal, looking back! [The first week was] A juggle! But peaceful. Trying to figure out what to do, and settling into what it means to have a baby. My husband helped a bit but I don’t think it was I really needed. I don’t have any other support. I was also still working. I am thankful I have good health and am strong, so was able to pull it together and make it work. I hope to be around for my daughter if she has children so I can be there for her.",
+    sentences: [
+      "My daughter’s birth was a surprise, but a beautiful one.",
+      "I was supposed to have a caesarean but she arrived early so I gave birth naturally, relying completely on the inherent wisdom of the female body.",
+      "I breathed through it, drew on inner strength and it was truly a magical experience.",
+      "I felt I had to take charge of the situation as the doctor was in a state, it was the midst of Covid, and my husband was fearful of natural birth.",
+      "Because I hadn’t expected a natural childbirth I didn’t expect any sensations nor any consequences of the birth. In retrospect I am glad for this, however, I realise that knowledge is power with child birth and ensure the safety and health of mother and child.",
+      "I felt like the bottom of my body was falling out! But I also felt calm and in control.",
+      "I breathed a lot - as if meditating - to keep the baby calm and help her enter the world peacefully.",
+      "The first 40 days were tricky - my husband was supportive but not as I had imagined. I also still had to work. It was all a bit surreal, looking back!",
+      "[The first week was] a juggle! But peaceful. Trying to figure out what to do, and settling into what it means to have a baby.",
+      "My husband helped a bit but I don’t think it was really needed. I don’t have any other support. I was also still working.",
+      "I am thankful I have good health and am strong, so was able to pull it together and make it work. I hope to be around for my daughter if she has children so I can be there for her.",
+    ],
+    birthOnly: `My daughter’s birth was a surprise, but a beautiful one. I was supposed to have a caesarean but she arrived early so I gave birth naturally, relying completely on the inherent wisdom of the female body. I breathed through it, drew on inner strength and it was truly a magical experience. I felt I had to take charge of the situation as the doctor was in a state, it was the midst of Covid, and my husband was fearful of natural birth. Because I hadn’t expected a natural childbirth I didn’t expect any sensations nor any consequences of the birth. In retrospect I am glad for this, however, I realise that knowledge is power with child birth and ensure the safety and health of mother and child. I felt like the bottom of my body was falling out! But I also felt calm and in control. I breathed a lot - as if meditating - to keep the baby calm and help her enter the world peacefully.`,
+    firstFortyDays: `The first 40 days were tricky - my husband was supportive but not as I had imagined. I also still had to work. It was all a bit surreal, looking back! [The first week was] a juggle! But peaceful. Trying to figure out what to do, and settling into what it means to have a baby. My husband helped a bit but I don’t think it was really needed. I don’t have any other support. I was also still working. I am thankful I have good health and am strong, so was able to pull it together and make it work. I hope to be around for my daughter if she has children so I can be there for her.`,
+  },
+
+  {
     id: "mag001",
     name: "Magdalena 001",
     motherName: "Magdalena",
@@ -214,44 +250,6 @@ const data = [
     birthOnly: `After months of anticipation, the day finally arrived when we were set to welcome our second baby. Unlike with our first child, this time we knew what to expect in a planned C-section which brought a different kind of calm and excitement.A day before, we made sure everything was ready for the big day—bags packed, our older child staying with family, and the house prepped for bringing a newborn home. At the hospital, we were prepped for surgery, and everything seemed to move so quickly. The nurses were incredibly kind, walking us through each step. We had a private room where we relaxed until it was time to give both. Soon enough, I was in the operating room, the lights bright and everything feeling a bit surreal. My husband was right there by my side, holding my hand. Once the anesthetic kicked in, I couldn’t feel anything from the waist down, but I was fully aware of the moment. I could feel pressure but no pain. Within 4 minutes, I heard the first cry of our baby boy. He was a beautiful, healthy boy! It was love all over again, just like the first time but different in its own way. After I held the baby for a few minutes, my husband left the room with our son while the doctors finished the surgery. Soon after, I was in recovery, and my baby was placed on my chest for skin-to-skin. I had a bad reaction to the anaesthetic and was fighting hard to stay awake while family gathered around the hospital bed to see baby. In retrospect, I would have preferred to not have had visitors immediately after giving birth. Recovery from the C-section was different than with my first birth, I experienced a lot of pain once I was released from hospital but in terms of taking care of baby, I was better prepared.`,
     firstFortyDays: `[During the first week], baby was peaceful although physically I was in severe pain due to not having the correct meds. As a result I stopped breastfeeding very soon after birth. My husband was home and taking care of our older daughter for a week. Thereafter she returned to nursery school full time.  Our moms were also around to help bath baby and take care of him for short periods while I rested. We had domestic help for 3 days a week to keep our home neat and tidy. I was scheduled to return to work, but due to a compulsory mandate to return to office full time I resigned. Prior to giving birth, I had worked remotely for 4 years. [I felt myself reemerge] once I was physically healed and was able to be completely mobile again. Approximately 3 months after giving birth.`,
   },
-
-  {
-    id: "anon001",
-    name: "Anonymous 001",
-    motherName: "Anonymous",
-    race: "white",
-    birthDate: "2020",
-    birthAge: "41",
-    city: "Johannesburg",
-    birthCity: "Johannesburg",
-    country: "South Africa",
-    countryLivesIn: "South Africa",
-    motherOrigin: "Johannesburg, South Africa",
-    birthKind: "Vaginal",
-    noOfChildren: "One",
-    noOfChild: "First",
-    portrait: "../images/anon-001-portrait.png",
-    link: "https://deemarco.substack.com/",
-    birthStory:
-      "My daughter’s birth was a surprise, but a beautiful one. I was supposed to have a caesarean but she arrived early so I gave birth naturally, relying completely on the inherent wisdom of the female body. I breathed through it, drew on inner strength and it was truly a magical experience. I felt I had to take charge of the situation as the doctor was in a state, it was the midst of Covid, and my husband was fearful of natural birth. Because I hadn’t expected a natural childbirth I didn’t expect any sensations nor any consequences of the birth. In retrospect I am glad for this, however, I realise that knowledge is power with child birth and ensure the safety and health of mother and child. I felt like the bottom of my body was falling out! But I also felt calm and in control. I breathed a lot - as if meditating - to keep the baby calm and help her enter the world peacefully.The first 40 days were tricky - my husband was supportive but not as I had imagined. I also still had to work. It was all a bit surreal, looking back! [The first week was] A juggle! But peaceful. Trying to figure out what to do, and settling into what it means to have a baby. My husband helped a bit but I don’t think it was I really needed. I don’t have any other support. I was also still working. I am thankful I have good health and am strong, so was able to pull it together and make it work. I hope to be around for my daughter if she has children so I can be there for her.",
-    sentences: [
-      "My daughter’s birth was a surprise, but a beautiful one.",
-      "I was supposed to have a caesarean but she arrived early so I gave birth naturally, relying completely on the inherent wisdom of the female body.",
-      "I breathed through it, drew on inner strength and it was truly a magical experience.",
-      "I felt I had to take charge of the situation as the doctor was in a state, it was the midst of Covid, and my husband was fearful of natural birth.",
-      "Because I hadn’t expected a natural childbirth I didn’t expect any sensations nor any consequences of the birth. In retrospect I am glad for this, however, I realise that knowledge is power with child birth and ensure the safety and health of mother and child.",
-      "I felt like the bottom of my body was falling out! But I also felt calm and in control.",
-      "I breathed a lot - as if meditating - to keep the baby calm and help her enter the world peacefully.",
-      "The first 40 days were tricky - my husband was supportive but not as I had imagined. I also still had to work. It was all a bit surreal, looking back!",
-      "[The first week was] a juggle! But peaceful. Trying to figure out what to do, and settling into what it means to have a baby.",
-      "My husband helped a bit but I don’t think it was really needed. I don’t have any other support. I was also still working.",
-      "I am thankful I have good health and am strong, so was able to pull it together and make it work. I hope to be around for my daughter if she has children so I can be there for her.",
-    ],
-    birthOnly: `My daughter’s birth was a surprise, but a beautiful one. I was supposed to have a caesarean but she arrived early so I gave birth naturally, relying completely on the inherent wisdom of the female body. I breathed through it, drew on inner strength and it was truly a magical experience. I felt I had to take charge of the situation as the doctor was in a state, it was the midst of Covid, and my husband was fearful of natural birth. Because I hadn’t expected a natural childbirth I didn’t expect any sensations nor any consequences of the birth. In retrospect I am glad for this, however, I realise that knowledge is power with child birth and ensure the safety and health of mother and child. I felt like the bottom of my body was falling out! But I also felt calm and in control. I breathed a lot - as if meditating - to keep the baby calm and help her enter the world peacefully.`,
-    firstFortyDays: `The first 40 days were tricky - my husband was supportive but not as I had imagined. I also still had to work. It was all a bit surreal, looking back! [The first week was] a juggle! But peaceful. Trying to figure out what to do, and settling into what it means to have a baby. My husband helped a bit but I don’t think it was really needed. I don’t have any other support. I was also still working. I am thankful I have good health and am strong, so was able to pull it together and make it work. I hope to be around for my daughter if she has children so I can be there for her.`,
-  },
-
-
 
   {
     id: "anon002",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ColorKeyStory from "./ColorKeyStory";
+import ColorKey from "./ColorKey";
 import data from "./Data";
 import colorMap from './ColorMap'; 
 import stopWords from "./StopWords";
@@ -15,7 +15,12 @@ const normalizeWord = (word) => {
 };
 
 const countWords = (text) => {
-  const words = text.toLowerCase().split(/\s+/);
+  const cleanedText = text
+    .toLowerCase()
+    .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "") // Removes common punctuation
+    .replace(/\s{2,}/g, " "); // Replaces multiple spaces with a single space
+
+  const words = cleanedText.split(/\s+/);
   const frequency = {};
 
   words.forEach((word) => {
@@ -25,7 +30,11 @@ const countWords = (text) => {
     }
   });
 
-  return frequency;
+  const filteredFrequency = Object.fromEntries(
+    Object.entries(frequency).filter(([word, count]) => count > 2)
+  );
+
+  return filteredFrequency;
 };
 
 function FullStoryPage() {
@@ -47,11 +56,12 @@ function FullStoryPage() {
   }
 
   useEffect(() => {
-    const frequency = countWords(story.birthStory);
+    const frequency = countWords(story.birthStory); 
     setWordFrequency(frequency);
-  
-    const bubbleData = getBubbleData(frequency, [story]); // Only pass the current story as filteredData
-    setBubbleData(bubbleData); 
+    
+    const bubbleData = getBubbleData(frequency, [story]);
+    setBubbleData(bubbleData);
+
   }, [story]);
   
 
@@ -120,7 +130,7 @@ function FullStoryPage() {
           ))}
         </div>
         <div>
-          <ColorKeyStory bubbleData={bubbleData} colorMap={colorMap} />
+          <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
         </div>
       </div>
       <br />

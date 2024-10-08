@@ -211,6 +211,8 @@ const stopWords = new Set([
     "another",
     "away",
     "can't",
+    "really",
+    "40",
   ]);
 
   export default stopWords;
