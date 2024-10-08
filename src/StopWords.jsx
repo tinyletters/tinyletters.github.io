@@ -213,6 +213,7 @@ const stopWords = new Set([
     "can't",
     "really",
     "40",
+    "time",
   ]);
 
   export default stopWords;

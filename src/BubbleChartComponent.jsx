@@ -34,11 +34,11 @@ export const getBubbleData = (frequency, filteredData) => {
     const words = entry.birthStory.toLowerCase().replace(/[.,!?:;]/g, "").split(" "); // Simplified punctuation removal
 
     words.forEach((word) => {
-      if (frequency[word] > 2) {
+      if (frequency[word] > 3) {
         const existingBubble = bubbleData.find((bubble) => bubble.name === word);
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 0.5;
+          existingBubble.size += frequency[word] * 0.4;
         } else {
           bubbleData.push({
             name: word,
@@ -66,18 +66,26 @@ export const getBubbleData = (frequency, filteredData) => {
   return bubbleData;
 };
 
-const getRelevantSentence = (sentences, word) => {
+const getRelevantEntries = (word, filteredData) => {
   const cleanWord = normalizeWord(word.toLowerCase());
   const wordBoundaryRegex = new RegExp(`\\b${cleanWord}\\b`);
-  
-  const matchingSentences = sentences.filter((sentence) => wordBoundaryRegex.test(sentence.toLowerCase()));
 
-  if (matchingSentences.length > 0) {
-    const randomIndex = Math.floor(Math.random() * matchingSentences.length);
-    return matchingSentences[randomIndex];
-  }
+  const matchingEntries = filteredData.filter((entry) => {
+    return entry.sentences.some((sentence) => wordBoundaryRegex.test(sentence.toLowerCase()));
+  });
 
-  return "No relevant sentence found.";
+  return matchingEntries.map((entry) => {
+    const relevantSentence = entry.sentences.find((sentence) =>
+      wordBoundaryRegex.test(sentence.toLowerCase())
+    );
+    return {
+      sentence: relevantSentence,
+      motherName: entry.motherName,
+      portrait: entry.portrait,
+      countryLivesIn: entry.countryLivesIn,
+      id: entry.id,  // Include the correct id for the full story
+    };
+  }).filter(result => result.sentence);
 };
 
 const getBoldedSentence = (sentence, word) => {
@@ -198,36 +206,40 @@ const BubbleChartComponent = () => {
       .attr("fill", (d) => getColor(d.name))
       .on("mouseover", (event, d) => {
         clearTimeout(timeoutId);
-        const entry = filteredData.find((entry) => entry.name === d.author);
-        const relevantSentence = entry
-          ? getRelevantSentence(entry.sentences, d.name)
-          : "No relevant sentence found.";
-        const boldedSentence = getBoldedSentence(relevantSentence, d.name);
-        const wordColor = getColor(d.name);
-
-        tooltip.transition().duration(200).style("opacity", 1);
-        tooltip
-          .html(
-            `
-              <div class="tooltip">
-                <div class="card-flex">
-                <div class="card-name">${d.name}</div>
-                <div class="word-dot" style="border-radius: 50%; background-color: ${wordColor};"></div>
-                </div><br>
-                <hr><br>
-                "${boldedSentence}"<br><br>
-                <div class="tooltip-name-flex">
-                <div><img src="${d.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
-                <div><strong>${d.motherName}</strong>, ${d.countryLivesIn}</div>
-                </div><br><hr><br>
-                Read full birth story <strong><a href="#/story/${d.id}">here</a></strong>
-              </div>
-            `
-          )
-          .style("left", `${event.pageX + 5}px`)
-          .style("top", `${event.pageY - 28}px`);
-
-        setTooltipVisible(true);
+        const relevantResults = getRelevantEntries(d.name, filteredData);
+      
+        if (relevantResults.length > 0) {
+          const randomResult = relevantResults[Math.floor(Math.random() * relevantResults.length)];
+          const boldedSentence = getBoldedSentence(randomResult.sentence, d.name);
+          const wordColor = getColor(d.name);
+      
+          tooltip.transition().duration(200).style("opacity", 1);
+          tooltip
+            .html(
+              `
+                <div class="tooltip">
+                  <div class="card-flex">
+                    <div class="card-name">${d.name}</div>
+                    <div class="word-dot" style="border-radius: 50%; background-color: ${wordColor};"></div>
+                  </div><br>
+                  <hr><br>
+                  "${boldedSentence}"<br><br>
+                  <div class="tooltip-name-flex">
+                    <div><img src="${randomResult.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
+                    <div><strong>${randomResult.motherName}</strong>, ${randomResult.countryLivesIn}</div>
+                  </div><br><hr><br>
+                  Read full birth story <strong><a href="#/story/${randomResult.id}">here</a></strong>
+                </div>
+              `
+            )
+            .style("left", `${event.pageX + 5}px`)
+            .style("top", `${event.pageY - 28}px`);
+      
+          setTooltipVisible(true);
+        } else {
+          tooltip.transition().duration(200).style("opacity", 0);
+          setTooltipVisible(false);
+        }
       })
       .on("mousemove", (event) => {
         tooltip.style("left", `${event.pageX + 5}px`).style("top", `${event.pageY - 28}px`);
