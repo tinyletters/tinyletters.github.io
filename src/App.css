@@ -27,6 +27,12 @@ body {
 .bubble-chart {
   width: 98vw;
   height: 1700px;
+  grid-area: bubble;
+}
+
+.data-viz {
+display: flex;
+flex-direction: row;
 }
 
 .limited-data {
@@ -189,25 +195,16 @@ circle.hovered {
 .filter-section {
   background-color: white;
   border-radius: 10px;
-  position: absolute;
+  position: sticky;
+  top: 10rem;
   width: 250px;
+  height: fit-content;
   margin: 2rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 5px;
-}
-
-.data-viz {
-  /* display: flex;
-  flex-direction: row;
-  width: 98vw;
-  gap: 2vw;
-  margin: 2rem; */
-}
-
-.color-key-item {
-  width: 150px;
+  grid-area: filter;
 }
 
 .color-key {
@@ -215,6 +212,10 @@ circle.hovered {
   grid-gap: 2px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 2rem;
+}
+
+.color-key-item {
+  width: 150px;
 }
 
 .search-category {
@@ -587,6 +588,7 @@ h3 {
     border-radius: 10px;
     position: relative;
     width: 76vw;
+    height: fit-content;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
@@ -611,8 +613,8 @@ h3 {
     flex-direction: column;
     margin: 2rem;
     width: 82vw;
-
   }
+
   .color-key-item {
     width: 130px;
   }
@@ -858,8 +860,6 @@ h3 {
 /* -------iPad View---------*/
 
 @media all and (min-width: 769px) and (max-width: 1200px) {
-
-
   .dee--marco--image {
     width: 90%;
   }
@@ -885,14 +885,15 @@ h3 {
   .filter-section {
     background-color: white;
     border-radius: 10px;
-    position: sticky;
+    position: relative;
     width: 90vw;
+    height: fit-content;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     margin: 0rem;
-    margin-top: -2rem;
+    margin-top: -12rem;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -919,9 +920,7 @@ h3 {
 
   .color-key {
     margin-top: 0rem;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
-    
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 
   .color-key-story {

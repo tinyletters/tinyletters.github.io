@@ -14,7 +14,10 @@ const normalizeWord = (word) => {
 };
 
 const countWords = (text) => {
-  const words = text.toLowerCase().replace(/[.,!?:;]/g, "").split(/\s+/); // Simplified punctuation removal
+  const words = text
+    .toLowerCase()
+    .replace(/[.,!?:;]/g, "")
+    .split(/\s+/); // Simplified punctuation removal
   const frequency = {};
 
   words.forEach((word) => {
@@ -31,11 +34,16 @@ export const getBubbleData = (frequency, filteredData) => {
   const bubbleData = [];
 
   filteredData.forEach((entry) => {
-    const words = entry.birthStory.toLowerCase().replace(/[.,!?:;]/g, "").split(" "); // Simplified punctuation removal
+    const words = entry.birthStory
+      .toLowerCase()
+      .replace(/[.,!?:;]/g, "")
+      .split(" "); // Simplified punctuation removal
 
     words.forEach((word) => {
       if (frequency[word] >= 3) {
-        const existingBubble = bubbleData.find((bubble) => bubble.name === word);
+        const existingBubble = bubbleData.find(
+          (bubble) => bubble.name === word
+        );
         if (existingBubble) {
           existingBubble.value += frequency[word];
           existingBubble.size += frequency[word] * 0.25;
@@ -71,21 +79,25 @@ const getRelevantEntries = (word, filteredData) => {
   const wordBoundaryRegex = new RegExp(`\\b${cleanWord}\\b`);
 
   const matchingEntries = filteredData.filter((entry) => {
-    return entry.sentences.some((sentence) => wordBoundaryRegex.test(sentence.toLowerCase()));
-  });
-
-  return matchingEntries.map((entry) => {
-    const relevantSentence = entry.sentences.find((sentence) =>
+    return entry.sentences.some((sentence) =>
       wordBoundaryRegex.test(sentence.toLowerCase())
     );
-    return {
-      sentence: relevantSentence,
-      motherName: entry.motherName,
-      portrait: entry.portrait,
-      countryLivesIn: entry.countryLivesIn,
-      id: entry.id,  // Include the correct id for the full story
-    };
-  }).filter(result => result.sentence);
+  });
+
+  return matchingEntries
+    .map((entry) => {
+      const relevantSentence = entry.sentences.find((sentence) =>
+        wordBoundaryRegex.test(sentence.toLowerCase())
+      );
+      return {
+        sentence: relevantSentence,
+        motherName: entry.motherName,
+        portrait: entry.portrait,
+        countryLivesIn: entry.countryLivesIn,
+        id: entry.id, // Include the correct id for the full story
+      };
+    })
+    .filter((result) => result.sentence);
 };
 
 const getBoldedSentence = (sentence, word) => {
@@ -93,7 +105,9 @@ const getBoldedSentence = (sentence, word) => {
   return sentence
     .split(" ")
     .map((token) => {
-      const cleanToken = normalizeWord(token.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "").toLowerCase());
+      const cleanToken = normalizeWord(
+        token.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "").toLowerCase()
+      );
       if (cleanToken === cleanWord) {
         return `<strong>${token}</strong>`;
       }
@@ -127,14 +141,18 @@ const BubbleChartComponent = () => {
     const filtered = data.filter((entry) => {
       return (
         (race === "" || entry.race.toLowerCase() === race.toLowerCase()) &&
-        (country === "" || entry.country.toLowerCase() === country.toLowerCase()) &&
-        (birthType === "" || entry.birthKind.toLowerCase() === birthType.toLowerCase())
+        (country === "" ||
+          entry.country.toLowerCase() === country.toLowerCase()) &&
+        (birthType === "" ||
+          entry.birthKind.toLowerCase() === birthType.toLowerCase())
       );
     });
 
     setFilteredData(filtered);
 
-    const combinedStories = filtered.flatMap((entry) => entry.sentences).join(" ");
+    const combinedStories = filtered
+      .flatMap((entry) => entry.sentences)
+      .join(" ");
     const frequency = countWords(combinedStories);
     const bubbles = getBubbleData(frequency, filtered);
 
@@ -190,7 +208,10 @@ const BubbleChartComponent = () => {
       .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -2))
       .force(
         "center",
-        d3.forceCenter(width / (isMobile ? 2.2 : 1.8), height / (isMobile ? 3 : 2))
+        d3.forceCenter(
+          width / (isMobile ? 2.2 : 2.5),
+          height / (isMobile ? 3 : 2)
+        )
       )
       .force(
         "collide",
@@ -207,12 +228,16 @@ const BubbleChartComponent = () => {
       .on("mouseover", (event, d) => {
         clearTimeout(timeoutId);
         const relevantResults = getRelevantEntries(d.name, filteredData);
-      
+
         if (relevantResults.length > 0) {
-          const randomResult = relevantResults[Math.floor(Math.random() * relevantResults.length)];
-          const boldedSentence = getBoldedSentence(randomResult.sentence, d.name);
+          const randomResult =
+            relevantResults[Math.floor(Math.random() * relevantResults.length)];
+          const boldedSentence = getBoldedSentence(
+            randomResult.sentence,
+            d.name
+          );
           const wordColor = getColor(d.name);
-      
+
           tooltip.transition().duration(200).style("opacity", 1);
           tooltip
             .html(
@@ -234,7 +259,7 @@ const BubbleChartComponent = () => {
             )
             .style("left", `${event.pageX + 5}px`)
             .style("top", `${event.pageY - 28}px`);
-      
+
           setTooltipVisible(true);
         } else {
           tooltip.transition().duration(200).style("opacity", 0);
@@ -242,7 +267,9 @@ const BubbleChartComponent = () => {
         }
       })
       .on("mousemove", (event) => {
-        tooltip.style("left", `${event.pageX + 5}px`).style("top", `${event.pageY - 28}px`);
+        tooltip
+          .style("left", `${event.pageX + 5}px`)
+          .style("top", `${event.pageY - 28}px`);
       })
       .on("mouseout", () => {
         if (!isMouseInsideTooltip) {
@@ -265,10 +292,13 @@ const BubbleChartComponent = () => {
 
     tooltipElement.on("mouseout", () => {
       isMouseInsideTooltip = false;
-      timeoutId = setTimeout(() => {
-        tooltip.transition().duration(500).style("opacity", 0);
-        setTooltipVisible(false);
-      }, isMobile ? mobileTooltipTimeout : desktopTooltipTimeout);
+      timeoutId = setTimeout(
+        () => {
+          tooltip.transition().duration(500).style("opacity", 0);
+          setTooltipVisible(false);
+        },
+        isMobile ? mobileTooltipTimeout : desktopTooltipTimeout
+      );
     });
 
     simulation.on("tick", () => {
@@ -365,21 +395,23 @@ const BubbleChartComponent = () => {
         </div>
         {/* Render a message if no data is found */}
         {filteredData.length === 0 || bubbleData.length === 0 ? (
-  <div className="limited-data">
-    <p>Data for this search is currently too limited. Try broader filters.</p>
-  </div>
-) : (
-  <>
-  <div>
-    <svg ref={svgRef} className="bubble-chart"></svg>
-    <div ref={tooltipRef} />
-    <div className="color-key-main">
-    </div>
-    <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
-    </div>
-  </>
-)}
+          <div className="limited-data">
+            <p>
+              Data for this search is currently too limited. Try broader
+              filters.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div>
+              <svg ref={svgRef} className="bubble-chart"></svg>
+              <div ref={tooltipRef} />
+              <div className="color-key-main"></div>
+            </div>
+          </>
+        )}
       </div>
+      <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
     </>
   );
 };
