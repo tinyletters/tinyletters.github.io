@@ -89,7 +89,7 @@ function FullStoryPage() {
             <strong>Mother's age at childbirth:</strong> {story.birthAge}
           </div>
           <div>
-            <strong>Mother's race:</strong> {story.race}
+            <strong>Mother's race/ethnicity:</strong> {story.race}
           </div>
           <div>
             <strong>Mother's origin:</strong> {story.motherOrigin}
