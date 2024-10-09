@@ -34,7 +34,7 @@ export const getBubbleData = (frequency, filteredData) => {
     const words = entry.birthStory.toLowerCase().replace(/[.,!?:;]/g, "").split(" "); // Simplified punctuation removal
 
     words.forEach((word) => {
-      if (frequency[word] >= 3) {
+      if (frequency[word] > 3) {
         const existingBubble = bubbleData.find((bubble) => bubble.name === word);
         if (existingBubble) {
           existingBubble.value += frequency[word];
