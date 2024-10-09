@@ -25,8 +25,8 @@ body {
 }
 
 .bubble-chart {
-  width: 90vw;
-  height: 1800px;
+  width: 98vw;
+  height: 1700px;
 }
 
 .limited-data {
@@ -199,20 +199,21 @@ circle.hovered {
 }
 
 .data-viz {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   width: 98vw;
-  gap: 3vw;
-  margin: 2rem;
+  gap: 2vw;
+  margin: 2rem; */
 }
+
 .color-key-item {
   width: 150px;
 }
 
 .color-key {
   display: grid;
-  grid-gap: 3px;
-  grid-template-columns: 1fr;
+  grid-gap: 2px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 2rem;
 }
 
@@ -856,7 +857,9 @@ h3 {
 
 /* -------iPad View---------*/
 
-@media all and (min-width: 769px) and (max-width: 1000px) {
+@media all and (min-width: 769px) and (max-width: 1200px) {
+
+
   .dee--marco--image {
     width: 90%;
   }
@@ -874,11 +877,16 @@ h3 {
     font-size: 20px;
   }
 
+  .bubble-chart {
+    width: 93vw;
+    height: 1700px;
+  }
+
   .filter-section {
     background-color: white;
     border-radius: 10px;
     position: sticky;
-    width: 77vw;
+    width: 90vw;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
@@ -911,6 +919,9 @@ h3 {
 
   .color-key {
     margin-top: 0rem;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    
   }
 
   .color-key-story {

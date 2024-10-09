@@ -226,6 +226,7 @@ const stopWords = new Set([
   "let",
   "within",
   "30",
+  "2",
 ]);
 
 export default stopWords;

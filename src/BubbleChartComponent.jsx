@@ -190,7 +190,7 @@ const BubbleChartComponent = () => {
       .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -2))
       .force(
         "center",
-        d3.forceCenter(width / (isMobile ? 2.2 : 1.7), height / (isMobile ? 3 : 2))
+        d3.forceCenter(width / (isMobile ? 2.2 : 1.8), height / (isMobile ? 3 : 2))
       )
       .force(
         "collide",
@@ -370,9 +370,11 @@ const BubbleChartComponent = () => {
   </div>
 ) : (
   <>
+  <div>
     <svg ref={svgRef} className="bubble-chart"></svg>
     <div ref={tooltipRef} />
     <div className="color-key-main">
+    </div>
     <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
     </div>
   </>

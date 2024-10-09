@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ColorKey from "./ColorKey";
+import ColorKeyStory from "./ColorKeyStory";
 import data from "./Data";
 import colorMap from './ColorMap'; 
 import stopWords from "./StopWords";
@@ -130,7 +130,7 @@ function FullStoryPage() {
           ))}
         </div>
         <div>
-          <ColorKey bubbleData={bubbleData} colorMap={colorMap} />
+          <ColorKeyStory bubbleData={bubbleData} colorMap={colorMap} />
         </div>
       </div>
       <br />
