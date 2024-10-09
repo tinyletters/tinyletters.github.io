@@ -336,7 +336,17 @@ const colorMap = {
     walking: "#32CD32",
     tell: "#FF6347",
     front: "#4682B4",
-    something: "#FF8C00"
+    something: "#FF8C00",
+    other: "#DAA520",
+    saw: "#4682B4",
+    realised: "#FF8C00",
+    travel: "#1E90FF",
+    weird: "#8A2BE2",
+    hair: "#CD853F",
+    suddenly: "#FF4500",
+    place: "#32CD32",
+    possibly: "#FFD700",
+    relieved: "#7FFF00",
   
   };
   

@@ -68,7 +68,6 @@ const stopWords = new Set([
   "once",
   "only",
   "or",
-  "other",
   "our",
   "ours",
   "ourselves",
@@ -223,6 +222,10 @@ const stopWords = new Set([
   "15",
   "postpartum",
   "newborn",
+  "etc",
+  "let",
+  "within",
+  "30",
 ]);
 
 export default stopWords;

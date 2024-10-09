@@ -34,11 +34,11 @@ export const getBubbleData = (frequency, filteredData) => {
     const words = entry.birthStory.toLowerCase().replace(/[.,!?:;]/g, "").split(" "); // Simplified punctuation removal
 
     words.forEach((word) => {
-      if (frequency[word] > 3) {
+      if (frequency[word] >= 3) {
         const existingBubble = bubbleData.find((bubble) => bubble.name === word);
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 0.3;
+          existingBubble.size += frequency[word] * 0.25;
         } else {
           bubbleData.push({
             name: word,
@@ -119,7 +119,7 @@ const BubbleChartComponent = () => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const mobileTooltipTimeout = 20000;
-  const desktopTooltipTimeout = 5000;
+  const desktopTooltipTimeout = 2000;
 
   const updateFilteredDataAndBubbles = () => {
     const { race, country, birthType } = filters;
@@ -320,7 +320,7 @@ const BubbleChartComponent = () => {
 
           <br />
           <label className="search-category">
-            <div>Race:</div>
+            <div>Race/Ethnicity:</div>
             <select
               name="race"
               value={filters.race}
@@ -331,6 +331,7 @@ const BubbleChartComponent = () => {
               <option value="white, other">White, other</option>
               <option value="coloured">Coloured</option>
               <option value="Black African">Black African</option>
+              <option value="Indian">Indian</option>
             </select>
           </label>
 
