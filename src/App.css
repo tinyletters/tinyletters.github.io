@@ -49,6 +49,10 @@ flex-direction: row;
   height: 2vw;
 }
 
+.word-intro {
+  margin: 2rem;
+}
+
 /* unvisited link */
 a:link {
   color: black;
@@ -250,6 +254,60 @@ select {
   padding-left: 5px;
   padding-right: 5px;
   pointer-events: auto; /* Ensure the tooltip can receive events */
+}
+
+.word-container {
+  border: none;
+  width: 100%;
+  height: fit-content;
+  pointer-events: auto; /* Ensure the tooltip can receive events */
+  padding: 0.5rem;
+}
+
+.word-header {
+  font-family: "Crake", sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.word-flex {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 2rem;
+
+}
+
+.word-portrait {
+  width: 3vw;
+  border-radius: 50%;
+  padding: 0.2rem;
+}
+
+.word-word {
+  font-size: 40px;
+}
+
+.word-name-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.dot-and-word {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.all-mentions {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: normal;
 }
 
 .tooltip-portrait {
@@ -651,6 +709,13 @@ h3 {
     gap: 5px;
   }
 
+  .word-portrait {
+    width: 7vw;
+    padding: 0.5rem;
+
+  }
+
+
   .card-name {
     font-family: "Crake", sans-serif;
     font-size: 20px;
@@ -933,6 +998,12 @@ h3 {
     justify-content: space-between;
 
     gap: 5px;
+  }
+
+  .word-portrait {
+    width: 6vw;
+    padding: 0.1rem;
+
   }
 
   @keyframes circle-translate-1 {

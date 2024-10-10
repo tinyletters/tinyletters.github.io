@@ -8,24 +8,24 @@ import BubbleChartComponent from "./BubbleChartComponent";
 import FullStoryPage from './FullStoryPage';
 import { HashRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop'; 
-
-
+import WordSentencesPage from './WordSentencesPage'; 
 
 function MainContent() {
   const location = useLocation();
-
-  // Check if the current route includes "/story" to determine if it's a story page
   const isStoryPage = location.pathname.includes('/story');
+  const isWordSentencesPage = location.pathname.includes('/sentences');
 
   return (
     <>
       {isStoryPage ? (
-        // Only render the FullStoryPage when on a story route
         <Routes>
           <Route path="/story/:id" element={<FullStoryPage />} />
         </Routes>
+      ) : isWordSentencesPage ? (
+        <Routes>
+          <Route path="/sentences/:word" element={<WordSentencesPage />} />
+        </Routes>
       ) : (
-        // Render everything else when not on a story route
         <>
           <div className="circles--mobile">
             <br />
@@ -33,7 +33,7 @@ function MainContent() {
             <Circles />
           </div>
           <br />
-                    <div className="circles--dt">
+          <div className="circles--dt">
             <Circles />
           </div>
           <div className="intro--card">
@@ -71,7 +71,7 @@ function MainContent() {
                 Tiny letters for mothers is an artistic research project that aims
                 to create a global network of data stories about mothering and
                 parenting, especially in the early stages. Our first data story is
-                focussed on the first 40 days / 6 weeks postpartum, and on the birth
+                focused on the first 40 days / 6 weeks postpartum, and on the birth
                 stories of mothers or coming home stories in the context of
                 adoption. The title tiny letters is borne of Dee Marco’s 40+day
                 postpartum writing after the birth of her third child in 2023. Her

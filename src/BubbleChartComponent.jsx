@@ -6,7 +6,7 @@ import data from "./Data";
 import colorMap from "./ColorMap";
 import stopWords from "./StopWords";
 
-const normalizeWord = (word) => {
+export const normalizeWord = (word) => {
   if (word.endsWith("s") && word.length > 1) {
     return word.slice(0, -1);
   }
@@ -17,7 +17,7 @@ const countWords = (text) => {
   const words = text
     .toLowerCase()
     .replace(/[.,!?:;]/g, "")
-    .split(/\s+/); // Simplified punctuation removal
+    .split(/\s+/);
   const frequency = {};
 
   words.forEach((word) => {
@@ -37,7 +37,7 @@ export const getBubbleData = (frequency, filteredData) => {
     const words = entry.birthStory
       .toLowerCase()
       .replace(/[.,!?:;]/g, "")
-      .split(" "); // Simplified punctuation removal
+      .split(" ");
 
     words.forEach((word) => {
       if (frequency[word] >= 3) {
@@ -74,7 +74,7 @@ export const getBubbleData = (frequency, filteredData) => {
   return bubbleData;
 };
 
-const getRelevantEntries = (word, filteredData) => {
+export const getRelevantEntries = (word, filteredData) => {
   const cleanWord = normalizeWord(word.toLowerCase());
   const wordBoundaryRegex = new RegExp(`\\b${cleanWord}\\b`);
 
@@ -94,7 +94,7 @@ const getRelevantEntries = (word, filteredData) => {
         motherName: entry.motherName,
         portrait: entry.portrait,
         countryLivesIn: entry.countryLivesIn,
-        id: entry.id, // Include the correct id for the full story
+        id: entry.id,
       };
     })
     .filter((result) => result.sentence);
@@ -178,7 +178,7 @@ const BubbleChartComponent = () => {
 
   useEffect(() => {
     const { width, height } = dimensions;
-    if (!bubbleData.length) return; // Exit if no bubble data
+    if (!bubbleData.length) return;
 
     d3.select(svgRef.current).selectAll("*").remove();
 
@@ -393,7 +393,6 @@ const BubbleChartComponent = () => {
             </select>
           </label>
         </div>
-        {/* Render a message if no data is found */}
         {filteredData.length === 0 || bubbleData.length === 0 ? (
           <div className="limited-data">
             <p>
