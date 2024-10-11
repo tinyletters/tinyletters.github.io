@@ -49,6 +49,11 @@ body {
   height: 3vw;
 }
 
+.word-dot-tooltip {
+  width: 3vw;
+  height: 3vw;
+}
+
 .word-intro {
   margin: 2rem;
 }
@@ -650,6 +655,11 @@ h3 {
   .word-dot {
     width: 15vw;
     height: 15vw;
+  }
+
+  .word-dot-tooltip {
+    width: 6vw;
+    height: 6vw;
   }
 
   .word-word {

@@ -245,7 +245,7 @@ const BubbleChartComponent = () => {
                 <div class="tooltip">
                   <div class="card-flex">
                     <div class="card-name">${d.name}</div>
-                    <div class="word-dot" style="border-radius: 50%; background-color: ${wordColor};"></div>
+                    <div class="word-dot-tooltip" style="border-radius: 50%; background-color: ${wordColor};"></div>
                   </div><br>
                   <hr><br>
                   "${boldedSentence}"<br><br>
