@@ -25,7 +25,7 @@ body {
 }
 
 .bubble-chart {
-  width: 80vw;
+  width: 74vw;
   height: 1700px;
   grid-area: bubble;
 }
