@@ -1,13 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import the navigation hook
+import { useNavigate } from 'react-router-dom'; 
 
 const ColorKey = ({ bubbleData, colorMap }) => {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   const sortedWords = bubbleData.sort((a, b) => b.value - a.value);
 
   const handleWordClick = (word) => {
-    // Navigate to the word's sentences page
     navigate(`/sentences/${word}`);
   };
 
@@ -17,8 +16,8 @@ const ColorKey = ({ bubbleData, colorMap }) => {
         <div
           key={bubble.name}
           className="color-key-item"
-          onClick={() => handleWordClick(bubble.name)} // Add the click handler
-          style={{ cursor: 'pointer' }} // Add a pointer cursor to show it's clickable
+          onClick={() => handleWordClick(bubble.name)} 
+          style={{ cursor: 'pointer' }}
         >
           <div
             className="color-box"

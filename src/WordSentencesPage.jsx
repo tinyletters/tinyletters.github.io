@@ -39,8 +39,6 @@ function WordSentencesPage() {
               style={{
                 borderRadius: "50%",
                 backgroundColor: colorMap[word] || "gray",
-                width: "6vw",
-                height: "6vw",
               }}
             />
             <div className="word-word">{word}</div>
@@ -54,7 +52,9 @@ function WordSentencesPage() {
                 width: "100%",
               }}
             />
-            <p>All mentions of the associated word </p>
+            <p>
+              All mentions of this word in the stories we've received so far.
+            </p>
             <Divider
               sx={{
                 borderColor: "black",
@@ -65,7 +65,6 @@ function WordSentencesPage() {
             />
           </div>
         </div>
-        <br />
         <br />
         <button onClick={() => navigate("/")}>Back home</button>
       </div>
@@ -79,15 +78,18 @@ function WordSentencesPage() {
                 borderWidth: "1px",
                 my: 1,
                 width: "100%",
+                marginTop: "-10px",
               }}
             />
             <div className="word-name-flex">
               <div>
-                <img
-                  src={item.portrait}
-                  className="word-portrait"
-                  alt="portrait"
-                />
+              <a href={`#/story/${item.id}`}>
+                  <img
+                    src={item.portrait}
+                    className="word-portrait"
+                    alt="portrait"
+                  />
+                </a>
               </div>
               <div>
                 <strong>{item.motherName}</strong>, {item.countryLivesIn}
@@ -101,35 +103,75 @@ function WordSentencesPage() {
                 width: "100%",
               }}
             />
-            {filteredSentences.map((sentence, sentenceIndex) => {
-              const boldedSentence = sentence.replace(
-                new RegExp(`(${word})`, "gi"),
-                "<strong>$1</strong>"
-              );
 
-              return (
-                <div key={sentenceIndex}>
-                  <br />
-                  <div dangerouslySetInnerHTML={{ __html: boldedSentence }} />
-                  <br />
-                  <Divider
-                    sx={{
-                      borderColor: "black",
-                      borderWidth: "1px",
-                      my: 1,
-                      width: "100%",
-                    }}
+            <div>
+              {filteredSentences.map((sentence, sentenceIndex) => {
+                const boldedSentence = sentence.replace(
+                  new RegExp(`(${word})`, "gi"),
+                  "<strong>$1</strong>"
+                );
+
+                return (
+                  <div key={sentenceIndex}>
+                    <div className="word-name-flex-2">
+                      <div>
+                        <a href={`#/story/${item.id}`}>
+                          <img
+                            src={item.portrait}
+                            className="word-portrait"
+                            alt="portrait"
+                          />
+                        </a>
+                      </div>
+                      <br />
+                      <div
+                        dangerouslySetInnerHTML={{ __html: boldedSentence }}
+                      />
+                      <br />
+                    </div>
+                    <Divider
+                      sx={{
+                        borderColor: "black",
+                        borderWidth: "1px",
+                        my: 1,
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="word-name-flex">
+              <div>
+                <a href={`#/story/${item.id}`}>
+                  <img
+                    src={item.portrait}
+                    className="word-portrait"
+                    alt="portrait"
                   />
-                </div>
-              );
-            })}
-            <br />
-            Read full birth story{" "}
-            <strong>
-              <a href={`#/story/${item.id}`}>here</a>
-            </strong>
+                </a>
+              </div>
+              <div>
+                Read full birth story{" "}
+                <strong>
+                  <a href={`#/story/${item.id}`}>here</a>
+                </strong>
+              </div>
+            </div>
           </div>
         ))}
+        <div className="read-full-story">
+          <Divider
+            sx={{
+              borderColor: "black",
+              borderWidth: "1px",
+              my: 1,
+              width: "100%",
+              marginTop: "0.2rem",
+              marginLeft: "0.5rem",
+            }}
+          />
+        </div>
       </div>
     </div>
   );
