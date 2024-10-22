@@ -963,7 +963,7 @@ h3 {
 
 /* -------iPad View---------*/
 
-@media all and (min-width: 769px) and (max-width: 1200px) {
+@media all and (min-width: 768px) and (max-width: 1200px) {
   .dee--marco--image {
     width: 90%;
   }
@@ -981,16 +981,44 @@ h3 {
     font-size: 20px;
   }
 
+  .card {
+    width: 88vw;
+  }
+
   .bubble-chart {
     width: 93vw;
     height: 1700px;
+  }
+  .dee--image--mobile {
+    width: 92%;
+  }
+
+  .title--card {
+    width: 92%;
+  }
+
+  .dee--card {
+    width: 100%;
+  }
+
+  .dear--data--image {
+    width: 100%;
+  }
+
+  .mary--kelly--image {
+    width: 92%;
+  }
+
+  .kelly--text {
+    margin: 0;
+    width: 100%;
   }
 
   .filter-section {
     background-color: white;
     border-radius: 10px;
     position: relative;
-    width: 90vw;
+    width: 88vw;
     height: fit-content;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -1038,7 +1066,6 @@ h3 {
 
     gap: 5px;
   }
-
 
   .word-portrait {
     width: 6vw;
