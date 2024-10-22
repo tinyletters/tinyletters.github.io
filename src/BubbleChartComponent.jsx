@@ -32,9 +32,9 @@ const countWords = (text) => {
 
 export const getBubbleData = (frequency, filteredData) => {
   const bubbleData = [];
-    const isMobile = window.innerWidth <= 768;
-  const sizeMultiplier = isMobile ? 0.5 : 1; 
-  
+  const isMobile = window.innerWidth <= 768;
+  const sizeMultiplier = isMobile ? 0.5 : 1;
+
   filteredData.forEach((entry) => {
     const words = entry.birthStory
       .toLowerCase()
@@ -75,7 +75,6 @@ export const getBubbleData = (frequency, filteredData) => {
 
   return bubbleData;
 };
-
 
 export const getRelevantEntries = (word, filteredData) => {
   const cleanWord = normalizeWord(word.toLowerCase());
