@@ -649,7 +649,7 @@ h3 {
     margin-top: 12rem;
     margin-bottom: -5rem;
     width: 83vw;
-    height: 1200px;
+    height: 600px;
   }
 
   .word-dot {
@@ -678,7 +678,7 @@ h3 {
     padding-bottom: 1rem;
     border-radius: 10px;
     margin: 0;
-    margin-top: -10rem;
+    margin-top: -12rem;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -714,7 +714,7 @@ h3 {
   }
 
   .color-key {
-    margin-top: -10rem;
+    margin-top: 0rem;
     display: grid;
     grid-gap: 3px;
     grid-template-columns: 1fr 1fr;
@@ -753,6 +753,11 @@ h3 {
   .card-name {
     font-family: "Crake", sans-serif;
     font-size: 20px;
+  }
+
+  .tooltip-portrait {
+    width: 7vw;
+    border-radius: 50%;
   }
 
   .card {
@@ -1033,6 +1038,7 @@ h3 {
 
     gap: 5px;
   }
+
 
   .word-portrait {
     width: 6vw;

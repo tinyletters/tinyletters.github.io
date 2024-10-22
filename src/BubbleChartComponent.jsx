@@ -32,7 +32,9 @@ const countWords = (text) => {
 
 export const getBubbleData = (frequency, filteredData) => {
   const bubbleData = [];
-
+    const isMobile = window.innerWidth <= 768;
+  const sizeMultiplier = isMobile ? 0.5 : 1; 
+  
   filteredData.forEach((entry) => {
     const words = entry.birthStory
       .toLowerCase()
@@ -40,18 +42,18 @@ export const getBubbleData = (frequency, filteredData) => {
       .split(" ");
 
     words.forEach((word) => {
-      if (frequency[word] >= 3) {
+      if (frequency[word] > 3) {
         const existingBubble = bubbleData.find(
           (bubble) => bubble.name === word
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 0.25;
+          existingBubble.size += frequency[word] * 0.16 * sizeMultiplier;
         } else {
           bubbleData.push({
             name: word,
             value: frequency[word],
-            size: frequency[word],
+            size: frequency[word] * sizeMultiplier,
             story: entry.birthStory,
             author: entry.name,
             country: entry.country,
@@ -73,6 +75,7 @@ export const getBubbleData = (frequency, filteredData) => {
 
   return bubbleData;
 };
+
 
 export const getRelevantEntries = (word, filteredData) => {
   const cleanWord = normalizeWord(word.toLowerCase());
@@ -205,12 +208,12 @@ const BubbleChartComponent = () => {
 
     const simulation = d3
       .forceSimulation(bubbleData)
-      .force("charge", d3.forceManyBody().strength(isMobile ? -2 : -2))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -1 : -2))
       .force(
         "center",
         d3.forceCenter(
-          width / (isMobile ? 2.2 : 2.2),
-          height / (isMobile ? 3 : 2)
+          width / (isMobile ? 2.2 : 2),
+          height / (isMobile ? 2.2 : 2)
         )
       )
       .force(

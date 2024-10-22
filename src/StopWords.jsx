@@ -227,6 +227,18 @@ const stopWords = new Set([
   "within",
   "30",
   "2",
+  "i’m",
+  "I’ve",
+  "i’ve",
+  "i've",
+  "i’ve",
+  "didn't",
+  "didn’t",
+  "use",
+  "fine",
+  "bringing",
+  "already",
+  "happen",
 ]);
 
 export default stopWords;
