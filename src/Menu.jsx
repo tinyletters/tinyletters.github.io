@@ -69,16 +69,20 @@ export default function Menu({ isOpen, toggleMenu }) {
           />
           <div className="email-flex">
             <div>
-            <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button className="contribute">
-            <div>contribute your story</div>
-            <img className="write" src="../images/write-simple.svg" alt="" />
-          </button>
-        </a>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="contribute">
+                  <div>contribute</div>
+                  <img
+                    className="write"
+                    src="../images/write-simple.svg"
+                    alt=""
+                  />
+                </button>
+              </a>
             </div>
             <div>
               <a

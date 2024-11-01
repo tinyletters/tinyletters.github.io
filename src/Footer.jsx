@@ -20,7 +20,7 @@ export default function Footer() {
               rel="noopener noreferrer"
             >
               <button className="contribute">
-                <div>contribute your story</div>
+                <div>contribute</div>
                 <img
                   className="write"
                   src="../images/write-simple.svg"
