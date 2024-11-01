@@ -239,6 +239,7 @@ const stopWords = new Set([
   "bringing",
   "already",
   "happen",
+  "leg",
 ]);
 
 export default stopWords;
