@@ -53,7 +53,7 @@ function WordSentencesPage() {
               }}
             />
             <p>
-              All mentions of this word in the stories we've received so far.
+             Mentions of this word in the stories we've received so far.
             </p>
             <Divider
               sx={{
@@ -66,7 +66,12 @@ function WordSentencesPage() {
           </div>
         </div>
         <br />
-        <button onClick={() => navigate("/")}>Back home</button>
+        <div className="back-flex-word">
+          <button onClick={() => navigate("/data-stories")}>
+            Back to data story
+          </button>
+          <button onClick={() => navigate("/")}>Back home</button>
+        </div>
       </div>
 
       <div className="word-flex">
@@ -83,7 +88,7 @@ function WordSentencesPage() {
             />
             <div className="word-name-flex">
               <div>
-              <a href={`#/story/${item.id}`}>
+                <a href={`#/story/${item.id}`}>
                   <img
                     src={item.portrait}
                     className="word-portrait"

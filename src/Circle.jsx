@@ -40,41 +40,74 @@ export const Circles = () => {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
       <div className="about--circles">
-        <img
-          src="../images/Ellipse-9.svg"
-          className="color--circle--4"
-          alt="logo"
-        />
-        <img
-          src="../images/Group-228.svg"
-          className="image--circle--1"
-          alt="logo"
-        />
-        <img
-          src="../images/Group-275.svg"
-          className="image--circle--2"
-          alt="logo"
-        />
+        <div>
+          <img
+            src="../images/Ellipse-9.svg"
+            className="color--circle--4"
+            alt="logo"
+          />
+        </div>
+        <div></div>
+        <div></div>
+        <div>
+          <img
+            src="../images/Group-228.svg"
+            className="image--circle--2"
+            alt="logo"
+          />
+        </div>
 
-        <img
-          src="../images/Group-280.svg"
-          className="image--circle--3"
-          alt="logo"
-        />
-        <img
-          src="../images/Ellipse-10.svg"
-          className="color--circle--5"
-          alt="logo"
-        />
-        <img
-          src="../images/Group-241.svg"
-          className="color--circle--3"
-          alt="logo"
-        />
+        <div>
+          <img
+            src="../images/image3-square.jpg"
+            className="image--circle--1"
+            alt="logo"
+          />
+        </div>
+        <div>
+          <img
+            src="../images/Group-275.svg"
+            className="image--circle--2"
+            alt="logo"
+          />
+        </div>
+        <div></div>
+        <div>
+          <img
+            src="../images/Group-280.svg"
+            className="image--circle--3"
+            alt="logo"
+          />
+        </div>
+        <div></div>
+        <div></div>
+        <div>
+          <img
+            src="../images/Ellipse-10.svg"
+            className="color--circle--5"
+            alt="logo"
+          />
+        </div>
+        <div></div>
+
+        <div>
+          <img
+            src="../images/image0-1-square.jpg"
+            className="image--circle--4"
+            alt="logo"
+          />
+        </div>
+        <div>
+  
+        </div>
+                <div>
+          <img
+            src="../images/Group-241.svg"
+            className="color--circle--3"
+            alt="logo"
+          />
+        </div>
       </div>
       <br />
       <br />
