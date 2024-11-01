@@ -23,7 +23,7 @@ export default function Header() {
           rel="noopener noreferrer"
         >
           <button className="contribute">
-            <div>contribute</div>
+            <div>contribute your story</div>
             <img className="write" src="../images/write-simple.svg" alt="" />
           </button>
         </a>
