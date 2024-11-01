@@ -133,7 +133,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 4vh;
+  height: 3vh;
   gap: 15px;
 }
 
@@ -867,13 +867,11 @@ h3 {
 
   .contribute {
     font-size: 12px;
+    height: 3.5vh;
   }
 
   .top-section {
-    height: 1rem;
-    padding: 0;
-    margin: 1rem;
-    margin-bottom: 1.5rem;
+display: none;
   }
 
 
@@ -1335,6 +1333,9 @@ h3 {
     height: 6vw;
   }
 
+  .contribute {
+    height: 2.5vh;
+  }
   .close-menu {
     height: 6vw;
   }

@@ -114,7 +114,7 @@ export default function Colophon() {
           </div>
           <br />
           <br />
-          <button onClick={() => navigate("/")}>Back home</button>
+          {/* <button onClick={() => navigate("/")}>Back home</button> */}
           <br />
           <br />
         </div>
