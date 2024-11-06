@@ -48,7 +48,7 @@ export const getBubbleData = (frequency, filteredData) => {
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 0.16 * sizeMultiplier;
+          existingBubble.size += frequency[word] * 0.12 * sizeMultiplier;
         } else {
           bubbleData.push({
             name: word,
@@ -377,6 +377,7 @@ const BubbleChartComponent = () => {
               <option value="">All</option>
               <option value="South Africa">South Africa</option>
               <option value="Egypt">Egypt</option>
+              <option value="Germany">Germany</option>
               <option value="The Netherlands">The Netherlands</option>
               <option value="United Kingdom">United Kingdom</option>
             </select>
