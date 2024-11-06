@@ -168,8 +168,8 @@ body {
 }
 
 .bubble-chart {
-  width: 74vw;
-  height: 1700px;
+  width: 76vw;
+  height: 1300px;
   grid-area: bubble;
 }
 

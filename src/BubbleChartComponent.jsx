@@ -33,7 +33,7 @@ const countWords = (text) => {
 export const getBubbleData = (frequency, filteredData) => {
   const bubbleData = [];
   const isMobile = window.innerWidth <= 768;
-  const sizeMultiplier = isMobile ? 0.5 : 1;
+  const sizeMultiplier = isMobile ? 0.8 : 1;
 
   filteredData.forEach((entry) => {
     const words = entry.birthStory
@@ -48,7 +48,7 @@ export const getBubbleData = (frequency, filteredData) => {
         );
         if (existingBubble) {
           existingBubble.value += frequency[word];
-          existingBubble.size += frequency[word] * 0.12 * sizeMultiplier;
+          existingBubble.size += frequency[word] * 0.1 * sizeMultiplier;
         } else {
           bubbleData.push({
             name: word,
@@ -212,7 +212,7 @@ const BubbleChartComponent = () => {
         "center",
         d3.forceCenter(
           width / (isMobile ? 2.2 : 2),
-          height / (isMobile ? 2.2 : 2)
+          height / (isMobile ? 2.2 : 2.2)
         )
       )
       .force(

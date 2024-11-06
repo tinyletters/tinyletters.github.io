@@ -128,12 +128,10 @@ function FullStoryPage() {
             }}
           />
           <br />
-          <div className="back-flex">
-            <button onClick={() => navigate("/")}>Back home</button>
-            <button onClick={() => navigate("/data-stories")}>
-              Back to data story
-            </button>
-          </div>
+
+          <button onClick={() => navigate("/data-stories")}>
+            Back to data story
+          </button>
         </div>
         <div className="birth-story">
           <h4>birth story</h4>
