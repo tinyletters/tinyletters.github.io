@@ -48,7 +48,7 @@ const data = [
       "When the pain became worse and the contractions got closer to each other, my husband and I drove to the hospital. I remember cursing his old car because I felt every bump on the road and it made the pain of contractions just so much worse.",
       "We had to wait for a little bit before going into the labour room and all throughout I was convinced I would give birth on the bench in the waiting room. Luckily, that didn't happen and when I was admitted into the labour room, there were two midwife students who offered to massage my back to try and help me to relax.",
       "I had arranged with the hospital staff beforehand that I would like to not have any aditus (I'm very afraid of needles), so for the most part, the medical staff let me labour in peace.",
-      "As with my first labuor, my water didn't break until the very end.",
+      "As with my first labour, my water didn't break until the very end.",
       "My daughter was born shortly after and I felt so amazed by the fact that this (not quite so) tiny human being was my baby.",
       "The time at the hospital was strange.",
       "I was used to having my then four-year old son around, and being alone with my daughter, who still slept so much, I felt like I was in a different world.",
