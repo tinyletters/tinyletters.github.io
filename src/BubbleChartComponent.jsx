@@ -5,6 +5,7 @@ import ColorKey from "./ColorKey";
 import data from "./Data";
 import colorMap from "./ColorMap";
 import stopWords from "./StopWords";
+import { useNavigate } from "react-router-dom";
 
 export const normalizeWord = (word) => {
   if (word.endsWith("s") && word.length > 1) {
@@ -133,6 +134,11 @@ const BubbleChartComponent = () => {
   const [bubbleData, setBubbleData] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
 
   const mobileTooltipTimeout = 20000;
   const desktopTooltipTimeout = 2000;
@@ -334,14 +340,16 @@ const BubbleChartComponent = () => {
             can also filter by race of the mother, country (this is the country
             where the birth took place) and birth type. Explore each story
             through the tooltips. This is a growing data story. You can
-            contribute to it{" "}
-            <a
+            contribute to it {" "}
+            <span className="scan" onClick={() => handleNavigate("/")}>
+              by scanning the QR code on the home page.
+            </span>
+            {/* <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
               target="_blank"
               rel="noopener noreferrer"
-            >
-              here.
-            </a>
+            > */}
+            {/* </a> */}
           </p>
           <p className="best-viewed">
             <strong>
@@ -362,7 +370,7 @@ const BubbleChartComponent = () => {
               <option value="white">White</option>
               <option value="white, other">White, other</option>
               <option value="coloured">Coloured</option>
-              <option value="Black African">Black African</option>
+              <option value="Black">Black</option>
               <option value="Indian">Indian</option>
             </select>
           </label>

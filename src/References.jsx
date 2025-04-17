@@ -1,8 +1,15 @@
 import * as React from "react";
 import "./App.css";
+import { useNavigate } from "react-router-dom";
+
 import { Divider } from "@mui/material";
 
 export default function References() {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
   return (
     <>
       <div className="ref--card">
@@ -13,23 +20,24 @@ export default function References() {
           <p>
             The first data story in tiny letters for mothers, which anyone
             anywhere in the world can contribute to{" "}
-            <a
+            {/* <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
               target="_blank"
-            >
-              here
-            </a>
-            , emphasises the process of recalling birth or coming home
-            stories, exploring the way in which data and narrative can express
-            the nuances of this unique period in a mother or parent’s life,
-            which is often difficult to express. It is a collaborative project,
-            primarily inspired by the work of Dee Marco around motherhood and
-            community. After Dee worked with Independent Network for
-            Contemporary Culture & Art (INCCA) on their Art After Baby project,
-            her and INCCA founder Lara Koseff found common ground in their
-            interest in trying to find new ways to tell the many little stories
-            of motherhood that often go unrecorded or unsaid. Below are a series
-            of references that influenced this collaboration.
+            > */}
+            <span className="scan" onClick={() => handleNavigate("/")}>
+              by scanning the QR code on the home page
+            </span>
+            {/* </a> */}, emphasises the process of recalling birth or coming
+            home stories, exploring the way in which data and narrative can
+            express the nuances of this unique period in a mother or parent’s
+            life, which is often difficult to express. It is a collaborative
+            project, primarily inspired by the work of Dee Marco around
+            motherhood and community. After Dee worked with Independent Network
+            for Contemporary Culture & Art (INCCA) on their Art After Baby
+            project, her and INCCA founder Lara Koseff found common ground in
+            their interest in trying to find new ways to tell the many little
+            stories of motherhood that often go unrecorded or unsaid. Below are
+            a series of references that influenced this collaboration.
           </p>
         </div>
         <div className="ref">
@@ -59,9 +67,9 @@ export default function References() {
           <div>
             <p>
               Dee Marco's {""}
-              <a href="https://deemarco.substack.com/" target="_blank">
-                Tiny letters
-              </a>
+              {/* <a href="https://deemarco.substack.com/" target="_blank"> */}
+              Tiny letters
+              {/* </a> */}
             </p>
             <Divider
               sx={{
@@ -78,12 +86,12 @@ export default function References() {
                 about her life as a mother of three small children. It started
                 in February 2023 after the traumatic labour and birth of her
                 third child and the slew of feelings that accompanied her
-                arrival. Dee’s Tiny Letters is ongoing and you can read more and
+                {/* arrival. Dee’s Tiny Letters is ongoing and you can read more and
                 subscribe{" "}
                 <a href="https://deemarco.substack.com/" target="_blank">
                   here
                 </a>
-                .
+                . */}
               </p>
             </div>
           </div>
@@ -119,9 +127,9 @@ export default function References() {
           />
           <div>
             <p>
-              <a href="https://www.dear-data.com/theproject" target="_blank">
-                Dear Data
-              </a>
+              {/* <a href="https://www.dear-data.com/theproject" target="_blank"> */}
+              Dear Data
+              {/* </a> */}
               {""} by Giorgia Lupi and Stefanie Posavec
             </p>
             <Divider
@@ -152,11 +160,11 @@ export default function References() {
                 visualised. They decided to specifically focus on the first 40
                 days postpartum, to create a resource so that mothers can
                 potentially feel less alone and isolated during one of the most
-                tumultuous periods in a care-givers life. Read more{" "}
+                {/* tumultuous periods in a care-givers life. Read more{" "}
                 <a href="https://www.dear-data.com/theproject" target="_blank">
                   here
                 </a>
-                .
+                . */}
               </p>
             </div>
           </div>
@@ -183,12 +191,12 @@ export default function References() {
           />
           <div>
             <p>
-              <a
+              {/* <a
                 href="https://www.marykellyartist.com/post-partum-document-1973-79"
                 target="_blank"
-              >
-                Post-Partum Document
-              </a>
+              > */}
+              Post-Partum Document
+              {/* </a> */}
               {""} by Mary Kelly
             </p>
             <Divider
@@ -233,12 +241,12 @@ export default function References() {
         />
         <div>
           <p>
-            <a
+            {/* <a
               href="https://www.penguinrandomhouse.com/books/730717/touched-out-by-amanda-montei/"
               target="_blank"
-            >
-              Touched Out: Motherhood, Misogyny, Consent, and Control {""}
-            </a>
+            > */}
+            Touched Out: Motherhood, Misogyny, Consent, and Control {""}
+            {/* </a> */}
             by Amanda Montei
           </p>
           <Divider
@@ -252,12 +260,13 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://lareviewofbooks.org/article/birth-stories-are-an-ideological-minefield-a-conversation-with-amanda-montei/?utm_source=substack&utm_medium=email"
               target="_blank"
-            >
-              Birth Stories Are an Ideological Minefield: A Conversation with Amanda Montei {""}
-            </a>
+            > */}
+            Birth Stories Are an Ideological Minefield: A Conversation with
+            Amanda Montei {""}
+            {/* </a> */}
             by Kate Durbin
           </p>
           <Divider
@@ -271,12 +280,12 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://read.dukeupress.edu/books/book/1596/Cruel-Optimism"
               target="_blank"
-            >
-              Cruel Optimism {""}
-            </a>
+            > */}
+            Cruel Optimism {""}
+            {/* </a> */}
             by Lauren Berlant
           </p>
           <Divider
@@ -290,13 +299,13 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://extraextramagazine.com/talk/lauren-berlant-on-intimacy-as-world-making/"
               target="_blank"
-            >
-              Lauren Berlant on Intimacy as World-Making {""}
-            </a>
-            by Hans Demeyer 
+            > */}
+            Lauren Berlant on Intimacy as World-Making {""}
+            {/* </a> */}
+            by Hans Demeyer
           </p>
           <Divider
             sx={{
@@ -309,12 +318,12 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://www.moussemagazine.it/magazine/michellegrabner-mocacleveland/"
               target="_blank"
-            >
-              I Work from Home {""}
-            </a>
+            > */}
+            I Work from Home {""}
+            {/* </a> */}
             by Michelle Grabner at MOCA Cleveland
           </p>
           <Divider
@@ -328,12 +337,12 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://www.harpersbazaar.com/culture/art-books-music/a43012829/christina-sharpe-in-the-wake/"
               target="_blank"
-            >
-              In The Wake {""}
-            </a>
+            > */}
+            In The Wake {""}
+            {/* </a> */}
             by Christina Sharpe
           </p>
           <Divider
@@ -347,12 +356,12 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://www.processjmus.org/blackmotherhood"
               target="_blank"
-            >
-             Black Motherhood In the Wake {""}
-            </a>
+            > */}
+            Black Motherhood In the Wake {""}
+            {/* </a> */}
             by Camille Crichlow
           </p>
           <Divider
@@ -366,12 +375,12 @@ export default function References() {
         </div>
         <div>
           <p>
-            <a
+            {/* <a
               href="https://www.hettiejudah.co.uk/how-not-to-exclude-artist-mothers-and-other-parents"
               target="_blank"
-            >
-              How Not To Exclude Artist Mothers (and other parents) {""}
-            </a>
+            > */}
+            How Not To Exclude Artist Mothers (and other parents) {""}
+            {/* </a> */}
             by Hettie Judah
           </p>
           <Divider

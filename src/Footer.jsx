@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="footer--title" onClick={() => navigate("/colophon")}>
             colophon
           </div>
-          <div className="contribute-footer">
+          {/* <div className="contribute-footer">
             {" "}
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
@@ -38,7 +38,7 @@ export default function Footer() {
                 alt="logo"
               />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

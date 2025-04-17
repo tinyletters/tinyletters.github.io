@@ -70,24 +70,7 @@ function MainContent() {
                       width: "100%",
                     }}
                   />
-                  <p>
-                    To contribute your birth or coming home story{" "}
-                    <a
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      fill out this form
-                    </a>
-                  </p>
-                  <Divider
-                    sx={{
-                      borderColor: "black",
-                      borderWidth: "1px",
-                      my: 2,
-                      width: "100%",
-                    }}
-                  />
+
                   <p>
                     View our first data story{" "}
                     <span
@@ -123,12 +106,36 @@ function MainContent() {
                     learning about global experiences of mothers and parents by
                     creating a data story through tiny letters from one mum to
                     another, from one geography to another, from one illogical
-                    moment to another.
+                    moment to another. To contribute and access our form, scan
+                    the QR code on this page. To get in touch, email us:
+                    tinylettersformothers@gmail.com
                   </p>
                 </div>
-
               </div>
-              <br /><br /><br />
+              <div className="qr--card">
+              <Divider
+                    sx={{
+                      borderColor: "black",
+                      borderWidth: "1px",
+                      my: 2,
+                      width: "100%",
+                    }}
+                  />
+                <p>
+                  To contribute your birth or coming home story, scan this code:
+                </p>
+                <br />
+                <img
+                  src="../images/Tiny_Letters_Poster.jpeg"
+                  alt="qr-code"
+                  className="qr-code"
+                />
+                
+              </div>
+              <br />
+
+              <br />
+              <br />
             </div>
           </>
         )}

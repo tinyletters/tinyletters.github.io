@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="top-section">
+      {/* <div className="top-section">
         {" "}
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
@@ -27,7 +27,7 @@ export default function Header() {
             <img className="write" src="../images/write-simple.svg" alt="" />
           </button>
         </a>
-      </div>
+      </div> */}
       <div className="div-mobile">
         <Divider
           sx={{
