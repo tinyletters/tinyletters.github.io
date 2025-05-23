@@ -86,7 +86,8 @@ export default function References() {
                 about her life as a mother of three small children. It started
                 in February 2023 after the traumatic labour and birth of her
                 third child and the slew of feelings that accompanied her
-                {/* arrival. Dee’s Tiny Letters is ongoing and you can read more and
+                arrival.
+                {/*  Dee’s Tiny Letters is ongoing and you can read more and
                 subscribe{" "}
                 <a href="https://deemarco.substack.com/" target="_blank">
                   here
@@ -160,7 +161,8 @@ export default function References() {
                 visualised. They decided to specifically focus on the first 40
                 days postpartum, to create a resource so that mothers can
                 potentially feel less alone and isolated during one of the most
-                {/* tumultuous periods in a care-givers life. Read more{" "}
+                tumultuous periods in a care-givers life.
+                {/*  Read more{" "}
                 <a href="https://www.dear-data.com/theproject" target="_blank">
                   here
                 </a>
