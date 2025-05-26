@@ -31,7 +31,7 @@ const countWords = (text) => {
   });
 
   const filteredFrequency = Object.fromEntries(
-    Object.entries(frequency).filter(([word, count]) => count > 2)
+    Object.entries(frequency).filter(([word, count]) => count >= 2)
   );
 
   return filteredFrequency;
