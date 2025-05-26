@@ -240,6 +240,13 @@ const stopWords = new Set([
   "already",
   "happen",
   "leg",
+  "feel",
+  "other",
+  "back",
+  "week",
+  "41",
+  "8pm",
+  "day"
 ]);
 
 export default stopWords;

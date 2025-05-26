@@ -34,7 +34,48 @@ const countWords = (text) => {
 export const getBubbleData = (frequency, filteredData) => {
   const bubbleData = [];
   const isMobile = window.innerWidth <= 768;
-  const sizeMultiplier = isMobile ? 0.8 : 1;
+  const initialWordList = Object.entries(frequency).filter(([word, count]) => count > 3);
+  const visibleWordCount = initialWordList.length;
+  
+  let sizeMultiplier;
+
+  if (isMobile) {
+    if (visibleWordCount <= 10) {
+      sizeMultiplier = 5;
+    } else if (visibleWordCount <= 20) {
+      sizeMultiplier = 5;
+    } else if (visibleWordCount <= 40) {
+      sizeMultiplier = 5;
+    } else if (visibleWordCount <= 100) {
+      sizeMultiplier = 0.8;
+    } else {
+      sizeMultiplier = 0.85;
+    }
+  } else {
+    if (visibleWordCount <= 10) {
+      sizeMultiplier = 5;
+    } else if (visibleWordCount <= 20) {
+      sizeMultiplier = 5;
+    } else if (visibleWordCount <= 40) {
+      sizeMultiplier = 4;
+    } else if (visibleWordCount <= 100) {
+      sizeMultiplier = 3;
+    } else {
+      sizeMultiplier = 0.8;
+    }
+  }
+  
+const dynamicThreshold = isMobile
+  ? (
+      visibleWordCount <= 10 ? 2 :
+      visibleWordCount <= 20 ? 2 :
+      visibleWordCount > 100 ? 10 : 2
+    )
+  : (
+      visibleWordCount <= 10 ? 2 :
+      visibleWordCount <= 20 ? 2 :
+      visibleWordCount > 100 ? 6 : 2
+    );
 
   filteredData.forEach((entry) => {
     const words = entry.birthStory
@@ -43,7 +84,7 @@ export const getBubbleData = (frequency, filteredData) => {
       .split(" ");
 
     words.forEach((word) => {
-      if (frequency[word] > 3) {
+      if (frequency[word] > dynamicThreshold)  {
         const existingBubble = bubbleData.find(
           (bubble) => bubble.name === word
         );
@@ -372,6 +413,7 @@ const BubbleChartComponent = () => {
               <option value="coloured">Coloured</option>
               <option value="Black">Black</option>
               <option value="Indian">Indian</option>
+              <option value="Not disclosed">Not disclosed</option>
             </select>
           </label>
 
@@ -388,6 +430,7 @@ const BubbleChartComponent = () => {
               <option value="Germany">Germany</option>
               <option value="The Netherlands">The Netherlands</option>
               <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
             </select>
           </label>
 
