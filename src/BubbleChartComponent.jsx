@@ -274,47 +274,47 @@ const BubbleChartComponent = () => {
       .append("circle")
       .attr("r", (d) => d.size)
       .attr("fill", (d) => getColor(d.name))
-      .on("mouseover", (event, d) => {
-        clearTimeout(timeoutId);
-        const relevantResults = getRelevantEntries(d.name, filteredData);
-
-        if (relevantResults.length > 0) {
-          const randomResult =
-            relevantResults[Math.floor(Math.random() * relevantResults.length)];
-          const boldedSentence = getBoldedSentence(
-            randomResult.sentence,
-            d.name
-          );
-          const wordColor = getColor(d.name);
-
-          tooltip.transition().duration(200).style("opacity", 1);
-          tooltip
-            .html(
-              `
-                <div class="tooltip">
-                  <div class="card-flex">
-                    <div class="card-name">${d.name}</div>
-                    <div class="word-dot-tooltip" style="border-radius: 50%; background-color: ${wordColor};"></div>
-                  </div><br>
-                  <hr><br>
-                  "${boldedSentence}"<br><br>
-                  <div class="tooltip-name-flex">
-                    <div><img src="${randomResult.portrait}" class="tooltip-portrait" alt="portrait"> </div> 
-                    <div><strong>${randomResult.motherName}</strong>, ${randomResult.countryLivesIn}</div>
-                  </div><br><hr><br>
-                  Read full birth story <strong><a href="#/story/${randomResult.id}">here</a></strong>
-                </div>
-              `
-            )
-            .style("left", `${event.pageX + 5}px`)
-            .style("top", `${event.pageY - 28}px`);
-
-          setTooltipVisible(true);
-        } else {
-          tooltip.transition().duration(200).style("opacity", 0);
-          setTooltipVisible(false);
-        }
-      })
+        .on("mouseover", (event, d) => {
+          clearTimeout(timeoutId);
+          const relevantResults = getRelevantEntries(d.name, filteredData);
+        
+          if (relevantResults.length > 0) {
+            const randomResult =
+              relevantResults[Math.floor(Math.random() * relevantResults.length)];
+            const boldedSentence = getBoldedSentence(
+              randomResult.sentence,
+              d.name
+            );
+            const wordColor = getColor(d.name);
+        
+            tooltip.transition().duration(200).style("opacity", 1);
+            tooltip
+              .html(
+                `
+                  <div class="tooltip">
+                    <div class="card-flex">
+                      <div class="card-name">${d.name}</div>
+                      <div class="word-dot-tooltip" data-word="${d.name}" style="border-radius: 50%; background-color: ${wordColor}; cursor: pointer;"></div>
+                    </div><br>
+                    <hr><br>
+                    "${boldedSentence}"<br><br>
+                    <div class="tooltip-name-flex">
+                      <div><a href="#/story/${randomResult.id}"><img src="${randomResult.portrait}" class="tooltip-portrait" alt="portrait"></a></div> 
+                      <div><strong>${randomResult.motherName}</strong>, ${randomResult.countryLivesIn}</div>
+                    </div><br><hr><br>
+                    Read full birth story <strong><a href="#/story/${randomResult.id}">here</a></strong>
+                  </div>
+                `
+              )
+              .style("left", `${event.pageX + 5}px`)
+              .style("top", `${event.pageY - 28}px`);
+        
+            setTooltipVisible(true);
+          } else {
+            tooltip.transition().duration(200).style("opacity", 0);
+            setTooltipVisible(false);
+          }
+        })
       .on("mousemove", (event) => {
         tooltip
           .style("left", `${event.pageX + 5}px`)
@@ -330,6 +330,10 @@ const BubbleChartComponent = () => {
             isMobile ? mobileTooltipTimeout : desktopTooltipTimeout
           );
         }
+      });
+
+      tooltip.select(".word-dot-tooltip").on("click", () => {
+        handleWordClick(d.name);
       });
 
     const tooltipElement = d3.select(tooltipRef.current);
@@ -348,6 +352,16 @@ const BubbleChartComponent = () => {
         },
         isMobile ? mobileTooltipTimeout : desktopTooltipTimeout
       );
+    });
+
+    tooltipElement.on("click", (event) => {
+      const target = event.target;
+      if (target.classList.contains("word-dot-tooltip")) {
+        const word = target.getAttribute("data-word");
+        if (word) {
+          navigate(`/sentences/${word}`);
+        }
+      }
     });
 
     simulation.on("tick", () => {
