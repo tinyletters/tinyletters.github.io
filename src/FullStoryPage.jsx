@@ -67,32 +67,37 @@ function FullStoryPage() {
     <>
       <div className="full-story-page">
         <div className="full-story-intro">
-          <img
-            src={story.portrait}
-            alt={`${story.name}'s portrait`}
-            className="full-story-portrait"
-          />
-          <br />
-          <br />
-          <Divider
-            sx={{
-              borderColor: "black",
-              borderWidth: "1px",
-              my: 1,
-              width: "100%",
-            }}
-          />
-          <h3 className="story-name">
-            {story.motherName}, {story.countryLivesIn}
-          </h3>
-          <Divider
-            sx={{
-              borderColor: "black",
-              borderWidth: "1px",
-              my: 1,
-              width: "100%",
-            }}
-          />
+          <div className="mobile-flex">
+            <img
+              src={story.portrait}
+              alt={`${story.name}'s portrait`}
+              className="full-story-portrait"
+            />
+                   </div>
+            <br />
+            <br />
+            <div>
+            <Divider
+              sx={{
+                borderColor: "black",
+                borderWidth: "1px",
+                my: 1,
+                width: "100%",
+              }}
+            />
+            <h3 className="story-name">
+              {story.motherName}, {story.countryLivesIn}
+            </h3>
+            <Divider
+              sx={{
+                borderColor: "black",
+                borderWidth: "1px",
+                my: 1,
+                width: "100%",
+              }}
+            />
+     
+          </div>
           <br />
           <div>
             <strong>Year of childbirth:</strong> {story.birthDate}

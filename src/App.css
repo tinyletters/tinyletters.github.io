@@ -337,7 +337,6 @@ button.home-button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
 }
 
 .ref--card {
@@ -571,7 +570,7 @@ select:focus {
 
 .about--circles {
   margin-top: 100px;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
   margin-left: 20px;
   margin-right: 20px;
   padding: 2rem;
@@ -764,7 +763,7 @@ h3 {
   margin-bottom: 2rem;
   margin-right: 2rem;
   margin-left: 2rem;
-  width: 50%;
+  /* width: 50%; */
 }
 
 .reading {
@@ -885,6 +884,10 @@ h3 {
     margin-right: 4rem;
   }
 
+  .qr--card {
+    padding: 1rem;
+    }
+
   .contribute {
     font-size: 12px;
     height: 3.5vh;
@@ -894,6 +897,12 @@ h3 {
 display: none;
   }
 
+.mobile-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
   .menu-logo {
     height: 6vw;
@@ -953,8 +962,10 @@ display: none;
   }
 
   .full-story-portrait {
+    padding-top: 1rem;
     border-radius: 50%;
-    width: 77vw;
+    width: 70vw;
+    align-items: center;
   }
 
   h3 {
@@ -1090,20 +1101,22 @@ display: none;
   }
 
   .card {
-    width: 77vw;
+    /* width: 77vw; */
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0rem;
     padding-bottom: 0rem;
-    margin-right: 2rem;
     border-radius: 10px;
+    margin: 1rem;
   }
+
   .intro--card {
     flex-direction: column;
   }
 
   .about {
-    margin-right: 2rem;
+    padding: 1rem;
+    padding-bottom: 0;
   }
 
   .ref--card {
