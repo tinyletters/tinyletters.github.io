@@ -61,7 +61,7 @@ export const getBubbleData = (frequency, filteredData) => {
     } else if (visibleWordCount <= 100) {
       sizeMultiplier = 3;
     } else {
-      sizeMultiplier = 0.8;
+      sizeMultiplier = 0.6;
     }
   }
   
@@ -422,12 +422,12 @@ const BubbleChartComponent = () => {
               onChange={handleFilterChange}
             >
               <option value="">All</option>
-              <option value="white">White</option>
-              <option value="white, other">White, other</option>
-              <option value="coloured">Coloured</option>
+              <option value="Arab">Arab</option>
               <option value="Black">Black</option>
+              <option value="Coloured">Coloured</option>
               <option value="Indian">Indian</option>
-              <option value="Not disclosed">Not disclosed</option>
+              <option value="White">White</option>
+    <option value="Not disclosed">Not disclosed</option>
             </select>
           </label>
 
@@ -439,9 +439,11 @@ const BubbleChartComponent = () => {
               onChange={handleFilterChange}
             >
               <option value="">All</option>
-              <option value="South Africa">South Africa</option>
+              <option value="Australia">Australia</option>
               <option value="Egypt">Egypt</option>
               <option value="Germany">Germany</option>
+              <option value="South Africa">South Africa</option>
+              <option value="Syria">Syria</option>
               <option value="The Netherlands">The Netherlands</option>
               <option value="United Kingdom">United Kingdom</option>
               <option value="United States">United States</option>
