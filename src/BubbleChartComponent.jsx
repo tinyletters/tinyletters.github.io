@@ -49,7 +49,7 @@ export const getBubbleData = (frequency, filteredData) => {
     } else if (visibleWordCount <= 100) {
       sizeMultiplier = 0.8;
     } else {
-      sizeMultiplier = 0.85;
+      sizeMultiplier = 0.4;
     }
   } else {
     if (visibleWordCount <= 10) {

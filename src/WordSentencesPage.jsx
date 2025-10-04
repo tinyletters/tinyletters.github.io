@@ -70,7 +70,7 @@ function WordSentencesPage() {
           <button onClick={() => navigate("/data-stories")}>
             Back to data story
           </button>
-          <button onClick={() => navigate("/")}>Back home</button>
+          {/* <button onClick={() => navigate("/")}>Back home</button> */}
         </div>
       </div>
 
