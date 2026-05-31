@@ -335,7 +335,7 @@ button.home-button {
 
 .intro--card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -570,7 +570,7 @@ select:focus {
 
 .about--circles {
   margin-top: 100px;
-  margin-bottom: 60px;
+  margin-bottom: 0;
   margin-left: 20px;
   margin-right: 20px;
   padding: 2rem;
@@ -673,10 +673,10 @@ h3 {
 
 @keyframes circle-scale-1 {
   0% {
-    transform: scale(1.5);
+    transform: scale(1);
   }
   100% {
-    transform: scale(2.5);
+    transform: scale(2);
   }
 }
 
@@ -764,6 +764,18 @@ h3 {
   margin-right: 2rem;
   margin-left: 2rem;
   /* width: 50%; */
+}
+
+.intro-card {
+  background-color: white;
+  border-radius: 20px;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 .reading {
@@ -1023,6 +1035,16 @@ display: none;
     gap: 2px;
   }
 
+  about-heading {
+    padding-top: 0;
+    margin-top: 0;
+    font-family: "Crake", sans-serif;
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    font-weight: normal;
+  }
+
   h2 {
     font-family: "Crake", sans-serif;
     font-size: 30px;
@@ -1106,6 +1128,13 @@ display: none;
     padding-right: 1rem;
     padding-top: 0rem;
     padding-bottom: 0rem;
+    border-radius: 10px;
+    margin: 1rem;
+  }
+
+  .intro-card {
+    padding-left: 1rem;
+    padding-right: 1rem;
     border-radius: 10px;
     margin: 1rem;
   }

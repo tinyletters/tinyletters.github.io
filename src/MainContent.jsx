@@ -55,41 +55,61 @@ function MainContent() {
               <Circles />
             </div>
             <br />
+
+            <div className="about">
+              <Divider
+                sx={{
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  my: 2,
+                  width: "100%",
+                }}
+              />
+              <p>
+                To view our first data story{" "}
+                <span
+                  className="here"
+                  onClick={() => navigate("/data-stories")}
+                >
+                  click here
+                </span>
+              </p>
+              <Divider
+                sx={{
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  my: 2,
+                  width: "100%",
+                }}
+              />
+              <p>
+                To contribute your birth or coming home story
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  click here
+                </a>
+              </p>
+              <Divider
+                sx={{
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  my: 2,
+                  width: "100%",
+                }}
+              />
+            </div>
+
             <div className="circle-intro">
               <div className="circles--dt">
                 <Circles />
               </div>
-              <div className="intro--card">
-                <div className="about">
-                  <h2>about</h2>
-                  <Divider
-                    sx={{
-                      borderColor: "black",
-                      borderWidth: "1px",
-                      my: 2,
-                      width: "100%",
-                    }}
-                  />
 
-                  <p>
-                    View our first data story{" "}
-                    <span
-                      className="here"
-                      onClick={() => navigate("/data-stories")}
-                    >
-                      here
-                    </span>
-                  </p>
-                  <Divider
-                    sx={{
-                      borderColor: "black",
-                      borderWidth: "1px",
-                      my: 2,
-                      width: "100%",
-                    }}
-                  />
-                </div>
-                <div className="card">
+                <div className="intro-card">
+                  <h2 className="about-heading">about</h2>
                   <p>
                     Tiny letters for mothers is an artistic research project
                     that aims to create a global network of data stories about
@@ -112,31 +132,7 @@ function MainContent() {
                   </p>
                 </div>
               </div>
-              <div className="qr--card">
-              <Divider
-                    sx={{
-                      borderColor: "black",
-                      borderWidth: "1px",
-                      my: 2,
-                      width: "100%",
-                    }}
-                  />
-                <p>
-                  To contribute your birth or coming home story, scan this code:
-                </p>
-                <br />
-                <img
-                  src="../images/Tiny_Letters_Poster.jpeg"
-                  alt="qr-code"
-                  className="qr-code"
-                />
-                
-              </div>
-              <br />
 
-              <br />
-              <br />
-            </div>
           </>
         )}
       </div>

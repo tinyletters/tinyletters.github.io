@@ -67,9 +67,8 @@ export default function Menu({ isOpen, toggleMenu }) {
               width: "99.5%",
             }}
           />
-<p>tinylettersformothers@gmail.com</p>
           
-          {/* <div className="email-flex">
+          <div className="email-flex">
             <div>
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
@@ -98,7 +97,7 @@ export default function Menu({ isOpen, toggleMenu }) {
                 />
               </a>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </>
