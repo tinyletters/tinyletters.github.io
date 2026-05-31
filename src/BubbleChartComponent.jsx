@@ -395,16 +395,14 @@ const BubbleChartComponent = () => {
             can also filter by race of the mother, country (this is the country
             where the birth took place) and birth type. Explore each story
             through the tooltips. This is a growing data story. You can
-            contribute to it {" "}
-            <span className="scan" onClick={() => handleNavigate("/")}>
-              by scanning the QR code on the home page.
-            </span>
-            {/* <a
+            contribute to it by {" "}
+           
+            <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
               target="_blank"
               rel="noopener noreferrer"
-            > */}
-            {/* </a> */}
+            > clicking here.
+</a>
           </p>
           <p className="best-viewed">
             <strong>

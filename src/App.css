@@ -387,7 +387,7 @@ circle.hovered {
   border-radius: 10px;
   position: sticky;
   top: 10rem;
-  /* width: 250px; */
+  width: 250px;
   height: fit-content;
   margin: 2rem;
   padding: 2rem;
@@ -1021,7 +1021,7 @@ display: none;
     background-color: white;
     border-radius: 10px;
     position: relative;
-    /* width: 82vw; */
+    width: 82vw;
     height: fit-content;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -1480,7 +1480,7 @@ display: none;
     background-color: white;
     border-radius: 10px;
     position: relative;
-    /* width: 89vw; */
+    width: 89vw;
     height: fit-content;
     padding-left: 1rem;
     padding-right: 1rem;
