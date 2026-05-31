@@ -108,31 +108,41 @@ function MainContent() {
                 <Circles />
               </div>
 
-                <div className="intro-card">
-                  <h2 className="about-heading">about</h2>
-                  <p>
-                    Tiny letters for mothers is an artistic research project
-                    that aims to create a global network of data stories about
-                    mothering and parenting, especially in the early stages. Our
-                    first data story is focused on the first 40 days / 6 weeks
-                    postpartum, and on the birth stories of mothers or coming
-                    home stories in the context of adoption. The title tiny
-                    letters is borne of Dee Marco’s 40+day postpartum writing
-                    after the birth of her third child in 2023. Her candid and
-                    sometimes raw and scary recollections of the time set off a
-                    series of conversations that led to the best kind of working
-                    collaboration – one where mums work together. Dee and
-                    creative developer Lara Koseff embark on this journey of
-                    learning about global experiences of mothers and parents by
-                    creating a data story through tiny letters from one mum to
-                    another, from one geography to another, from one illogical
-                    moment to another. To contribute and access our form, scan
-                    the QR code on this page. To get in touch, email us:
-                    tinylettersformothers@gmail.com
-                  </p>
-                </div>
+              <div className="intro-card">
+                <h2 className="about-heading">about</h2>
+                <p>
+                  Tiny letters for mothers is an artistic research project that
+                  aims to create a global network of data stories about
+                  mothering and parenting, especially in the early stages. Our
+                  first data story is focused on the first 40 days / 6 weeks
+                  postpartum, and on the birth stories of mothers or coming home
+                  stories in the context of adoption. The title tiny letters is
+                  borne of Dee Marco’s 40+day postpartum writing after the birth
+                  of her third child in 2023. Her candid and sometimes raw and
+                  scary recollections of the time set off a series of
+                  conversations that led to the best kind of working
+                  collaboration – one where mums work together. Dee and creative
+                  developer Lara Koseff embark on this journey of learning about
+                  global experiences of mothers and parents by creating a data
+                  story through tiny letters from one mum to another, from one
+                  geography to another, from one illogical moment to another. To
+                  contribute{" "}
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdF396c_2UL8Z_zjiszvVsEdRb5QHnJxeEhrVlxpgoEiidNig/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    click here.
+                  </a>{" "}
+                  To get in touch{" "}
+                  <a href="mailto:tinylettersformothers@gmail.com">
+                    {" "}
+                    email us.
+                  </a>
+                </p>
               </div>
-
+            </div>
           </>
         )}
       </div>
